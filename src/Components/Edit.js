@@ -1,9 +1,10 @@
 import React from 'react'
+import './edit.css'
 
 function Edit() {
   return (
-    <div>
-      edit
+    <div id="edit">
+      
     </div>
   )
 }

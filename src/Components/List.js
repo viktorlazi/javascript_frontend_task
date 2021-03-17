@@ -1,9 +1,19 @@
 import React from 'react'
+import ListElement from './ListElement'
 
-function List() {
+function List({listElements}) {
   return (
     <div>
-      list
+      <input type="text" id="search"/>
+      {
+        listElements ? 
+        <ul>
+          {listElements.map((e)=>{
+            return <ListElement props={e}/>
+          })}
+        </ul>
+        : <h3>No elements in a list</h3>
+      }
     </div>
   )
 }
