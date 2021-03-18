@@ -3,10 +3,12 @@ import ListElement from './ListElement'
 import UserInput from './UserInput'
 import './styles/list.css'
 
+import userInput from '../Stores/UserInputStore';
+
 function List({listElements}) {
   return (
     <div id="list">
-      <UserInput />
+      <UserInput userInput={userInput} />
       {
         listElements.length > 0 ? 
         <ul>
