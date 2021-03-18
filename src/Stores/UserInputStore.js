@@ -9,6 +9,9 @@ class UserInputStore{
   setSearchField(x){
     this.searchField=x
   }
+  setFiler(x){
+    this.filter = x
+  }
 }
 
 const userInputStore = new UserInputStore()

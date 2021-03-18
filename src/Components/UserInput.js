@@ -8,7 +8,7 @@ function UserInput({userInput}) {
         onChange={(e)=>{userInput.setSearchField(e.target.value)}}
         />
       <select type="text" id="sortBy" placeholder="sort by..." list="sortByList"
-      onChange={(e)=>{userInput.setSearchField(e.target.value)}} >
+      onChange={(e)=>{userInput.setFilter(e.target.value)}} >
         <option value="cost">sort by: cost</option>
         <option value="brand">sort by: brand</option>
         <option value="type">sort by: type</option>
