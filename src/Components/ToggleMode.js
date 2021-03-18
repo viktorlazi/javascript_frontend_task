@@ -1,6 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import './toggleMode.css';
+import './styles/toggleMode.css';
 
 function ToggleMode({UserMode}) {
   return (

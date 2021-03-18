@@ -1,0 +1,10 @@
+#search{
+  width:100%;
+  padding:5px;
+}
+#sortBy{
+  display:inline;
+}
+.userInput{
+  display:flex;
+}

@@ -1,12 +1,14 @@
 import React from 'react'
 import ListElement from './ListElement'
+import UserInput from './UserInput'
+import './styles/list.css'
 
 function List({listElements}) {
   return (
-    <div>
-      <input type="text" id="search"/>
+    <div id="list">
+      <UserInput />
       {
-        listElements ? 
+        listElements.length > 0 ? 
         <ul>
           {listElements.map((e)=>{
             return <ListElement props={e}/>

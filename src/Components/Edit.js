@@ -1,5 +1,5 @@
 import React from 'react'
-import './edit.css'
+import './styles/edit.css'
 
 function Edit() {
   return (
