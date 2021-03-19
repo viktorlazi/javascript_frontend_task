@@ -16,10 +16,10 @@ class ListStore{
       cost:4300      
     },
     {
-      brand:'fender',
-      type:'jazzmaster',
+      brand:'cort',
+      type:'singlecut',
       colour:'sunburn',
-      cost:5500    
+      cost:3301    
     },
     {
       brand:'epiphone',

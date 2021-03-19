@@ -10,15 +10,64 @@ function List({listElements}) {
   const [filteredAndSortedList, setFilteredAndSortedList] = useState([])
   useEffect(() => {
     let filtered = [...listElements.filter((e)=>{
-      if((e.brand + e.type + e.colour).includes(userInput.searchField)){
-        return e
-      }
+      return (e.brand + e.type + e.colour).includes(userInput.searchField)
     })]
-    filtered.sort(
-      (a,b)=>{
-        return a.cost - b.cost
-      }
-    ) 
+    switch(userInput.sort){
+      case 'cost':
+        filtered.sort(
+          (a,b)=>{
+            return a.cost - b.cost
+          }
+        )
+        break;
+      case 'brand':
+        filtered.sort(
+          (a,b)=>{
+            const nameA = a.brand.toUpperCase();
+            const nameB = b.brand.toUpperCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          }
+        )
+        break;
+      case 'type':
+        filtered.sort(
+          (a,b)=>{
+            const nameA = a.type.toUpperCase();
+            const nameB = b.type.toUpperCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          }
+        )
+        break;
+      case 'colour':
+        filtered.sort(
+          (a,b)=>{
+            const nameA = a.colour.toUpperCase();
+            const nameB = b.colour.toUpperCase();
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            return 0;
+          }
+        )
+        break;
+      default: break;
+    }
+     
     setFilteredAndSortedList(
       [...filtered]
     )
