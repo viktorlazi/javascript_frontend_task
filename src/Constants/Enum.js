@@ -19,3 +19,10 @@ const colours = {
   black:'black'
 }
 export {colours}
+
+export const sortingTypes = {
+  brand:'brand',
+  type:'type',
+  colour:'colour',
+  cost:'cost'
+}
