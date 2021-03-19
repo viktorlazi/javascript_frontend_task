@@ -1,8 +1,12 @@
 #toggle__buttons{
   display:flex;
+  column-gap: 15px;
 }
-#toggle__buttons button{
+#toggle__buttons .toggle__buttons__link{
   padding:10px;
   width:50%;
   background-color: rgba(93, 187, 231);
+  text-decoration: none;
+  color:black;
+  text-align: center;
 }

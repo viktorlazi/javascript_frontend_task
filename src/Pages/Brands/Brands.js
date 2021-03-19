@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles/edit.css'
+import './styles/brands.css'
 
 function Edit() {
   return (

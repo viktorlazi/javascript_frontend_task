@@ -4,10 +4,11 @@ import './styles/listElement.css'
 function ListElement({props}) {
   return (
     <li>
-      <p>{props.brand}</p>
-      <p>{props.type}</p>
-      <p>{props.colour}</p>
-      <p>{props.cost}</p>
+      {
+        Object.keys(props).map((e)=>{
+          return <p>{props[e]}</p>
+        })
+      }
     </li>
   )
 }

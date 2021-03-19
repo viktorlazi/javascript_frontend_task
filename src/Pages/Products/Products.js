@@ -1,21 +1,21 @@
 import React from 'react'
-import ListElement from './ListElement'
-import UserInput from './UserInput'
-import './styles/list.css'
+import ListElement from '../../Components/ListElement'
+import UserInput from '../../Components/UserInput'
+import './styles/products.css'
 import {observer} from 'mobx-react'
-import userInput from '../Stores/UserInputStore';
+import userInputStore from '../../Stores/UserInputStore';
 import {useState, useEffect} from 'react'
 
 function List({listElements}) {
   const [filteredAndSortedList, setFilteredAndSortedList] = useState([])
   useEffect(() => {
     let filtered = [...listElements.filter((e)=>{
-      return (e.brand + e.type + e.colour).includes(userInput.searchField)
+      return (e.brand + e.type + e.colour).includes(userInputStore.searchField)
     })]
     filtered.sort(
       (a,b)=>{
-        const nameA = a[userInput.sort]
-        const nameB = b[userInput.sort]
+        const nameA = a[userInputStore.sort]
+        const nameB = b[userInputStore.sort]
         if (nameA < nameB) {
           return -1;
         }else if (nameA > nameB) {
@@ -27,10 +27,10 @@ function List({listElements}) {
     setFilteredAndSortedList(
       [...filtered]
     )
-  }, [userInput.searchField, userInput.sort, listElements])
+  }, [userInputStore.searchField, userInputStore.sort, listElements])
   return (
     <div id="list">
-      <UserInput userInput={userInput} />
+      <UserInput userInput={userInputStore} />
       {
         filteredAndSortedList.length > 0 ? 
         <ul>

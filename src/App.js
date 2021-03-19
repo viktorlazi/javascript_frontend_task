@@ -1,16 +1,31 @@
 import './App.css';
-import Display from './Components/Display';
 import ToggleMode from './Components/ToggleMode';
-import UserMode from './Stores/UserMode'
 import {observer} from 'mobx-react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+
+import Brands from './Pages/Brands/Brands'
+import Products from './Pages/Products/Products'
+
+import ListStore from './Stores/ListStore'
 
 
 function App() {
-  return (
-    <div className="App">
-      <Display isInEditMode={UserMode.isInEditMode} />
-      <ToggleMode UserMode={UserMode} />
-    </div>
+  return ( 
+    <Router>
+      <div className="App">
+        <div id="display">
+          <Route exact path="/">
+            <Products listElements={ListStore.list}/>
+          </Route>
+          <Route path="/brands">
+            <Brands/>
+          </Route>
+        </div>
+        <Route path="/">
+          <ToggleMode/>
+        </Route>
+      </div>
+    </Router>
   );
 }
 
