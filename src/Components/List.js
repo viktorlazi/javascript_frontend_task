@@ -4,21 +4,38 @@ import UserInput from './UserInput'
 import './styles/list.css'
 import {observer} from 'mobx-react'
 import userInput from '../Stores/UserInputStore';
+import {useState, useEffect} from 'react'
 
 function List({listElements}) {
+  const [filteredAndSortedList, setFilteredAndSortedList] = useState([])
+  useEffect(() => {
+    let filtered = [...listElements.filter((e)=>{
+      if((e.brand + e.type + e.colour).includes(userInput.searchField)){
+        return e
+      }
+    })]
+    filtered.sort(
+      (a,b)=>{
+        return a.cost - b.cost
+      }
+    ) 
+    setFilteredAndSortedList(
+      [...filtered]
+    )
+  }, [userInput.searchField, userInput.sort, listElements])
   return (
     <div id="list">
       <UserInput userInput={userInput} />
       {
-        listElements.length > 0 ? 
+        filteredAndSortedList.length > 0 ? 
         <ul>
-          {listElements.map((e)=>{
-            if((e.brand + e.type + e.colour).includes(userInput.searchField)){
+          {
+            filteredAndSortedList.map((e)=>{
               return <ListElement props={e}/>
-            }
-          })}
+            })
+          }
         </ul>
-        : <h3>List is empty</h3>
+        : <h4>No results</h4>
       }
     </div>
   )

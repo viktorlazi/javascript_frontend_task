@@ -2,15 +2,15 @@ import { makeAutoObservable } from 'mobx'
 
 class UserInputStore{
   searchField = '';
-  filter = null;
+  sort = 'cost';
   constructor(){
     makeAutoObservable(this)
   }
   setSearchField(x){
     this.searchField=x
   }
-  setFiler(x){
-    this.filter = x
+  setSort(x){
+    this.sort = x
   }
 }
 
