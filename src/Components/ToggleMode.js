@@ -1,5 +1,4 @@
 import React from 'react'
-import {observer} from 'mobx-react'
 import './styles/toggleMode.css';
 import {Link} from 'react-router-dom'
 
@@ -16,4 +15,4 @@ function ToggleMode({UserMode}) {
   )
 }
 
-export default observer(ToggleMode)
+export default ToggleMode

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {observer} from 'mobx-react'
 import {sortingTypes} from '../Constants/Enum'
+import HelperStore from '../Stores/HelperStore'
 
 function UserInput({userInput}) {
-  const [sortingTypesList, setSortingTypesList] = useState([])
   useEffect(() => {
     let list = [];
     for (let item in sortingTypes) {
@@ -11,7 +11,7 @@ function UserInput({userInput}) {
         list.push(item)
       }
     }
-    setSortingTypesList([...list])
+    HelperStore.sortingTypesList = [...list]
   }, [sortingTypes])
   return (
     <div className="userInput">
@@ -21,7 +21,7 @@ function UserInput({userInput}) {
       <select type="text" id="sortBy" placeholder="sort by..." list="sortByList"
         onChange={(e)=>{userInput.setSort(e.target.value)}} >
         {
-          sortingTypesList.map((e)=>{
+          HelperStore.sortingTypesList.map((e)=>{
             return <option value={e}>sort by: {e}</option>
           })
         }

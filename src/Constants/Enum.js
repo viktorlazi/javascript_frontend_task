@@ -1,25 +1,19 @@
-const brands = {
+export const brands = {
   fender:'fender',
   epiphone:'epiphone',
   cort:'cort'
 }
-export {brands};
-
-const types = {
+export const types = {
   stratocaster:'stratocaster',
   telecaster:'telecaster',
   singlecut:'singlecut'
 }
-export  {types};
-
-const colours = {
+export const colours = {
   yellow:'yellow',
   sunburn:'sunburn',
   blue:'blue',
   black:'black'
 }
-export {colours}
-
 export const sortingTypes = {
   brand:'brand',
   type:'type',

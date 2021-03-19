@@ -4,10 +4,11 @@ import UserInput from '../../Components/UserInput'
 import './styles/products.css'
 import {observer} from 'mobx-react'
 import userInputStore from '../../Stores/UserInputStore';
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
+import HelperStore from '../../Stores/HelperStore'
 
 function List({listElements}) {
-  const [filteredAndSortedList, setFilteredAndSortedList] = useState([])
+  
   useEffect(() => {
     let filtered = [...listElements.filter((e)=>{
       return (e.brand + e.type + e.colour).includes(userInputStore.searchField)
@@ -24,18 +25,16 @@ function List({listElements}) {
         return 0;
       }
     )
-    setFilteredAndSortedList(
-      [...filtered]
-    )
+    HelperStore.filteredAndSortedList=[...filtered]
   }, [userInputStore.searchField, userInputStore.sort, listElements])
   return (
     <div id="list">
       <UserInput userInput={userInputStore} />
       {
-        filteredAndSortedList.length > 0 ? 
+        HelperStore.filteredAndSortedList.length > 0 ? 
         <ul>
           {
-            filteredAndSortedList.map((e)=>{
+            HelperStore.filteredAndSortedList.map((e)=>{
               return <ListElement props={e}/>
             })
           }
