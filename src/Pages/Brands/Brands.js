@@ -1,9 +1,11 @@
 import React from 'react'
+import UserInput from '..//../Components/UserInput'
 import './styles/brands.css'
+import userInputStore from '../../Stores/UserInputStore';
 
-function Edit() {
+function Edit({listElements}) {
   return (
-    <div id="edit">
+    <div id="brands">
       
     </div>
   )

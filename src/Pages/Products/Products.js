@@ -1,10 +1,9 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import ListElement from '../../Components/ListElement'
 import UserInput from '../../Components/UserInput'
 import './styles/products.css'
 import {observer} from 'mobx-react'
-import userInputStore from '../../Stores/UserInputStore';
-import {useEffect} from 'react'
+import userInputStore from '../../Stores/UserInputStore'
 import HelperStore from '../../Stores/HelperStore'
 
 function List({listElements}) {
@@ -28,7 +27,7 @@ function List({listElements}) {
     HelperStore.filteredAndSortedList=[...filtered]
   }, [userInputStore.searchField, userInputStore.sort, listElements])
   return (
-    <div id="list">
+    <div id="products">
       <UserInput userInput={userInputStore} />
       {
         HelperStore.filteredAndSortedList.length > 0 ? 

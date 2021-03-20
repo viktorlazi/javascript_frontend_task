@@ -2,7 +2,7 @@ import React from 'react'
 import './styles/toggleMode.css';
 import {Link} from 'react-router-dom'
 
-function ToggleMode({UserMode}) {
+function ToggleMode() {
   return (
     <div id="toggle__buttons">
       <Link to="/" className="toggle__buttons__link">

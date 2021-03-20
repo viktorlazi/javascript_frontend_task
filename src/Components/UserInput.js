@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
 import {sortingTypes} from '../Constants/Enum'
 import HelperStore from '../Stores/HelperStore'
