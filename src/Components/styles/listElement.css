@@ -23,3 +23,9 @@ li .edit__span{
 li span{
   cursor:pointer;
 }
+li input{
+  width:15%;
+}
+li .change__span{
+  color: blue;
+}

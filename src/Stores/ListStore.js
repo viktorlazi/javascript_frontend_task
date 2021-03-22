@@ -25,7 +25,8 @@ class ListStore{
       colour:colours.sunburn,
       cost:3301 
     },
-    { id:3,
+    { 
+      id:3,
       brand:brands.epiphone,
       type:types.singlecut,
       colour:colours.yellow,
@@ -41,6 +42,10 @@ class ListStore{
         return e.id != id
       }
     )
+  }
+  editElement(id, field, value){
+    let index = this.list.findIndex(obj => obj.id == id)
+    this.list[index][field] = value
   }
 }
 
