@@ -4,7 +4,7 @@ import UserInput from '../../Components/UserInput'
 import './styles/products.css'
 import {observer} from 'mobx-react'
 import userInputStore from '../../Stores/UserInputStore'
-import HelperStore from '../../Stores/HelperStore'
+import ListStore from '../../Stores/ListStore'
 
 function List({listElements}) {
   
@@ -24,16 +24,16 @@ function List({listElements}) {
         return 0;
       }
     )
-    HelperStore.filteredAndSortedList=[...filtered]
+    ListStore.filteredAndSortedList=[...filtered]
   }, [userInputStore.searchField, userInputStore.sort, listElements])
   return (
     <div id="products">
       <UserInput userInput={userInputStore} />
       {
-        HelperStore.filteredAndSortedList.length > 0 ? 
+        ListStore.filteredAndSortedList.length > 0 ? 
         <ul>
           {
-            HelperStore.filteredAndSortedList.map((e)=>{
+            ListStore.filteredAndSortedList.map((e)=>{
               return <ListElement props={e}/>
             })
           }

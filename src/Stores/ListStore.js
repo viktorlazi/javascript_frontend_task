@@ -1,35 +1,37 @@
 import { makeAutoObservable } from 'mobx'
-import {brands, types, colours} from '../Constants/Enum'
 
 class ListStore{
   list = []
+  filteredAndSortedList = []
+  sortingTypesList = ['brand', 'type', 'colour', 'cost']
+  
   constructor(){
     this.list.push({
       id:0,
-      brand:brands.fender,
-      type:types.stratocaster,
-      colour:colours.blue,
+      brand:'fender',
+      type:'stratocaster',
+      colour:'blue',
       cost:4200      
     },
     {
       id:1,
-      brand:brands.fender,
-      type:types.telecaster,
-      colour:colours.black,
+      brand:'fender',
+      type:'telecaster',
+      colour:'black',
       cost:4300      
     },
     {
       id:2,
-      brand:brands.cort,
-      type:types.singlecut,
-      colour:colours.sunburn,
+      brand:'cort',
+      type:'singlecut',
+      colour:'sunburn',
       cost:3301 
     },
     { 
       id:3,
-      brand:brands.epiphone,
-      type:types.singlecut,
-      colour:colours.yellow,
+      brand:'epiphone',
+      type:'singlecut',
+      colour:'yellow',
       cost:3300     
     }    
     )    
@@ -44,7 +46,7 @@ class ListStore{
     )
   }
   editElement(id, field, value){
-    let index = this.list.findIndex(obj => obj.id == id)
+    const index = this.list.findIndex(obj => obj.id == id)
     this.list[index][field] = value
   }
 }
