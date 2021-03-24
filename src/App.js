@@ -15,7 +15,7 @@ function App() {
       <div className="App">
         <div id="display">
           <Route exact path="/">
-            <Products listElements={ListStore.list}/>
+            <Products />
           </Route>
           <Route path="/brands">
             <Brands/>

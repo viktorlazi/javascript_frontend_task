@@ -4,6 +4,8 @@ class ListStore{
   list = []
   filteredAndSortedList = []
   sortingTypesList = ['brand', 'type', 'colour', 'cost']
+  newElement = {}
+  brands = ['fender', 'cort', 'epiphone']
   
   constructor(){
     this.list.push({
@@ -41,13 +43,32 @@ class ListStore{
   removeElement(id){
     //for some reason list.splice() not working
     this.list=this.list.filter(e=>{
-        return e.id != id
+        return e.id !== id
       }
     )
   }
   editElement(id, field, value){
-    const index = this.list.findIndex(obj => obj.id == id)
+    const index = this.list.findIndex(obj => obj.id === id)
     this.list[index][field] = value
+  }
+  addNewElement(){
+    if(this.isNewElementValid(this.newElement)){
+      let newElement = this.newElement
+      newElement['id'] = this.list.length - 1
+      this.list.push(newElement)
+      this.newElement = {}
+    }else{
+      alert('invalid inputs')
+    }
+  }
+  getNewElementValue(key){
+    return this.newElement[key] === undefined ? '':this.newElement[key] 
+  }
+  isNewElementValid(newElement){
+    if(Object.keys(newElement).length < this.sortingTypesList.length){
+      return false
+    }
+    return true
   }
 }
 

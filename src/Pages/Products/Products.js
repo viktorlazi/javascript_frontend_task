@@ -5,11 +5,12 @@ import './styles/products.css'
 import {observer} from 'mobx-react'
 import userInputStore from '../../Stores/UserInputStore'
 import ListStore from '../../Stores/ListStore'
+import AddElement from '../../Components/AddElement'
 
-function List({listElements}) {
+function List() {
   
   useEffect(() => {
-    let filtered = [...listElements.filter((e)=>{
+    let filtered = [...ListStore.list.filter((e)=>{
       return (e.brand + e.type + e.colour).includes(userInputStore.searchField)
     })]
     filtered.sort(
@@ -25,7 +26,7 @@ function List({listElements}) {
       }
     )
     ListStore.filteredAndSortedList=[...filtered]
-  }, [userInputStore.searchField, userInputStore.sort, listElements])
+  }, [userInputStore.searchField, userInputStore.sort, ListStore.list.length])
   return (
     <div id="products">
       <UserInput userInput={userInputStore} />
@@ -40,6 +41,7 @@ function List({listElements}) {
         </ul>
         : <h4>No results</h4>
       }
+      <AddElement />
     </div>
   )
 }
