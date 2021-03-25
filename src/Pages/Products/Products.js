@@ -1,22 +1,24 @@
 import React, {useEffect} from 'react'
+import {observer} from 'mobx-react'
+
 import ListElement from '../../Components/ListElement'
 import UserInput from '../../Components/UserInput'
-import './styles/products.css'
-import {observer} from 'mobx-react'
-import userInputStore from '../../Stores/UserInputStore'
-import ListStore from '../../Stores/ListStore'
 import AddElement from '../../Components/AddElement'
 
+import UserInputStore from '../../Stores/UserInputStore'
+import {ProductsListStore} from '../../Stores/ListStore'
+
+import './styles/products.css'
+
 function List() {
-  
   useEffect(() => {
-    let filtered = [...ListStore.list.filter((e)=>{
-      return (e.brand + e.type + e.colour).includes(userInputStore.searchField)
+    let filtered = [...ProductsListStore.list.filter((e)=>{
+      return (e.brand + e.type + e.colour + e.cost).includes(UserInputStore.searchField)
     })]
     filtered.sort(
       (a,b)=>{
-        const nameA = a[userInputStore.sort]
-        const nameB = b[userInputStore.sort]
+        const nameA = a[UserInputStore.sort]
+        const nameB = b[UserInputStore.sort]
         if (nameA < nameB) {
           return -1;
         }else if (nameA > nameB) {
@@ -25,23 +27,23 @@ function List() {
         return 0;
       }
     )
-    ListStore.filteredAndSortedList=[...filtered]
-  }, [userInputStore.searchField, userInputStore.sort, ListStore.list.length])
+    ProductsListStore.filteredAndSortedList=[...filtered]
+  }, [UserInputStore.searchField, UserInputStore.sort, ProductsListStore.list.length])
   return (
     <div id="products">
-      <UserInput userInput={userInputStore} />
+      <UserInput UserInputStore={UserInputStore} ListStore={ProductsListStore} />
       {
-        ListStore.filteredAndSortedList.length > 0 ? 
+        ProductsListStore.filteredAndSortedList.length > 0 ? 
         <ul>
           {
-            ListStore.filteredAndSortedList.map((e)=>{
-              return <ListElement props={e}/>
+            ProductsListStore.filteredAndSortedList.map((e)=>{
+              return <ListElement props={e} ListStore={ProductsListStore}/>
             })
           }
         </ul>
         : <h4>No results</h4>
       }
-      <AddElement />
+      <AddElement ListStore={ProductsListStore} />
     </div>
   )
 }

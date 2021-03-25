@@ -1,15 +1,25 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
-import ListStore from '../Stores/ListStore'
 
-function AddElement() {
+function AddElement({ListStore}) {
   return (
     <div className="add__new">
       {
-        Object.keys(ListStore.list[0]).map((e)=>{
-          if(e!=='id'){
-            return <input onChange={ 
+        ListStore.sortingTypesList.map((e)=>{
+          if(e==='brand'){
+            return <select type="text" onChange={action((i)=>{
+                ListStore.newElement['brand'] = i.target.value
+              })
+            }>
+              {
+                ListStore.brands.map((e)=>{
+                  return <option value={e}>{e}</option>
+                })
+              }
+            </select>           
+          }else if(e!=='id'){
+              return <input onChange={ 
               action((i)=>{
                 ListStore.newElement[e] = i.target.value
               })

@@ -6,6 +6,7 @@ class ListStore{
   sortingTypesList = ['brand', 'type', 'colour', 'cost']
   newElement = {}
   brands = ['fender', 'cort', 'epiphone']
+  availableIDs=[]
   
   constructor(){
     this.list.push({
@@ -42,10 +43,12 @@ class ListStore{
 
   removeElement(id){
     //for some reason list.splice() not working
-    this.list=this.list.filter(e=>{
+    if(this.list=this.list.filter(e=>{
         return e.id !== id
       }
-    )
+    )){
+      this.availableIDs.push(id)
+    }
   }
   editElement(id, field, value){
     const index = this.list.findIndex(obj => obj.id === id)
@@ -54,7 +57,11 @@ class ListStore{
   addNewElement(){
     if(this.isNewElementValid(this.newElement)){
       let newElement = this.newElement
-      newElement['id'] = this.list.length - 1
+      if(this.availableIDs.length){
+        newElement['id'] = this.availableIDs[0]
+      }else{
+        newElement['id'] = this.list.length
+      }
       this.list.push(newElement)
       this.newElement = {}
     }else{
@@ -72,5 +79,8 @@ class ListStore{
   }
 }
 
-const listStore = new ListStore()
-export default listStore
+const BrandsListStore = new ListStore()
+export {BrandsListStore}
+
+const ProductsListStore = new ListStore()
+export {ProductsListStore}
