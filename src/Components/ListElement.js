@@ -3,6 +3,7 @@ import './styles/listElement.css'
 import {useState} from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
+import MultioptionEditButton from './MultioptionEditButton'
 
 function ListElement({props, ListStore}) {
   const [isInEditMode, setIsInEditMode] = useState(false)
@@ -27,15 +28,7 @@ function ListElement({props, ListStore}) {
         {
         Object.keys(props).map((e)=>{
           if(e==='brand'){
-            return <select type="text" onChange={(e)=>{
-              ListStore.editElement(props.id, 'brand', e.target.value)
-            }}>
-              {
-                ListStore.brands.map((e)=>{
-                  return <option value={e}>{e}</option>
-                })
-              }
-            </select>
+            return <MultioptionEditButton props={props} ListStore={ListStore} name="brand" />
           }
           else if(e!=='id'){
             return <input onChange={action((i)=>{ListStore.editElement(props.id, e, i.target.value)})} 

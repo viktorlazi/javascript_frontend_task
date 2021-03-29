@@ -4,45 +4,15 @@ class ListStore{
   list = []
   filteredAndSortedList = []
   sortingTypesList = ['brand', 'type', 'colour', 'cost']
-  newElement = {}
+  newElement = {brand:'', type:'', colour:'', cost:''}
   brands = ['fender', 'cort', 'epiphone']
   availableIDs=[]
   
   constructor(){
-    this.list.push({
-      id:0,
-      brand:'fender',
-      type:'stratocaster',
-      colour:'blue',
-      cost:4200      
-    },
-    {
-      id:1,
-      brand:'fender',
-      type:'telecaster',
-      colour:'black',
-      cost:4300      
-    },
-    {
-      id:2,
-      brand:'cort',
-      type:'singlecut',
-      colour:'sunburn',
-      cost:3301 
-    },
-    { 
-      id:3,
-      brand:'epiphone',
-      type:'singlecut',
-      colour:'yellow',
-      cost:3300     
-    }    
-    )    
     makeAutoObservable(this)
   }
 
   removeElement(id){
-    //for some reason list.splice() not working
     if(this.list=this.list.filter(e=>{
         return e.id !== id
       }
@@ -59,11 +29,14 @@ class ListStore{
       let newElement = this.newElement
       if(this.availableIDs.length){
         newElement['id'] = this.availableIDs[0]
+        this.availableIDs.shift()
       }else{
         newElement['id'] = this.list.length
       }
       this.list.push(newElement)
-      this.newElement = {}
+      
+      this.newElement = 
+        {brand:newElement.brand, type:'', colour:'', cost:''}
     }else{
       alert('invalid inputs')
     }
@@ -72,15 +45,45 @@ class ListStore{
     return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
   isNewElementValid(newElement){
-    if(Object.keys(newElement).length < this.sortingTypesList.length){
-      return false
-    }
-    return true
+    const keys = Object.keys(newElement)
+    return keys.every((e)=>{
+      return newElement[e] !== ''
+    })
   }
 }
+
 
 const BrandsListStore = new ListStore()
 export {BrandsListStore}
 
 const ProductsListStore = new ListStore()
+ProductsListStore.list.push({
+  id:0,
+  brand:'fender',
+  type:'stratocaster',
+  colour:'blue',
+  cost:4200      
+},
+{
+  id:1,
+  brand:'fender',
+  type:'telecaster',
+  colour:'black',
+  cost:4300      
+},
+{
+  id:2,
+  brand:'cort',
+  type:'singlecut',
+  colour:'sunburn',
+  cost:3301 
+},
+{ 
+  id:3,
+  brand:'epiphone',
+  type:'singlecut',
+  colour:'yellow',
+  cost:3300     
+}    
+)    
 export {ProductsListStore}

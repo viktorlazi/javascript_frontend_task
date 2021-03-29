@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
 
@@ -12,6 +12,9 @@ function AddElement({ListStore}) {
                 ListStore.newElement['brand'] = i.target.value
               })
             }>
+              {
+                <option>-</option>
+              }
               {
                 ListStore.brands.map((e)=>{
                   return <option value={e}>{e}</option>
