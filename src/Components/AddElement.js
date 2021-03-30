@@ -1,6 +1,8 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
+import {BrandsListStore} from '../Stores/ListStore'
+
 
 function AddElement({ListStore}) {
   return (
@@ -9,6 +11,7 @@ function AddElement({ListStore}) {
         ListStore.sortingTypesList.map((e)=>{
           switch(e){
             case 'brand':
+              const brands = BrandsListStore.list
               return <select type="text" value={ListStore.getNewElementValue(e)} onChange={action((i)=>{
                   ListStore.newElement['brand'] = i.target.value
                 })
@@ -17,8 +20,8 @@ function AddElement({ListStore}) {
                 <option value="undefined">-</option>
               }
               {
-                ListStore.brands.map((e)=>{
-                  return <option value={e}>{e}</option>
+                brands.map((e)=>{
+                  return <option value={e.id}>{e.name}</option>
                 })
               }
               </select>

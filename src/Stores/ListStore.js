@@ -1,11 +1,10 @@
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
 class ListStore{
   list = []
   filteredAndSortedList = []
   sortingTypesList = []
   newElement = {}
-  brands = ['fender', 'cort', 'epiphone']
   availableIDs=[]
   
   constructor(){
@@ -51,13 +50,16 @@ class ListStore{
     }
     return false
   }
+  getListProperties(key){
+    return this.list.map(e=>e[key])
+  }
 }
 
 
 const BrandsListStore = new ListStore()
 BrandsListStore.list.push({
   id:0,
-  name:'fender'
+  name:'unbranded'
 },
 {
   id:1,
@@ -66,6 +68,10 @@ BrandsListStore.list.push({
 {
   id:2,
   name:'cort'
+},
+{
+  id:3,
+  name:'fender'
 }
 )
 BrandsListStore.sortingTypesList = ['name']
@@ -74,28 +80,28 @@ export {BrandsListStore}
 const ProductsListStore = new ListStore()
 ProductsListStore.list.push({
   id:0,
-  brand:'fender',
+  brand:3,
   type:'stratocaster',
   colour:'blue',
   cost:4200      
 },
 {
   id:1,
-  brand:'fender',
+  brand:3,
   type:'telecaster',
   colour:'black',
   cost:4300      
 },
 {
   id:2,
-  brand:'cort',
+  brand:2,
   type:'singlecut',
   colour:'sunburn',
   cost:3301 
 },
 { 
   id:3,
-  brand:'epiphone',
+  brand:1,
   type:'singlecut',
   colour:'yellow',
   cost:3300     

@@ -4,6 +4,8 @@ import {useState} from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
 import MultioptionEditButton from './MultioptionEditButton'
+import {BrandsListStore} from '../Stores/ListStore'
+
 
 function ListElement({props, ListStore}) {
   const [isInEditMode, setIsInEditMode] = useState(false)
@@ -12,10 +14,15 @@ function ListElement({props, ListStore}) {
       <li>
       {
         Object.keys(props).map((e)=>{
-          if(e!=='id'){
-            return <p>{props[e]}</p>
+          switch(e){
+            case 'brand':
+              const brands = BrandsListStore.getListProperties('name')
+              return <p>{brands[props[e]]}</p>
+            case 'id':
+              return null
+            default:
+              return <p>{props[e]}</p>
           }
-          return null
         })
       }
       <span onClick={()=>{setIsInEditMode(!isInEditMode)}} className="edit__span">edit</span>
@@ -27,14 +34,19 @@ function ListElement({props, ListStore}) {
       <li>
         {
         Object.keys(props).map((e)=>{
-          if(e==='brand'){
-            return <MultioptionEditButton props={props} ListStore={ListStore} name="brand" />
-          }
-          else if(e!=='id'){
-            return <input onChange={action((i)=>{ListStore.editElement(props.id, e, i.target.value)})} 
-                          value={props[e]} 
-                          placeholder={e} 
-                          type="text"/>
+          switch(e){
+            case 'brand':
+              return <MultioptionEditButton props={props} ListStore={ListStore} name="brand" />
+            case 'id':
+              return null
+            default:
+              return <input 
+                onChange={action((i)=>{
+                  ListStore.editElement(props.id, e, i.target.value)
+                })} 
+                value={props[e]} 
+                placeholder={e} 
+                type="text"/>
           }
         })
         }

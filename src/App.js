@@ -13,7 +13,7 @@ import {ProductsListStore, BrandsListStore} from './Stores/ListStore'
 function App() {
   useEffect(() => {
     ProductsListStore.brands = [...BrandsListStore.list.map(e=>e.name)]
-  }, [BrandsListStore.list])
+  }, [BrandsListStore.list.length])
   return ( 
     <Router>
       <div className="App">
