@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, toJS } from 'mobx'
 
 class ListStore{
   list = []
@@ -34,7 +34,6 @@ class ListStore{
         newElement['id'] = this.list.length
       }
       this.list.push(newElement)
-      
       this.newElement = {}
     }else{
       alert('invalid inputs')
@@ -45,14 +44,31 @@ class ListStore{
   }
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)
-    return keys.every((e)=>{
-      return newElement[e] !== ''
-    })
+    if(keys.length>0){
+      return keys.every((e)=>{
+        return newElement[e] !== ''
+      })
+    }
+    return false
   }
 }
 
 
 const BrandsListStore = new ListStore()
+BrandsListStore.list.push({
+  id:0,
+  name:'fender'
+},
+{
+  id:1,
+  name:'epiphone'
+},
+{
+  id:2,
+  name:'cort'
+}
+)
+BrandsListStore.sortingTypesList = ['name']
 export {BrandsListStore}
 
 const ProductsListStore = new ListStore()
