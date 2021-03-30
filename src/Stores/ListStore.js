@@ -3,8 +3,8 @@ import { makeAutoObservable } from 'mobx'
 class ListStore{
   list = []
   filteredAndSortedList = []
-  sortingTypesList = ['brand', 'type', 'colour', 'cost']
-  newElement = {brand:'', type:'', colour:'', cost:''}
+  sortingTypesList = []
+  newElement = {}
   brands = ['fender', 'cort', 'epiphone']
   availableIDs=[]
   
@@ -35,8 +35,7 @@ class ListStore{
       }
       this.list.push(newElement)
       
-      this.newElement = 
-        {brand:newElement.brand, type:'', colour:'', cost:''}
+      this.newElement = {}
     }else{
       alert('invalid inputs')
     }
@@ -86,4 +85,6 @@ ProductsListStore.list.push({
   cost:3300     
 }    
 )    
+ProductsListStore.sortingTypesList = ['brand', 'type', 'colour', 'cost']
+ProductsListStore.newElement = {brand:'', type:'', colour:'', cost:''}
 export {ProductsListStore}

@@ -7,28 +7,31 @@ function AddElement({ListStore}) {
     <div className="add__new">
       {
         ListStore.sortingTypesList.map((e)=>{
-          if(e==='brand'){
-            return <select type="text" onChange={action((i)=>{
-                ListStore.newElement['brand'] = i.target.value
-              })
-            }>
+          switch(e){
+            case 'brand':
+              return <select type="text" value={ListStore.getNewElementValue(e)} onChange={action((i)=>{
+                  ListStore.newElement['brand'] = i.target.value
+                })
+              }>
               {
-                <option>-</option>
+                <option value="undefined">-</option>
               }
               {
                 ListStore.brands.map((e)=>{
                   return <option value={e}>{e}</option>
                 })
               }
-            </select>           
-          }else if(e!=='id'){
+              </select>
+            case 'id':
+              return null
+            default:
               return <input onChange={ 
-              action((i)=>{
-                ListStore.newElement[e] = i.target.value
-              })
-            } placeholder={e} value={ListStore.getNewElementValue(e)} type="text"></input>
-          }
-          return null
+                action((i)=>{
+                  ListStore.newElement[e] = i.target.value
+                })
+              } placeholder={e} value={ListStore.getNewElementValue(e)} type="text">
+              </input>
+            }
         })
       }
       <button onClick={()=>{

@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
 
-import ListElement from '../../Components/ListElement'
 import UserInput from '../../Components/UserInput'
 import AddElement from '../../Components/AddElement'
+import DisplayList from '../../Components/DisplayList'
 
 import UserInputStore from '../../Stores/UserInputStore'
 import {ProductsListStore} from '../../Stores/ListStore'
@@ -32,17 +32,7 @@ function List() {
   return (
     <div id="products">
       <UserInput UserInputStore={UserInputStore} ListStore={ProductsListStore} />
-      {
-        ProductsListStore.filteredAndSortedList.length > 0 ? 
-        <ul>
-          {
-            ProductsListStore.filteredAndSortedList.map((e)=>{
-              return <ListElement props={e} ListStore={ProductsListStore}/>
-            })
-          }
-        </ul>
-        : <h4>No results</h4>
-      }
+      <DisplayList ListStore={ProductsListStore} />
       <AddElement ListStore={ProductsListStore} />
     </div>
   )
