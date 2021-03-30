@@ -6,7 +6,7 @@ import AddElement from '../../Components/AddElement'
 import DisplayList from '../../Components/DisplayList'
 
 import UserInputStore from '../../Stores/UserInputStore'
-import {ProductsListStore, BrandsListStore} from '../../Stores/ListStore'
+import {ProductsListStore} from '../../Stores/ListStore'
 
 import './styles/products.css'
 

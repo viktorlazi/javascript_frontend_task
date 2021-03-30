@@ -26,6 +26,7 @@ function AddElement({ListStore}) {
               }
               </select>
             case 'id':
+            case 'number of products':
               return null
             default:
               return <input onChange={ 
