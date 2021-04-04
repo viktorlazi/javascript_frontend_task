@@ -7,6 +7,7 @@ import DisplayList from '../../Components/DisplayList'
 
 import UserInputStore from '../../Stores/UserInputStore'
 import {ProductsListStore} from '../../Stores/ListStore'
+import {BrandsListStore} from '../../Stores/ListStore'
 
 import './styles/products.css'
 
@@ -27,6 +28,13 @@ function List() {
         return 0;
       }
     )
+    const branded = BrandsListStore.getListProperties('id')
+    filtered.forEach(e => {
+      if(!branded.includes(e.brand)){
+        e.brand=0
+      }
+    })
+
     ProductsListStore.filteredAndSortedList=[...filtered]
   }, [UserInputStore.searchField, UserInputStore.sort, ProductsListStore.list.length])
   return (
