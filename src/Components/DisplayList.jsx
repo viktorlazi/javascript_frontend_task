@@ -7,10 +7,10 @@ function DisplayList({ListStore}) {
   return (
     <div>
       {
-        ListStore.filteredAndSortedList.length > 0 ? 
+        ListStore.filteredAndSorted.length > 0 ? 
         <ul>
           {
-            ListStore.filteredAndSortedList.map((e)=>{
+            ListStore.filteredAndSorted.map((e)=>{
               return <ListElement props={e} ListStore={ListStore}/>
             })
           }

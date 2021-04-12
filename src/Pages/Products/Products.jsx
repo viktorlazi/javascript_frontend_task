@@ -5,43 +5,20 @@ import UserInput from '../../Components/UserInput'
 import AddElement from '../../Components/AddElement'
 import DisplayList from '../../Components/DisplayList'
 
-import UserInputStore from '../../Stores/UserInputStore'
-import {ProductsListStore} from '../../Stores/ListStore'
-import {BrandsListStore} from '../../Stores/ListStore'
+import {ProductsInputStore} from '../../Stores/UserInputStore'
+import ProductsService from './Stores/ProductsService'
 
 import './styles/products.css'
 
 function List() {
   useEffect(() => {
-    let filtered = [...ProductsListStore.list.filter((e)=>{
-      return (e.brand + e.type + e.colour + e.cost).includes(UserInputStore.searchField)
-    })]
-    filtered.sort(
-      (a,b)=>{
-        const nameA = a[UserInputStore.sort]
-        const nameB = b[UserInputStore.sort]
-        if (nameA < nameB) {
-          return -1;
-        }else if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      }
-    )
-    const branded = BrandsListStore.getListProperties('id')
-    filtered.forEach(e => {
-      if(!branded.includes(e.brand)){
-        e.brand=0
-      }
-    })
-
-    ProductsListStore.filteredAndSortedList=[...filtered]
-  }, [UserInputStore.searchField, UserInputStore.sort, ProductsListStore.list.length])
+    ProductsService.filterAndSort()
+  }, [ProductsInputStore.searchField, ProductsInputStore.sort])
   return (
     <div id="products">
-      <UserInput UserInputStore={UserInputStore} ListStore={ProductsListStore} />
-      <DisplayList ListStore={ProductsListStore} />
-      <AddElement ListStore={ProductsListStore} />
+      <UserInput UserInputStore={ProductsInputStore} ListStore={ProductsService} />
+      <DisplayList ListStore={ProductsService} />
+      <AddElement ListStore={ProductsService} />
     </div>
   )
 }

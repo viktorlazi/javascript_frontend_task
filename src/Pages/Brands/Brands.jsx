@@ -2,12 +2,13 @@ import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
 import './styles/brands.css'
 import UserInput from '../../Components/UserInput'
-import {BrandsListStore, ProductsListStore} from '../../Stores/ListStore'
-import UserInputStore from '../../Stores/UserInputStore'
+import BrandsService from './Stores/BrandsService'
+import {BrandsInputStore} from '../../Stores/UserInputStore'
 import DisplayList from '../../Components/DisplayList'
 import AddElement from '../../Components/AddElement'
 
 function Brands() {
+  /*
   useEffect(() => {
     let products = ProductsListStore.getListProperties('brand')
     console.log(products)
@@ -32,12 +33,13 @@ function Brands() {
     )
     BrandsListStore.filteredAndSortedList=[...filtered]
   }, [UserInputStore.searchField, UserInputStore.sort, BrandsListStore.list.length, ProductsListStore.list])
+  */
   
   return (
     <div id="brands">
-      <UserInput UserInputStore={UserInputStore} ListStore={BrandsListStore} />
-      <DisplayList ListStore={BrandsListStore} />
-      <AddElement ListStore={BrandsListStore} />      
+      <UserInput UserInputStore={BrandsInputStore} ListStore={BrandsService} />
+      <DisplayList ListStore={BrandsService} />
+      <AddElement ListStore={BrandsService} />      
     </div>
   )
 }
