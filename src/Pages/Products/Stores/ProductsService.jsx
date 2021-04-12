@@ -4,7 +4,7 @@ import {ProductsInputStore} from '../../../Stores/UserInputStore'
 import BrandsStore from '../../../Stores/BrandsStore'
 
 class ProductsService{
-  filteredAndSorted = []
+  processedList = []
   newElement = {}
   sortingTypes = []
 
@@ -12,14 +12,11 @@ class ProductsService{
     makeAutoObservable(this)
   }
 
-  filterAndSort(){
-    let filtered = [...ProductsStore.list.filter((e)=>{
-      return (e.brand + e.type + e.colour + e.cost).includes(ProductsInputStore.searchField)
-    })]
-    filtered.sort(
+  sort(list, sortBy){
+    list.sort(
       (a,b)=>{
-        const nameA = a[ProductsInputStore.sortBy]
-        const nameB = b[ProductsInputStore.sortBy]
+        const nameA = a[sortBy]
+        const nameB = b[sortBy]
         if (nameA < nameB) {
           return -1;
         }else if (nameA > nameB) {
@@ -27,15 +24,28 @@ class ProductsService{
         }
         return 0;
       }
-    )
-    const branded = BrandsStore.getListProperties('id')
-    filtered.forEach(e => {
-      if(!branded.includes(e.brand)){
+      )
+      return list
+    }
+  filter(list, searchField){
+    let filtered = [...list.filter((e)=>{
+      return (e.brand + e.type + e.colour + e.cost).includes(searchField)
+    })]
+    return filtered
+  }
+  unbrandIfBrandNotExistent(list, validBrands){
+    list.forEach(e => {
+      if(!validBrands.includes(e.brand)){
         e.brand=0
       }
     })
-
-    this.filteredAndSorted=[...filtered]
+    return list
+  }
+  processList(){
+    let list = this.filter(ProductsStore.list, ProductsInputStore.searchField)
+    list = this.sort(list, ProductsInputStore.sortBy)    
+    list = this.unbrandIfBrandNotExistent(list, BrandsStore.getListProperties('id'))
+    this.processedList=[...list]
   }
 }
 

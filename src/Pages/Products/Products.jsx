@@ -12,7 +12,7 @@ import './styles/products.css'
 
 function List() {
   useEffect(() => {
-    ProductsService.filterAndSort()
+    ProductsService.processList()
   }, [ProductsInputStore.searchField, ProductsInputStore.sort])
   return (
     <div id="products">
