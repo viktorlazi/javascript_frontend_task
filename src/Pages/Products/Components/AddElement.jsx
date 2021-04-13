@@ -14,26 +14,8 @@ class Helper{
   getNewElementValue(key){
     return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
-  areInputsFilled(){
-    const keys = Object.keys(this.newElement)
-    if(keys.length>0){
-      return keys.every((e)=>{
-        return this.newElement[e] !== ''
-      })
-    }
-    return false
-  }
   addNewElementToList(){
-    if(this.areInputsFilled()){
-      if(!isNaN(this.newElement.cost)){
-        ProductsService.addNewElement(this.newElement)
-        return
-      }
-      alert('invalid product cost')
-      return
-    }
-    alert('invalid inputs')
-    return
+    ProductsService.addNewElement(this.newElement)
   }
 }
 const helper = new Helper()

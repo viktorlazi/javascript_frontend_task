@@ -22,13 +22,22 @@ class ProductsStore{
     this.list[index][field] = value
   }
   addNewElement(newElement){
-    if(this.availableIDs.length){
-      newElement['id'] = this.availableIDs[0]
-      this.availableIDs.shift()
-    }else{
-      newElement['id'] = this.list.length
+    if(this.isNewElementValid(newElement)){
+      if(!isNaN(newElement.cost)){
+        if(this.availableIDs.length){
+          newElement['id'] = this.availableIDs[0]
+          this.availableIDs.shift()
+        }else{
+          newElement['id'] = this.list.length
+        }
+        this.list.push(newElement)
+        return
+      }
+      alert('invalid product cost')
+      return
     }
-    this.list.push(newElement)  
+    alert('invalid inputs')
+    return    
   }
   getNewElementValue(key){
     return this.newElement[key] === undefined ? '':this.newElement[key] 

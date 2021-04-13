@@ -12,6 +12,7 @@ class Helper{
   
   toggleEditMode(){
     this.isInEditMode = !this.isInEditMode
+    console.log(toJS(this.element))
   }
   resetChanges(){
     this.element = {}
@@ -29,6 +30,7 @@ class ListElement extends React.Component{
   constructor(props){
     super(props)
     this.helper=new Helper()
+    this.helper.element = this.props.props
   }
   render(){
     if(!this.helper.isInEditMode){
