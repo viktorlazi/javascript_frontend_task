@@ -1,4 +1,5 @@
 import React from 'react'
+import {observer} from 'mobx-react'
 import MultioptionEditButton from '../../../Components/MultioptionEditButton'
 import BrandsStore from '../../../Stores/BrandsStore'
 
@@ -23,4 +24,4 @@ class EditElement extends React.Component{
   }
 }
 
-export default EditElement
+export default observer(EditElement)

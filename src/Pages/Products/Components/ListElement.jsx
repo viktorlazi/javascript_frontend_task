@@ -19,6 +19,11 @@ class Helper{
   setElement(value, field){
     this.element[field] = value
   }
+  appendValues(x){
+    Object.keys(x).map((e)=>{
+      this.element[e]=x[e]
+    })
+  }
   constructor(){
     makeAutoObservable(this)
   }  
@@ -29,7 +34,7 @@ class ListElement extends React.Component{
   constructor(props){
     super(props)
     this.helper=new Helper()
-    this.helper.element = this.props.props
+    this.helper.appendValues(this.props.props)
   }
   render(){
     if(!this.helper.isInEditMode){

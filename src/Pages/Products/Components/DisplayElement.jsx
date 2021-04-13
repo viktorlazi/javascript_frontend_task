@@ -1,5 +1,6 @@
 import React from 'react'
 import BrandsStore from '../../../Stores/BrandsStore'
+import {observer} from 'mobx-react'
 
 function DisplayElement({props}) {
   return Object.keys(props).map((e)=>{
@@ -16,4 +17,4 @@ function DisplayElement({props}) {
 }
  
 
-export default DisplayElement
+export default observer(DisplayElement)

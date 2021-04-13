@@ -24,7 +24,8 @@ class ProductsStore{
   editElement(edited, id){
     if(this.isNewElementValid(edited)){
       if(!isNaN(edited.cost)){
-        this.list[id] = edited
+        const index = this.list.findIndex(obj => obj.id === id)
+        this.list[index] = edited
         return
       }
       alert('invalid product cost')
