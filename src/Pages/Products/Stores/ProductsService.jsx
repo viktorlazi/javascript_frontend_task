@@ -9,7 +9,6 @@ class ProductsService{
   constructor(){
     makeAutoObservable(this)
   }
-
   getSortingTypes(){
     return ProductsStore.sortingTypes
   }
@@ -44,19 +43,14 @@ class ProductsService{
     })]
     return filtered
   }
-  unbrandIfBrandNotExistent(list, validBrands){
-    list.forEach(e => {
-      if(!validBrands.includes(e.brand)){
-        e.brand=0
-      }
-    })
-    return list
-  }
   processList(){
+    this.processedList=[]
+    ProductsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
     let list = this.filter(ProductsStore.list, ProductsInputStore.searchField)
-    list = this.sort(list, ProductsInputStore.sortBy)    
-    list = this.unbrandIfBrandNotExistent(list, BrandsStore.getListProperties('id'))
-    this.processedList=[...list]
+    list = this.sort(list, ProductsInputStore.sortBy)
+    list.forEach(e => {
+      this.processedList.push(e.id)
+    })
   }
 }
 

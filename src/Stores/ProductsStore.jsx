@@ -8,6 +8,10 @@ class ProductsStore{
   constructor(){
     makeAutoObservable(this)
   }
+  getElementById(id){
+    const index = this.list.findIndex(obj => obj.id === id)
+    return this.list[index]
+  }
   removeElement(id){
     if(this.list=this.list.filter(e=>{
         return e.id !== id
@@ -66,6 +70,13 @@ class ProductsStore{
   }
   getListProperties(key){
     return this.list.map(e=>e[key])
+  }
+  unbrandIfBrandNotExistent(validBrands){
+    this.list.forEach(e => {
+      if(!validBrands.includes(e.brand)){
+        e.brand=0
+      }
+    })
   }
 }
 
