@@ -5,7 +5,6 @@ import UserInput from '../../Components/UserInput'
 import BrandsService from './Stores/BrandsService'
 import {BrandsInputStore} from '../../Stores/UserInputStore'
 import DisplayList from '../../Components/DisplayList'
-import AddElement from '../../Components/AddElement'
 
 function Brands() {
   /*

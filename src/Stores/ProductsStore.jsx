@@ -8,14 +8,14 @@ class ProductsStore{
   constructor(){
     makeAutoObservable(this)
   }
-
   removeElement(id){
     if(this.list=this.list.filter(e=>{
         return e.id !== id
       }
     )){
-      this.availableIDs.push(id)
+      return this.availableIDs.push(id)
     }
+    alert('?')
   }
   editElementField(id, field, value){
     const index = this.list.findIndex(obj => obj.id === id)

@@ -16,6 +16,9 @@ class ProductsService{
   addNewElement(newElement){
     ProductsStore.addNewElement(newElement)
   }
+  removeElement(id){
+    ProductsStore.removeElement(id)
+  }
   sort(list, sortBy){
     list.sort(
       (a,b)=>{
@@ -32,8 +35,9 @@ class ProductsService{
       return list
     }
   filter(list, searchField){
+    const validBrands = BrandsStore.getListProperties('name')
     let filtered = [...list.filter((e)=>{
-      return (e.brand + e.type + e.colour + e.cost).includes(searchField)
+      return (validBrands[e.brand] + e.type + e.colour + e.cost).includes(searchField)
     })]
     return filtered
   }

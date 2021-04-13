@@ -10,18 +10,28 @@ import ProductsService from './Stores/ProductsService'
 import ProductsStore from '../../Stores/ProductsStore'
 
 import './styles/products.css'
+import ListElement from '../../Components/ListElement'
 
-function List() {
+function Products() {
   useEffect(() => { 
     ProductsService.processList()
-  }, [ProductsInputStore.searchField, ProductsInputStore.sort, ProductsStore.list.length])
+  }, [
+    ProductsInputStore.searchField, 
+    ProductsInputStore.sortBy, 
+    ProductsStore.list.length])
   return (
     <div id="products">
       <UserInput UserInputStore={ProductsInputStore} ListStore={ProductsService} />
-      <DisplayList ListStore={ProductsService} />
+      <DisplayList> 
+        {
+          ProductsService.processedList.map((e)=>{
+            return <ListElement props={e} ListStore={ProductsService.processedList}/>
+          })
+        }        
+      </DisplayList>
       <AddElement ListStore={ProductsService} />
     </div>
   )
 }
 
-export default observer(List)
+export default observer(Products)

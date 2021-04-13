@@ -1,18 +1,14 @@
 import React from 'react'
-import ListElement from './ListElement'
 import {observer} from 'mobx-react'
 
-
-function DisplayList({ListStore}) {
+function DisplayList(props) {
   return (
     <div>
       {
-        ListStore.processedList.length > 0 ? 
+        props.children.length ? 
         <ul>
           {
-            ListStore.processedList.map((e)=>{
-              return <ListElement props={e} ListStore={ListStore}/>
-            })
+            props.children
           }
         </ul>
         : <h4>No results</h4>
