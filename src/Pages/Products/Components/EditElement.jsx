@@ -10,7 +10,7 @@ class EditElement extends React.Component{
     return Object.keys(this.props.props).map((e)=>{
       switch(e){
         case 'brand':
-          return <MultioptionEditButton props={BrandsStore.list} />
+          return <MultioptionEditButton props={BrandsStore.list} getValue={(e)=>{this.props.setElement(e, 'brand')}} />
         case 'id':
           return null
         default:

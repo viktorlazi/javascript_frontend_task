@@ -1,7 +1,7 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, toJS} from 'mobx'
 import DisplayElement from './DisplayElement'
 import EditElement from './EditElement'
 
@@ -42,7 +42,6 @@ class ListElement extends React.Component{
     }else{
       return (
         <li>
-          <p>{this.helper.element['type']}</p>
           <EditElement props={this.props.props} setElement={(value, field)=>{this.helper.setElement(value, field)}} />
           <span onClick={()=>{this.helper.toggleEditMode()}} className="change__span">confirm</span>
           <span onClick={action(()=>{this.helper.toggleEditMode()})} className="cancel__span">cancel</span>

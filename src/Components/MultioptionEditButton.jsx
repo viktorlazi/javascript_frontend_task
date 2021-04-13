@@ -1,9 +1,9 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 
-function MultioptionEditButton({props}) {
+function MultioptionEditButton({props, getValue}) {
   return (
-    <select type="text">
+    <select type="text" onChange={(e)=>{getValue(e.target.value)}}>
       {
         <option>-</option>
       }
