@@ -25,7 +25,7 @@ function Products() {
       <DisplayList> 
         {
           ProductsService.processedList.map((e)=>{
-            return <ListElement props={e} removeElement={(x)=>ProductsService.removeElement(x)}/>
+            return <ListElement props={e} editElement={(edited, id)=>ProductsService.editElement(edited, id)} removeElement={(x)=>ProductsService.removeElement(x)}/>
           })
         }        
       </DisplayList>

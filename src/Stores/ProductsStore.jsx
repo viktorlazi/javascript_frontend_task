@@ -21,6 +21,18 @@ class ProductsStore{
     const index = this.list.findIndex(obj => obj.id === id)
     this.list[index][field] = value
   }
+  editElement(edited, id){
+    if(this.isNewElementValid(edited)){
+      if(!isNaN(edited.cost)){
+        this.list[id] = edited
+        return
+      }
+      alert('invalid product cost')
+      return
+    }
+    alert('invalid inputs')
+    return
+  }
   addNewElement(newElement){
     if(this.isNewElementValid(newElement)){
       if(!isNaN(newElement.cost)){

@@ -19,6 +19,9 @@ class ProductsService{
   removeElement(id){
     ProductsStore.removeElement(id)
   }
+  editElement(edited, id){
+    ProductsStore.editElement(edited, id)
+  }
   sort(list, sortBy){
     list.sort(
       (a,b)=>{
