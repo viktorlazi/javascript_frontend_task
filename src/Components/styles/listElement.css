@@ -1,8 +1,10 @@
 ul{
+  width:100%;
+  display:flex;
+  flex-direction: column;
   overflow-y:scroll;
   overflow-x:hidden;
 }
-
 li{
   display: flex;
   column-gap: 20px;
@@ -28,4 +30,7 @@ li input{
 }
 li .change__span{
   color: blue;
+}
+li .cancel__span{
+  color: purple;
 }

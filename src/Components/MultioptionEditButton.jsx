@@ -1,19 +1,14 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import {BrandsListStore} from '../Stores/ListStore'
 
-
-function MultioptionEditButton({props, ListStore, name}) {
-  const brands = BrandsListStore.list
+function MultioptionEditButton({props}) {
   return (
-    <select type="text" onChange={(e)=>{
-      ListStore.editElement(props.id, name, e.target.value)
-    }}>
+    <select type="text">
       {
         <option>-</option>
       }
       {
-        brands.map((e)=>{
+        props.map((e)=>{
           return <option value={e.id}>{e.name}</option>
         })
       }

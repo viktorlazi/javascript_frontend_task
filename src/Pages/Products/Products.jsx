@@ -4,13 +4,13 @@ import {observer} from 'mobx-react'
 import UserInput from '../../Components/UserInput'
 import AddElement from './Components/AddElement'
 import DisplayList from '../../Components/DisplayList'
+import ListElement from './Components/ListElement'
 
 import {ProductsInputStore} from '../../Stores/UserInputStore'
 import ProductsService from './Stores/ProductsService'
 import ProductsStore from '../../Stores/ProductsStore'
 
 import './styles/products.css'
-import ListElement from '../../Components/ListElement'
 
 function Products() {
   useEffect(() => { 
@@ -25,7 +25,7 @@ function Products() {
       <DisplayList> 
         {
           ProductsService.processedList.map((e)=>{
-            return <ListElement props={e} ListStore={ProductsService.processedList}/>
+            return <ListElement props={e} removeElement={(x)=>ProductsService.removeElement(x)}/>
           })
         }        
       </DisplayList>
