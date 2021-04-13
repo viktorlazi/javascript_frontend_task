@@ -8,7 +8,7 @@ function AddElement({ListStore}) {
   return (
     <div className="add__new">
       {
-        ListStore.sortingTypes.map((e)=>{
+        ListStore.getSortingTypes().map((e)=>{
           switch(e){
             case 'brand':
               const brands = BrandsListStore.list

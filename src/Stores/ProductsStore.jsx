@@ -22,17 +22,13 @@ class ProductsStore{
     this.list[index][field] = value
   }
   addNewElement(newElement){
-    if(this.isNewElementValid(newElement)){
-      if(this.availableIDs.length){
-        newElement['id'] = this.availableIDs[0]
-        this.availableIDs.shift()
-      }else{
-        newElement['id'] = this.list.length
-      }
-      this.list.push(newElement)
+    if(this.availableIDs.length){
+      newElement['id'] = this.availableIDs[0]
+      this.availableIDs.shift()
     }else{
-      alert('invalid inputs')
+      newElement['id'] = this.list.length
     }
+    this.list.push(newElement)  
   }
   getNewElementValue(key){
     return this.newElement[key] === undefined ? '':this.newElement[key] 

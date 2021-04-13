@@ -8,14 +8,14 @@ function UserInput({UserInputStore, ListStore}) {
         onChange={(e)=>{UserInputStore.setSearchField(e.target.value)}}
         />
         {
-        ListStore.sortingTypes.length?
+        ListStore.getSortingTypes()?
         <select type="text" id="sortBy" placeholder="sort by..." list="sortByList"
           onChange={(e)=>{UserInputStore.setSort(e.target.value)}} >
           {
             <option>-</option>
           }
           {
-            ListStore.sortingTypes.map((e)=>{
+            ListStore.getSortingTypes().map((e)=>{
               return <option value={e}>sort by: {e}</option>
             })
           }

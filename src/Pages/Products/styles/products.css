@@ -8,3 +8,6 @@
 .userInput{
   display:flex;
 }
+#products ul{
+  height:300px;
+}

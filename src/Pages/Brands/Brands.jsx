@@ -34,7 +34,8 @@ function Brands() {
     BrandsListStore.filteredAndSortedList=[...filtered]
   }, [UserInputStore.searchField, UserInputStore.sort, BrandsListStore.list.length, ProductsListStore.list])
   */
-  
+ return null
+  /*
   return (
     <div id="brands">
       <UserInput UserInputStore={BrandsInputStore} ListStore={BrandsService} />
@@ -42,6 +43,7 @@ function Brands() {
       <AddElement ListStore={BrandsService} />      
     </div>
   )
+  */
 }
 
 export default observer(Brands)

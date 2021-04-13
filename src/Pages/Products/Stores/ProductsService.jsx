@@ -1,17 +1,21 @@
 import { makeAutoObservable } from 'mobx'
 import ProductsStore from '../../../Stores/ProductsStore'
-import {ProductsInputStore} from '../../../Stores/UserInputStore'
 import BrandsStore from '../../../Stores/BrandsStore'
+import {ProductsInputStore} from '../../../Stores/UserInputStore'
 
 class ProductsService{
   processedList = []
-  newElement = {}
-  sortingTypes = []
 
   constructor(){
     makeAutoObservable(this)
   }
 
+  getSortingTypes(){
+    return ProductsStore.sortingTypes
+  }
+  addNewElement(newElement){
+    ProductsStore.addNewElement(newElement)
+  }
   sort(list, sortBy){
     list.sort(
       (a,b)=>{
