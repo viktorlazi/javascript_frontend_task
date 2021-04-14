@@ -13,13 +13,13 @@ class ProductsService{
     return ProductsStore.sortingTypes
   }
   addNewElement(newElement){
-    ProductsStore.addNewElement(newElement)
+    return ProductsStore.addNewElement(newElement)
   }
   removeElement(id){
-    ProductsStore.removeElement(id)
+    return ProductsStore.removeElement(id)
   }
   editElement(edited, id){
-    ProductsStore.editElement(edited, id)
+    return ProductsStore.editElement(edited, id)
   }
   sort(list, sortBy){
     list.sort(

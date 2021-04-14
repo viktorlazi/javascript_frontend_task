@@ -15,6 +15,5 @@ function DisplayElement({props}) {
     }
   })
 }
- 
 
 export default observer(DisplayElement)

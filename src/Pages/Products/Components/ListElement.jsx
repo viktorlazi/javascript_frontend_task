@@ -1,7 +1,7 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
-import { makeAutoObservable} from 'mobx'
+import { makeAutoObservable, toJS } from 'mobx'
 import DisplayElement from './DisplayElement'
 import EditElement from './EditElement'
 
@@ -13,13 +13,11 @@ class Helper{
   toggleEditMode(){
     this.isInEditMode = !this.isInEditMode
   }
-  resetChanges(){
-    this.element = {}
-  }
-  setElement(value, field){
+  setElementField(value, field){
     this.element[field] = value
   }
-  appendValues(x){
+  equalToProps(x){
+    this.element={}
     Object.keys(x).map((e)=>{
       this.element[e]=x[e]
     })
@@ -34,7 +32,15 @@ class ListElement extends React.Component{
   constructor(props){
     super(props)
     this.helper=new Helper()
-    this.helper.appendValues(this.props.props)
+    this.helper.equalToProps(this.props.props)
+  }
+  edit(){
+    if(this.props.editElement(this.helper.element, this.props.props.id)){
+      this.helper.toggleEditMode()
+      console.log(toJS(this.helper.element))
+      return
+    }
+    this.helper.equalToProps(this.props.props)
   }
   render(){
     if(!this.helper.isInEditMode){
@@ -48,9 +54,9 @@ class ListElement extends React.Component{
     }else{
       return (
         <li>
-          <EditElement props={this.props.props} setElement={(value, field)=>{this.helper.setElement(value, field)}} />
-          <span onClick={action(()=>{this.props.editElement(this.helper.element, this.props.props.id);this.helper.toggleEditMode()})} className="change__span">confirm</span>
-          <span onClick={action(()=>{this.helper.toggleEditMode()})} className="cancel__span">cancel</span>
+          <EditElement props={this.props.props} setElementField={(value, field)=>{this.helper.setElementField(value, field)}} />
+          <span onClick={action(()=>{this.edit()})} className="change__span">confirm</span>
+          <span onClick={()=>{this.helper.toggleEditMode()}} className="cancel__span">cancel</span>
         </li>
       )
     }

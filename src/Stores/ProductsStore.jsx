@@ -10,7 +10,7 @@ class ProductsStore{
   }
   getElementById(id){
     const index = this.list.findIndex(obj => obj.id === id)
-    return this.list[index]
+    return this.list[index] || {}
   }
   removeElement(id){
     if(this.list=this.list.filter(e=>{
@@ -19,24 +19,25 @@ class ProductsStore{
     )){
       return this.availableIDs.push(id)
     }
-    alert('?')
+    alert('invalid id')
   }
-  editElementField(id, field, value){
-    const index = this.list.findIndex(obj => obj.id === id)
-    this.list[index][field] = value
+  listElementEqualTo(obj, index){
+    Object.keys(this.list[index]).map((e)=>{
+      this.list[index][e] = obj[e]
+    })
   }
   editElement(edited, id){
     if(this.isNewElementValid(edited)){
-      if(!isNaN(edited.cost)){
+      if(!isNaN(edited.cost) && isNaN(edited.type) && isNaN(edited.colour)){
         const index = this.list.findIndex(obj => obj.id === id)
-        this.list[index] = edited
-        return
+        this.listElementEqualTo(edited, index)
+        return true
       }
-      alert('invalid product cost')
-      return
+      alert('-type and colour cant be numbers\n-cost can only be a number')
+      return false
     }
     alert('invalid inputs')
-    return
+    return false
   }
   addNewElement(newElement){
     if(this.isNewElementValid(newElement)){
