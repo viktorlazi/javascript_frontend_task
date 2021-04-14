@@ -1,5 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react'
+import {action} from 'mobx'
 import MultioptionEditButton from '../../../Components/MultioptionEditButton'
 import BrandsStore from '../../../Stores/BrandsStore'
 
@@ -16,7 +17,7 @@ class EditElement extends React.Component{
           return null
         default:
           return <input 
-            onChange={(i)=>{this.props.setElementField(i.target.value, e)}}
+            onChange={action((i)=>{this.props.setElementField(i.target.value, e)})}
             placeholder={this.props.props[e]} 
             type="text"/>
       }

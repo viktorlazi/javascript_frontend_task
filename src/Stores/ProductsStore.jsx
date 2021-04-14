@@ -73,6 +73,8 @@ class ProductsStore{
     return this.list.map(e=>e[key])
   }
   unbrandIfBrandNotExistent(validBrands){
+    console.log(validBrands)
+    console.log(this.list.map(e=>e.brand))
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
         e.brand=0

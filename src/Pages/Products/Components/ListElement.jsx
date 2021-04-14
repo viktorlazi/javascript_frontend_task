@@ -47,7 +47,7 @@ class ListElement extends React.Component{
       return (
         <li>
           <DisplayElement props={this.props.props} />
-          <span onClick={action(()=>{this.helper.toggleEditMode()})} className="edit__span">edit</span>
+          <span onClick={()=>{this.helper.toggleEditMode()}} className="edit__span">edit</span>
           <span onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="remove__span">remove</span>
         </li>
     )

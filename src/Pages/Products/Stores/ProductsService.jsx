@@ -44,8 +44,8 @@ class ProductsService{
     return filtered
   }
   processList(){
-    this.processedList=[]
     ProductsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
+    this.processedList=[]
     let list = this.filter(ProductsStore.list, ProductsInputStore.searchField)
     list = this.sort(list, ProductsInputStore.sortBy)
     list.forEach(e => {
