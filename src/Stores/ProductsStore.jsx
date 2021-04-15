@@ -1,16 +1,16 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, toJS } from 'mobx'
 
 class ProductsStore{
   list = []
   sortingTypes = []
-  availableIDs=[]
+  availableIDs = []
   
   constructor(){
     makeAutoObservable(this)
   }
   getElementById(id){
     const index = this.list.findIndex(obj => obj.id === id)
-    return this.list[index] || {}
+    return this.list[index]
   }
   removeElement(id){
     if(this.list=this.list.filter(e=>{
@@ -49,13 +49,13 @@ class ProductsStore{
           newElement['id'] = this.list.length
         }
         this.list.push(newElement)
-        return
+        return true
       }
       alert('invalid product cost')
-      return
+      return false
     }
     alert('invalid inputs')
-    return    
+    return false
   }
   getNewElementValue(key){
     return this.newElement[key] === undefined ? '':this.newElement[key] 

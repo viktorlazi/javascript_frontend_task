@@ -1,63 +1,66 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import {action} from 'mobx'
-import { makeAutoObservable } from 'mobx'
+import {makeAutoObservable, action} from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
 import ProductsService from '../Stores/ProductsService'
+import MultioptionEditButton from '../../../Components/MultioptionEditButton'
 
 class Helper{
   newElement = {}
-  
+
   constructor(){
+    this.newElement = {
+      brand:'',
+      type:'',
+      colour:'',
+      cost:''
+    }
     makeAutoObservable(this)
   }
   getNewElementValue(key){
     return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
-  addNewElementToList(){
-    ProductsService.addNewElement(this.newElement)
+  setElementField(value, field){
+    this.element[field] = value
   }
 }
-const helper = new Helper()
 
-function AddElement({ListStore}) {
-  return (
+class AddElement extends React.Component {
+  helper
+  constructor(props){
+    super(props)
+    this.helper=new Helper()
+  }
+  addNewElementToList(){
+    ProductsService.addNewElement(this.helper.newElement)
+  }
+  render(){
+    return(
     <div className="add__new">
       {
-        ListStore.getSortingTypes().map((e)=>{
+        this.props.ListStore.getSortingTypes().map((e)=>{
           switch(e){
             case 'brand':
               const brands = BrandsStore.list
-              return <select type="text" value={helper.getNewElementValue(e)} onChange={action((i)=>{
-                  helper.newElement['brand'] = i.target.value
-                })
-              }>
-              {
-                <option value="undefined">-</option>
-              }
-              {
-                brands.map((e)=>{
-                  return <option value={e.id}>{e.name}</option>
-                })
-              }
-              </select>
+              return <MultioptionEditButton props={brands} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} selected={0} />
             case 'id':
               return null
             default:
               return <input onChange={ 
                 action((i)=>{
-                  helper.newElement[e] = i.target.value
+                  this.helper.setElementField(i.target.value, e)
                 })
-              } placeholder={e} value={helper.getNewElementValue(e)} type="text">
+              } placeholder={e} value={this.helper.getNewElementValue(e)} type="text">
               </input>
             }
         })
       }
       <button onClick={()=>{
-        helper.addNewElementToList()
+        this.addNewElementToList(this.helper.newElement)
       }}>Add New</button>
     </div>
-  )
+    )
+  }
 }
 
 export default observer(AddElement)

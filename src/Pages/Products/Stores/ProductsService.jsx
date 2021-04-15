@@ -16,6 +16,7 @@ class ProductsService{
     return ProductsStore.addNewElement(newElement)
   }
   removeElement(id){
+    this.processedList=[]
     return ProductsStore.removeElement(id)
   }
   editElement(edited, id){
@@ -33,9 +34,9 @@ class ProductsService{
         }
         return 0;
       }
-      )
-      return list
-    }
+    )
+    return list
+  }
   filter(list, searchField){
     const validBrands = BrandsStore.getListProperties('name')
     let filtered = [...list.filter((e)=>{
