@@ -24,7 +24,7 @@ function Products() {
       <UserInput UserInputStore={ProductsInputStore} ListStore={ProductsService} />
       <DisplayList> 
         {
-          ProductsService.processedList.map((e)=>{
+          ProductsService.idList.map((e)=>{
             return <ListElement props={ProductsStore.getElementById(e)} editElement={(edited, id)=>{return ProductsService.editElement(edited, id)}} removeElement={(x)=>ProductsService.removeElement(x)}/>
           })
         }        

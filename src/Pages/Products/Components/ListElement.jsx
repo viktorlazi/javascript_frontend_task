@@ -36,7 +36,6 @@ class ListElement extends React.Component{
     super(props)
     this.helper=new Helper()
     this.helper.equalToProps(this.props.props)
-    console.log(toJS(this.helper.element))
   }
   edit(){
     if(this.props.editElement(this.helper.element, this.props.props.id)){

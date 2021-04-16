@@ -6,14 +6,15 @@ import ProductsService from '../Stores/ProductsService'
 import MultioptionEditButton from '../../../Components/MultioptionEditButton'
 
 class Helper{
-  newElement = {}
+  newElement
+  lastSelected = 0
 
   constructor(){
     this.newElement = {
-      brand:'',
+      brand:1,
       type:'',
       colour:'',
-      cost:''
+      cost:0
     }
     makeAutoObservable(this)
   }
@@ -21,7 +22,17 @@ class Helper{
     return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
   setElementField(value, field){
-    this.element[field] = value
+    this.newElement[field] = value
+  }
+  addNewElementToList(){
+    if(ProductsService.addNewElement(this.newElement)){
+      this.newElement = {
+        brand:1,
+        type:'',
+        colour:'',
+        cost:0
+      }
+    }
   }
 }
 
@@ -31,9 +42,6 @@ class AddElement extends React.Component {
     super(props)
     this.helper=new Helper()
   }
-  addNewElementToList(){
-    ProductsService.addNewElement(this.helper.newElement)
-  }
   render(){
     return(
     <div className="add__new">
@@ -42,21 +50,21 @@ class AddElement extends React.Component {
           switch(e){
             case 'brand':
               const brands = BrandsStore.list
-              return <MultioptionEditButton props={brands} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} selected={0} />
+              return <MultioptionEditButton props={brands} getValue={(e)=>{this.helper.setElementField(e, 'brand'); this.helper.lastSelected=e}} selected={this.helper.lastSelected} />
             case 'id':
               return null
             default:
               return <input onChange={ 
-                action((i)=>{
+                (i)=>{
                   this.helper.setElementField(i.target.value, e)
-                })
-              } placeholder={e} value={this.helper.getNewElementValue(e)} type="text">
+                }
+              } placeholder={e} value={this.helper.newElement[e]} type="text">
               </input>
             }
         })
       }
       <button onClick={()=>{
-        this.addNewElementToList(this.helper.newElement)
+        this.helper.addNewElementToList()
       }}>Add New</button>
     </div>
     )

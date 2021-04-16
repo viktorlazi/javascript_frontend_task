@@ -4,7 +4,7 @@ import BrandsStore from '../../../Stores/BrandsStore'
 import {ProductsInputStore} from '../../../Stores/UserInputStore'
 
 class ProductsService{
-  processedList = []
+  idList = []
 
   constructor(){
     makeAutoObservable(this)
@@ -16,7 +16,7 @@ class ProductsService{
     return ProductsStore.addNewElement(newElement)
   }
   removeElement(id){
-    this.processedList=[]
+    this.idList.splice(this.idList.indexOf(id))
     return ProductsStore.removeElement(id)
   }
   editElement(edited, id){
@@ -46,12 +46,10 @@ class ProductsService{
   }
   processList(){
     ProductsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
-    this.processedList=[]
     let list = this.filter(ProductsStore.list, ProductsInputStore.searchField)
     list = this.sort(list, ProductsInputStore.sortBy)
-    list.forEach(e => {
-      this.processedList.push(e.id)
-    })
+    const idList = list.map(e=>{return e.id})
+    this.idList=idList        
   }
 }
 

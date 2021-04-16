@@ -8,8 +8,8 @@ function DisplayElement({props}) {
       case 'id':
         return null
       case 'brand':
-        const brands = BrandsStore.getListProperties('name')
-        return <p>{brands[props[e]]}</p>
+        const brands = BrandsStore.list
+        return <p>{(brands.find((e)=>{return e.id===props['brand']})||{}).name || 'unbranded'}</p>
       default:
         return <p>{props[e]}</p>
     }

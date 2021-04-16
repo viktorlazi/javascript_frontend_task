@@ -53,23 +53,28 @@ class BrandsStore{
 
 const brandsStore = new BrandsStore()
 brandsStore.list.push({
-  id:0,
+  id:1,
   name:'unbranded',
   numberOfProducts: 0
 },
 {
-  id:1,
+  id:2,
   name:'epiphone',
   numberOfProducts: 0
 },
 {
-  id:2,
+  id:3,
   name:'cort',
   numberOfProducts: 0
 },
 {
-  id:3,
+  id:4,
   name:'fender',
+  numberOfProducts: 0
+},
+{
+  id:5,
+  name:'yamaha',
   numberOfProducts: 0
 }
 )

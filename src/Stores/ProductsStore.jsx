@@ -30,7 +30,6 @@ class ProductsStore{
       if(!isNaN(edited.cost) && isNaN(edited.type) && isNaN(edited.colour)){
         const index = this.list.findIndex(obj => obj.id === id)
         this.listElementEqualTo(edited, index)
-        console.log(toJS(this.list[index]))
         return true
       }
       alert('-type and colour cant be numbers\n-cost can only be a number')
@@ -41,17 +40,22 @@ class ProductsStore{
   }
   addNewElement(newElement){
     if(this.isNewElementValid(newElement)){
-      if(!isNaN(newElement.cost)){
+      if(!isNaN(newElement.cost) && isNaN(newElement.type) && isNaN(newElement.colour)){
+        let id
         if(this.availableIDs.length){
-          newElement['id'] = this.availableIDs[0]
+          id = this.availableIDs[0]
           this.availableIDs.shift()
         }else{
-          newElement['id'] = this.list.length
+          id = this.list.length
         }
-        this.list.push(newElement)
+        this.list.push({})
+        this.list[this.list.length-1]['id'] = id
+        Object.keys(newElement).map((e)=>{
+          this.list[this.list.length-1][e] = newElement[e]
+        })
         return true
       }
-      alert('invalid product cost')
+      alert('-type and colour cant be numbers\n-cost can only be a number')
       return false
     }
     alert('invalid inputs')
@@ -89,28 +93,28 @@ const productsStore = new ProductsStore()
  
 productsStore.list.push({
   id:0,
-  brand:3,
+  brand:4,
   type:'stratocaster',
   colour:'blue',
   cost:4200      
 },
 {
   id:1,
-  brand:3,
+  brand:4,
   type:'telecaster',
   colour:'black',
   cost:4300      
 },
 {
   id:2,
-  brand:2,
+  brand:3,
   type:'singlecut',
   colour:'sunburn',
   cost:3301 
 },
 { 
   id:3,
-  brand:1,
+  brand:2,
   type:'singlecut',
   colour:'yellow',
   cost:3300     
