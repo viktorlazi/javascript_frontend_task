@@ -22,7 +22,7 @@ function App() {
             <Products />
           </Route>
           <Route path="/brands">
-            <Brands/>
+            <Brands />
           </Route>
         </div>
         <Route path="/">

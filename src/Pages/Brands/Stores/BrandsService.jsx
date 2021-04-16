@@ -1,15 +1,26 @@
 import { makeAutoObservable } from 'mobx'
-import {BrandsInputStore} from '../../../Stores/UserInputStore'
 import BrandsStore from '../../../Stores/BrandsStore'
+import {BrandsInputStore} from '../../../Stores/UserInputStore'
 
 class BrandsService{
-  processedList = []
-  newElement = {}
+  idList = []
 
   constructor(){
     makeAutoObservable(this)
   }
-
+  getSortingTypes(){
+    return BrandsStore.sortingTypes
+  }
+  addNewElement(newElement){
+    return BrandsStore.addNewElement(newElement)
+  }
+  removeElement(id){
+    this.idList.splice(this.idList.indexOf(id))
+    return BrandsStore.removeElement(id)
+  }
+  editElement(edited, id){
+    return BrandsStore.editElement(edited, id)
+  }
   sort(list, sortBy){
     list.sort(
       (a,b)=>{
@@ -22,19 +33,22 @@ class BrandsService{
         }
         return 0;
       }
-      )
-      return list
-    }
+    )
+    return list
+  }
   filter(list, searchField){
+    const validBrands = BrandsStore.getListProperties('name')
     let filtered = [...list.filter((e)=>{
-      return (e.brand + e.type + e.colour + e.cost).includes(searchField)
+      return (validBrands[e.brand] + e.type + e.colour + e.cost).includes(searchField)
     })]
     return filtered
   }
   processList(){
+    BrandsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
     let list = this.filter(BrandsStore.list, BrandsInputStore.searchField)
-    list = this.sort(list, BrandsInputStore.sortBy)    
-    this.processedList=[...list]
+    list = this.sort(list, BrandsInputStore.sortBy)
+    const idList = list.map(e=>{return e.id})
+    this.idList=idList        
   }
 }
 
