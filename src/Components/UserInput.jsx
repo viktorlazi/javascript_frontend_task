@@ -10,10 +10,7 @@ function UserInput({UserInputStore, ListStore}) {
         {
         ListStore.getSortingTypes()?
         <select type="text" id="sortBy" placeholder="sort by..." list="sortByList"
-          onChange={(e)=>{UserInputStore.setSort(e.target.value)}} >
-          {
-            <option>-</option>
-          }
+          onChange={(e)=>{UserInputStore.sortBy=e.target.value}} >
           {
             ListStore.getSortingTypes().map((e)=>{
               return <option value={e}>sort by: {e}</option>

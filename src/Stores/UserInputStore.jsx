@@ -7,7 +7,7 @@ class UserInputStore{
     makeAutoObservable(this)
   }
   setSearchField(x){
-    this.searchField=x
+    this.searchField = x
   }
   setSort(x){
     this.sort = x
