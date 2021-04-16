@@ -18,7 +18,7 @@ class EditElement extends React.Component{
         default:
           return <input 
             onChange={action((i)=>{this.props.setElementField(i.target.value, e)})}
-            placeholder={this.props.props[e]} 
+            defaultValue={this.props.props[e]} 
             type="text"/>
       }
     })

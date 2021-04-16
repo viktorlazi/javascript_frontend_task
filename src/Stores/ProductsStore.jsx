@@ -13,17 +13,16 @@ class ProductsStore{
     return this.list[index]
   }
   removeElement(id){
-    if(this.list=this.list.filter(e=>{
-        return e.id !== id
-      }
-    )){
+    if(this.list.splice(this.list.indexOf(e=>e.id===id)+1, 1)){
       return this.availableIDs.push(id)
     }
     alert('invalid id')
   }
   listElementEqualTo(obj, index){
     Object.keys(this.list[index]).map((e)=>{
-      this.list[index][e] = obj[e]
+      if(e!=='id'){
+        this.list[index][e] = obj[e]
+      }
     })
   }
   editElement(edited, id){
@@ -31,6 +30,7 @@ class ProductsStore{
       if(!isNaN(edited.cost) && isNaN(edited.type) && isNaN(edited.colour)){
         const index = this.list.findIndex(obj => obj.id === id)
         this.listElementEqualTo(edited, index)
+        console.log(toJS(this.list[index]))
         return true
       }
       alert('-type and colour cant be numbers\n-cost can only be a number')
@@ -64,7 +64,7 @@ class ProductsStore{
     const keys = Object.keys(newElement)
     if(keys.length>0){
       return keys.every((e)=>{
-        return newElement[e] !== ''
+        return newElement[e]
       })
     }
     return false
@@ -73,8 +73,6 @@ class ProductsStore{
     return this.list.map(e=>e[key])
   }
   unbrandIfBrandNotExistent(validBrands){
-    console.log(validBrands)
-    console.log(this.list.map(e=>e.brand))
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
         e.brand=0

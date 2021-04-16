@@ -15,11 +15,14 @@ class Helper{
   }
   setElementField(value, field){
     this.element[field] = value
+    console.log(toJS(this.element))
   }
   equalToProps(x){
     this.element={}
     Object.keys(x).map((e)=>{
-      this.element[e]=x[e]
+      if(e!=='id'){
+        this.element[e]=x[e]
+      }
     })
   }
   constructor(){
@@ -33,11 +36,11 @@ class ListElement extends React.Component{
     super(props)
     this.helper=new Helper()
     this.helper.equalToProps(this.props.props)
+    console.log(toJS(this.helper.element))
   }
   edit(){
     if(this.props.editElement(this.helper.element, this.props.props.id)){
       this.helper.toggleEditMode()
-      console.log(toJS(this.helper.element))
       return
     }
     this.helper.equalToProps(this.props.props)
