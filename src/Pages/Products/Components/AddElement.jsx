@@ -1,9 +1,10 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import {makeAutoObservable, action} from 'mobx'
+import {makeAutoObservable} from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
 import ProductsService from '../Stores/ProductsService'
 import MultioptionEditButton from '../../../Components/MultioptionEditButton'
+import './styles/addElement.css'
 
 class Helper{
   newElement
@@ -14,7 +15,7 @@ class Helper{
       brand:1,
       type:'',
       colour:'',
-      cost:0
+      cost:''
     }
     makeAutoObservable(this)
   }
@@ -30,7 +31,7 @@ class Helper{
         brand:1,
         type:'',
         colour:'',
-        cost:0
+        cost:''
       }
     }
   }
