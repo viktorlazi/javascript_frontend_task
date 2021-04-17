@@ -41,7 +41,7 @@ class AddElement extends React.Component {
     return(
     <div className="add__new">
       {
-        this.props.ListStore.getSortingTypes().map((e)=>{
+        this.props.getSortingTypes().map((e)=>{
           switch(e){
             case 'id':
             case 'numberOfProducts':

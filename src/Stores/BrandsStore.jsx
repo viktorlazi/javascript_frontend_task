@@ -14,18 +14,17 @@ class BrandsStore{
     return this.list[index]
   }
   removeElement(id){
-    if(this.list=this.list.filter(e=>{
-        return e.id !== id
-      }
-    )){
-      this.availableIDs.push(id)
-    }
+    this.list=this.list.filter(e=>{
+      return e.id !== id
+    })
+    this.availableIDs.push(id)
   }
   listElementEqualTo(obj, index){
     Object.keys(this.list[index]).map((e)=>{
       if(e!=='id'){
         this.list[index][e] = obj[e]
       }
+      return true
     })
   }
   editElement(edited, id){
@@ -54,7 +53,7 @@ class BrandsStore{
       this.list[this.list.length-1]['id'] = id+1
       Object.keys(newElement).map((e)=>{
         this.list[this.list.length-1][e] = newElement[e]
-        console.log(toJS(this.list))
+        return true
       })
       console.log(toJS(this.list[this.list.length-1]))
       return true

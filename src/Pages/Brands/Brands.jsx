@@ -35,7 +35,7 @@ function Products() {
           })
         }        
       </DisplayList>
-      <AddElement ListStore={BrandsService} />
+      <AddElement getSortingTypes={()=>{return BrandsService.getSortingTypes()}} />
     </div>
   )
 }

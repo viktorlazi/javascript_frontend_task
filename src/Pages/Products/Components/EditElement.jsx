@@ -5,9 +5,6 @@ import MultioptionEditButton from '../../../Components/MultioptionEditButton'
 import BrandsStore from '../../../Stores/BrandsStore'
 
 class EditElement extends React.Component{
-  constructor(props){
-    super(props)
-  }
   render(){
     return Object.keys(this.props.props).map((e)=>{
       switch(e){

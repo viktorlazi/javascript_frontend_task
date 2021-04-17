@@ -20,6 +20,7 @@ class Helper{
       if(e!=='id'){
         this.element[e]=x[e]
       }
+      return true
     })
   }
   constructor(){

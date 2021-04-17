@@ -1,7 +1,7 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import DisplayElement from './DisplayElement'
 import EditElement from './EditElement'
 
@@ -22,6 +22,7 @@ class Helper{
       if(e!=='id'){
         this.element[e]=x[e]
       }
+      return true
     })
   }
   constructor(){
