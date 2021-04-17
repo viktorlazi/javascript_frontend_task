@@ -13,10 +13,12 @@ class ProductsStore{
     return this.list[index]
   }
   removeElement(id){
-    if(this.list.splice(this.list.indexOf(e=>e.id===id)+1, 1)){
-      return this.availableIDs.push(id)
+    if(this.list=this.list.filter(e=>{
+        return e.id !== id
+      }
+    )){
+      this.availableIDs.push(id)
     }
-    alert('invalid id')
   }
   listElementEqualTo(obj, index){
     Object.keys(this.list[index]).map((e)=>{
