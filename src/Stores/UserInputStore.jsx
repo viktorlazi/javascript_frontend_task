@@ -1,8 +1,8 @@
 import { makeAutoObservable } from 'mobx'
 
 class UserInputStore{
-  searchField = '';
-  sortBy = 'brand';
+  searchField = ''
+  sortBy
   constructor(){
     makeAutoObservable(this)
   }
@@ -15,7 +15,9 @@ class UserInputStore{
 }
 
 const BrandsInputStore = new UserInputStore()
+BrandsInputStore.sortBy='name'
 export  {BrandsInputStore}
 
 const ProductsInputStore = new UserInputStore()
+ProductsInputStore.sortBy='brands'
 export  {ProductsInputStore}

@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable , toJS} from 'mobx'
 
 class BrandsStore{
   list = []
@@ -8,7 +8,10 @@ class BrandsStore{
   constructor(){
     makeAutoObservable(this)
   }
-
+  getElementById(id){
+    const index = this.list.findIndex(obj => obj.id === id)
+    return this.list[index]
+  }
   removeElement(id){
     if(this.list=this.list.filter(e=>{
         return e.id !== id
@@ -17,9 +20,26 @@ class BrandsStore{
       this.availableIDs.push(id)
     }
   }
-  editElementField(id, field, value){
-    const index = this.list.findIndex(obj => obj.id === id)
-    this.list[index][field] = value
+  listElementEqualTo(obj, index){
+    Object.keys(this.list[index]).map((e)=>{
+      if(e!=='id'){
+        this.list[index][e] = obj[e]
+      }
+    })
+  }
+  editElement(edited, id){
+    console.log(toJS(edited))
+    if(this.isNewElementValid(edited)){
+      if(isNaN(edited.name)){
+        const index = this.list.findIndex(obj => obj.id === id)
+        this.listElementEqualTo(edited, index)
+        return true
+      }
+      alert('-brand name cant be a number')
+      return false
+    }
+    alert('invalid inputs')
+    return false
   }
   addNewElement(newElement){
     if(this.isNewElementValid(newElement)){

@@ -37,16 +37,14 @@ class BrandsService{
     return list
   }
   filter(list, searchField){
-    const validBrands = BrandsStore.getListProperties('name')
     let filtered = [...list.filter((e)=>{
-      return (validBrands[e.brand] + e.type + e.colour + e.cost).includes(searchField)
+      return e.name.includes(searchField)
     })]
     return filtered
   }
   processList(){
-    BrandsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
     let list = this.filter(BrandsStore.list, BrandsInputStore.searchField)
-    list = this.sort(list, BrandsInputStore.sortBy)
+    //list = this.sort(list, BrandsInputStore.sortBy)
     const idList = list.map(e=>{return e.id})
     this.idList=idList        
   }

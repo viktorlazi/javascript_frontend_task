@@ -1,19 +1,12 @@
-import './App.css';
-import {useEffect} from 'react'
-import ToggleMode from './Components/ToggleMode';
 import {observer} from 'mobx-react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
+import ToggleMode from './Components/ToggleMode'
 import Brands from './Pages/Brands/Brands'
 import Products from './Pages/Products/Products'
-
-import {ProductsListStore, BrandsListStore} from './Stores/ListStore'
-
+import './App.css'
 
 function App() {
-  useEffect(() => {
-    ProductsListStore.brands = [...BrandsListStore.list.map(e=>e.name)]
-  }, [BrandsListStore.list.length])
   return ( 
     <Router>
       <div className="App">
@@ -33,4 +26,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default observer(App)

@@ -9,6 +9,9 @@ class ProductsService{
   constructor(){
     makeAutoObservable(this)
   }
+  getElementById(id){
+    return ProductsStore.getElementById(id)
+  }
   getSortingTypes(){
     return ProductsStore.sortingTypes
   }

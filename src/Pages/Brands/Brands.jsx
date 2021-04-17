@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
+import {toJS} from 'mobx'
 
 import UserInput from '../../Components/UserInput'
 import DisplayList from '../../Components/DisplayList'
@@ -7,13 +8,13 @@ import ListElement from './Components/ListElement'
 
 import {BrandsInputStore} from '../../Stores/UserInputStore'
 import BrandsService from './Stores/BrandsService'
-import BrandsStore from '../../Stores/ProductsStore'
+import BrandsStore from '../../Stores/BrandsStore'
 
 import './styles/brands.css'
 
 function Products() {
   useEffect(() => { 
-    //BrandsService.processList()
+    BrandsService.processList()
   }, [
     BrandsInputStore.searchField, 
     BrandsInputStore.sortBy, 

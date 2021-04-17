@@ -15,7 +15,6 @@ class Helper{
   }
   setElementField(value, field){
     this.element[field] = value
-    console.log(toJS(this.element))
   }
   equalToProps(x){
     this.element={}
