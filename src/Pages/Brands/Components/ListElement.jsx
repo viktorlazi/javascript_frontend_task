@@ -43,6 +43,11 @@ class ListElement extends React.Component{
   }
   render(){
     if(!this.helper.isInEditMode){
+      if(this.props.props.name === 'unbranded'){
+        return <li>
+          <DisplayElement props={this.props.props} />
+        </li>
+      }
       return (
         <li>
           <DisplayElement props={this.props.props} />

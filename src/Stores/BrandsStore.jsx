@@ -1,4 +1,5 @@
 import { makeAutoObservable , toJS} from 'mobx'
+import ProductsStore from './ProductsStore'
 
 class BrandsStore{
   list = []
@@ -68,6 +69,13 @@ class BrandsStore{
   }
   getListProperties(key){
     return this.list.map(e=>e[key])
+  }
+  setNumberOfProducts(){
+    const products = ProductsStore.list
+    this.list.forEach((e)=>{
+      e.numberOfProducts=products.filter((i)=>{return i.brand===e.id}).length
+    })
+    
   }
 }
 

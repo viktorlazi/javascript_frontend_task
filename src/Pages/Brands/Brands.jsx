@@ -15,6 +15,7 @@ import './styles/brands.css'
 function Products() {
   useEffect(() => { 
     BrandsService.processList()
+    BrandsService.setNumberOfProducts()
   }, [
     BrandsInputStore.searchField, 
     BrandsInputStore.sortBy, 

@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
 import {BrandsInputStore} from '../../../Stores/UserInputStore'
+import ProductsStore from '../../../Stores/ProductsStore'
 
 class BrandsService{
   idList = []
@@ -41,6 +42,9 @@ class BrandsService{
       return e.name.includes(searchField)
     })]
     return filtered
+  }
+  setNumberOfProducts(){
+    return BrandsStore.setNumberOfProducts()
   }
   processList(){
     let list = this.filter(BrandsStore.list, BrandsInputStore.searchField)
