@@ -43,13 +43,21 @@ class BrandsStore{
   }
   addNewElement(newElement){
     if(this.isNewElementValid(newElement)){
+      let id
       if(this.availableIDs.length){
-        newElement['id'] = this.availableIDs[0]
+        id = this.availableIDs[0]
         this.availableIDs.shift()
       }else{
-        newElement['id'] = this.list.length
+        id = this.list.length
       }
-      this.list.push(newElement)
+      this.list.push({})
+      this.list[this.list.length-1]['id'] = id+1
+      Object.keys(newElement).map((e)=>{
+        this.list[this.list.length-1][e] = newElement[e]
+        console.log(toJS(this.list))
+      })
+      console.log(toJS(this.list[this.list.length-1]))
+      return true
     }else{
       alert('invalid inputs')
     }

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
-import {toJS} from 'mobx'
 
 import UserInput from '../../Components/UserInput'
 import DisplayList from '../../Components/DisplayList'
@@ -11,6 +10,7 @@ import BrandsService from './Stores/BrandsService'
 import BrandsStore from '../../Stores/BrandsStore'
 
 import './styles/brands.css'
+import AddElement from './Components/AddElement'
 
 function Products() {
   useEffect(() => { 
@@ -35,6 +35,7 @@ function Products() {
           })
         }        
       </DisplayList>
+      <AddElement ListStore={BrandsService} />
     </div>
   )
 }
