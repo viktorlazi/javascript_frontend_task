@@ -1,4 +1,4 @@
-import { makeAutoObservable , toJS} from 'mobx'
+import { makeAutoObservable , toJS } from 'mobx'
 import ProductsStore from './ProductsStore'
 
 class BrandsStore{
@@ -29,7 +29,6 @@ class BrandsStore{
     })
   }
   editElement(edited, id){
-    console.log(toJS(edited))
     if(this.isNewElementValid(edited)){
       if(isNaN(edited.name)){
         const index = this.list.findIndex(obj => obj.id === id)
@@ -106,6 +105,6 @@ brandsStore.list.push({
   numberOfProducts: 0
 }
 )
-brandsStore.sortingTypesList = ['name', 'number of products']
+brandsStore.sortingTypes = ['name', 'numberOfProducts']
  
 export default brandsStore

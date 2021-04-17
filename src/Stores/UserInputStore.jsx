@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 
 class UserInputStore{
   searchField = ''
-  sortBy
+  sortBy = ''
   constructor(){
     makeAutoObservable(this)
   }

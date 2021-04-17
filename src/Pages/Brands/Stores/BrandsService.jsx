@@ -1,7 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
 import {BrandsInputStore} from '../../../Stores/UserInputStore'
-import ProductsStore from '../../../Stores/ProductsStore'
 
 class BrandsService{
   idList = []
@@ -48,7 +47,7 @@ class BrandsService{
   }
   processList(){
     let list = this.filter(BrandsStore.list, BrandsInputStore.searchField)
-    //list = this.sort(list, BrandsInputStore.sortBy)
+    list = this.sort(list, BrandsInputStore.sortBy)
     const idList = list.map(e=>{return e.id})
     this.idList=idList        
   }

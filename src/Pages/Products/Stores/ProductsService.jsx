@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, toJS} from 'mobx'
 import ProductsStore from '../../../Stores/ProductsStore'
 import BrandsStore from '../../../Stores/BrandsStore'
 import {ProductsInputStore} from '../../../Stores/UserInputStore'
@@ -41,9 +41,8 @@ class ProductsService{
     return list
   }
   filter(list, searchField){
-    const validBrands = BrandsStore.getListProperties('name')
     let filtered = [...list.filter((e)=>{
-      return (validBrands[e.brand] + e.type + e.colour + e.cost).includes(searchField)
+      return (BrandsStore.getElementById(e.brand).name + e.type + e.colour + e.cost).includes(searchField)
     })]
     return filtered
   }
@@ -52,7 +51,7 @@ class ProductsService{
     let list = this.filter(ProductsStore.list, ProductsInputStore.searchField)
     list = this.sort(list, ProductsInputStore.sortBy)
     const idList = list.map(e=>{return e.id})
-    this.idList=idList        
+    this.idList=idList    
   }
 }
 

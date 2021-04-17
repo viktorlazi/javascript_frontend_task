@@ -79,7 +79,7 @@ class ProductsStore{
   unbrandIfBrandNotExistent(validBrands){
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
-        e.brand=0
+        e.brand=1
       }
     })
   }
@@ -88,7 +88,7 @@ class ProductsStore{
 const productsStore = new ProductsStore()
 
 /**
- * preset products and brands
+ * preset products
  */
  
 productsStore.list.push({
