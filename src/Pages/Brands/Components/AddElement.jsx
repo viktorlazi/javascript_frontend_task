@@ -29,9 +29,9 @@ class AddElement extends React.Component {
     return(
     <div className="add__new">
       <input onChange={ 
-        (i)=>{
+        action((i)=>{
           this.helper.newElement['name']=i.target.value
-        }
+        })
       } placeholder={'name'} value={this.helper.newElement['name']} type="text">
       </input>
       <button onClick={()=>{

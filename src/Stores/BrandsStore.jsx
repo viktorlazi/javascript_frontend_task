@@ -42,7 +42,11 @@ class BrandsStore{
     return false
   }
   addNewElement(newElement){
-    if(this.list.map(e=>e.name)[1]===newElement.name){
+    if(!isNaN(newElement.name)){
+      alert('brand name cant be a number')
+      return false
+    }
+    if(this.list.map(e=>e.name).includes(newElement.name)){
       alert('brand name already exists')
       return false
     }
