@@ -53,15 +53,14 @@ class AddElement extends React.Component {
           })
         }
       <button onClick={()=>{
-        if(this.helper.addNewElementToList()){
-          const lastSelected = this.helper.newElement.brand
-          this.helper.newElement = {
-            brand:lastSelected,
-            type:'',
-            colour:'',
-            cost:''
-          }
-        }
+        this.helper.addNewElementToList()
+        const lastSelected = this.helper.newElement.brand
+        action(()=>{this.helper.newElement = {
+          brand:lastSelected,
+          type:'',
+          colour:'',
+          cost:''
+        }})
       }}>Add New</button>
     </div>
     )
