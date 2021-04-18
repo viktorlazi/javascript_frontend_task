@@ -13,6 +13,9 @@ class ProductsStore{
     return this.list[index]
   }
   removeElement(id){
+    this.list=this.list.filter(e=>{
+      return e.id !== id
+    })
     this.availableIDs.push(id)
   }
   listElementEqualTo(obj, index){
@@ -59,9 +62,6 @@ class ProductsStore{
     }
     alert('invalid inputs')
     return false
-  }
-  getNewElementValue(key){
-    return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)

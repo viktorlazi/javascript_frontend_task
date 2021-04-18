@@ -16,14 +16,12 @@ function Products() {
   useEffect(() => { 
     BrandsService.processList()
     BrandsService.setNumberOfProducts()
-  }, [
-    BrandsInputStore.searchField, 
-    BrandsInputStore.sortBy, 
-    BrandsStore.list.length])
+     //eslint-disable-next-line
+  }, [BrandsInputStore.searchField, BrandsInputStore.sortBy, BrandsStore.list.length])
   
   return (
     <div id="products">
-      <UserInput UserInputStore={BrandsInputStore} ListStore={BrandsService} />
+      <UserInput UserInputStore={BrandsInputStore} getSortingTypes={()=>{return BrandsService.getSortingTypes()}} />
       <DisplayList> 
         {
           BrandsService.idList.map((e)=>{

@@ -1,18 +1,18 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 
-function UserInput({UserInputStore, ListStore}) {
+function UserInput({UserInputStore, getSortingTypes}) {
   return (
     <div className="userInput">
       <input type="text" id="search" placeholder="search..."
         onChange={(e)=>{UserInputStore.setSearchField(e.target.value)}}
         />
         {
-        ListStore.getSortingTypes()?
+        getSortingTypes()?
         <select type="text" id="sortBy" placeholder="sort by..." list="sortByList"
           onChange={(e)=>{UserInputStore.sortBy=e.target.value}} >
           {
-            ListStore.getSortingTypes().map((e)=>{
+            getSortingTypes().map((e)=>{
               return <option value={e}>sort by: {e}</option>
             })
           }

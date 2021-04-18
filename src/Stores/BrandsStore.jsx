@@ -30,6 +30,7 @@ class BrandsStore{
   editElement(edited, id){
     if(this.isNewElementValid(edited)){
       if(isNaN(edited.name)){
+        edited.numberOfProducts=0
         const index = this.list.findIndex(obj => obj.id === id)
         this.listElementEqualTo(edited, index)
         return true
@@ -60,9 +61,6 @@ class BrandsStore{
     }else{
       alert('invalid inputs')
     }
-  }
-  getNewElementValue(key){
-    return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)

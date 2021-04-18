@@ -3,9 +3,6 @@ import {observer} from 'mobx-react'
 import {action} from 'mobx'
 
 class EditElement extends React.Component{
-  constructor(props){
-    super(props)
-  }
   render(){
     return Object.keys(this.props.props).map((e)=>{
       switch(e){

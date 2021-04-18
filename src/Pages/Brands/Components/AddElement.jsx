@@ -18,9 +18,6 @@ class Helper{
   getNewElementValue(key){
     return this.newElement[key] === undefined ? '':this.newElement[key] 
   }
-  setElementField(value, field){
-    this.newElement[field] = value
-  }
   addNewElementToList(){
     if(BrandsService.addNewElement(this.newElement)){
       this.newElement = {
@@ -49,7 +46,7 @@ class AddElement extends React.Component {
             default:
               return <input onChange={ 
                 (i)=>{
-                  this.helper.setElementField(i.target.value, e)
+                  this.helper.newElement[e]=i.target.value
                 }
               } placeholder={e} value={this.helper.newElement[e]} type="text">
               </input>

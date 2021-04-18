@@ -15,20 +15,18 @@ import './styles/products.css'
 function Products() {
   useEffect(() => { 
     ProductsService.processList()
-  }, [
-    ProductsInputStore.searchField, 
-    ProductsInputStore.sortBy, 
-    ProductsStore.list.length])
+    //eslint-disable-next-line
+  }, [ProductsInputStore.searchField, ProductsInputStore.sortBy, ProductsStore.list.length])
   return (
     <div id="products">
-      <UserInput UserInputStore={ProductsInputStore} ListStore={ProductsService} />
+      <UserInput UserInputStore={ProductsInputStore} getSortingTypes={()=>{return ProductsService.getSortingTypes()}}/>
       <DisplayList> 
         {
           ProductsService.idList.map((e)=>{
             return <ListElement 
               props={ProductsService.getElementById(e)} 
               editElement={(edited, id)=>{return ProductsService.editElement(edited, id)}} 
-              removeElement={(x)=>ProductsService.removeElement(x)}/>
+              removeElement={(x)=>ProductsService.removeElement(x)} />
           })
         }        
       </DisplayList>
