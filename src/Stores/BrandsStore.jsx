@@ -1,4 +1,4 @@
-import { makeAutoObservable , toJS } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import ProductsStore from './ProductsStore'
 
 class BrandsStore{
@@ -42,6 +42,10 @@ class BrandsStore{
     return false
   }
   addNewElement(newElement){
+    if(this.list.map(e=>e.name)[1]===newElement.name){
+      alert('brand name already exists')
+      return false
+    }
     if(this.isNewElementValid(newElement)){
       let id
       if(this.availableIDs.length){
@@ -56,7 +60,6 @@ class BrandsStore{
         this.list[this.list.length-1][e] = newElement[e]
         return true
       })
-      console.log(toJS(this.list[this.list.length-1]))
       return true
     }else{
       alert('invalid inputs')

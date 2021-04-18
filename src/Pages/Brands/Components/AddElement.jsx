@@ -1,12 +1,11 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import {makeAutoObservable} from 'mobx'
+import {makeAutoObservable, action} from 'mobx'
 import BrandsService from '../Stores/BrandsService'
 import './styles/addElement.css'
 
 class Helper{
   newElement
-  lastSelected = 0
 
   constructor(){
     this.newElement = {
@@ -15,16 +14,8 @@ class Helper{
     }
     makeAutoObservable(this)
   }
-  getNewElementValue(key){
-    return this.newElement[key] === undefined ? '':this.newElement[key] 
-  }
   addNewElementToList(){
-    if(BrandsService.addNewElement(this.newElement)){
-      this.newElement = {
-        name:'',
-        numberOfProducts:0
-      }
-    }
+    return BrandsService.addNewElement(this.newElement)
   }
 }
 
@@ -37,24 +28,18 @@ class AddElement extends React.Component {
   render(){
     return(
     <div className="add__new">
-      {
-        this.props.getSortingTypes().map((e)=>{
-          switch(e){
-            case 'id':
-            case 'numberOfProducts':
-              return null
-            default:
-              return <input onChange={ 
-                (i)=>{
-                  this.helper.newElement[e]=i.target.value
-                }
-              } placeholder={e} value={this.helper.newElement[e]} type="text">
-              </input>
-            }
-        })
-      }
+      <input onChange={ 
+        (i)=>{
+          this.helper.newElement['name']=i.target.value
+        }
+      } placeholder={'name'} value={this.helper.newElement['name']} type="text">
+      </input>
       <button onClick={()=>{
         this.helper.addNewElementToList()
+        action(()=>{this.helper.newElement = {
+          name:'',
+          numberOfProducts:0
+        }})
       }}>Add New</button>
     </div>
     )
