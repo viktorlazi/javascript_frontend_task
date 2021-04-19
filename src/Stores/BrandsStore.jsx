@@ -30,7 +30,6 @@ class BrandsStore{
   editElement(edited, id){
     if(this.isNewElementValid(edited)){
       if(isNaN(edited.name)){
-        edited.numberOfProducts=0
         const index = this.list.findIndex(obj => obj.id === id)
         this.listElementEqualTo(edited, index)
         return true
@@ -85,8 +84,7 @@ class BrandsStore{
     const products = ProductsStore.list
     this.list.forEach((e)=>{
       e.numberOfProducts=products.filter((i)=>{return i.brand===e.id}).length
-    })
-    
+    })    
   }
 }
 
