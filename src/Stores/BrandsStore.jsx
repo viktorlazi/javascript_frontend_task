@@ -28,6 +28,10 @@ class BrandsStore{
     })
   }
   editElement(edited, id){
+    if(this.list.map(e=>e.name).includes(edited.name)){
+      alert('brand name already exists')
+      return false
+    }
     if(this.isNewElementValid(edited)){
       if(isNaN(edited.name)){
         const index = this.list.findIndex(obj => obj.id === id)
