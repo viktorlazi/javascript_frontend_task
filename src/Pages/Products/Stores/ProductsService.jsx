@@ -46,10 +46,10 @@ class ProductsService{
     })]
     return filtered
   }
-  processList(){
+  processList(searchField, sortBy){
     ProductsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
-    let list = this.filter(ProductsStore.list, ProductsInputStore.searchField)
-    list = this.sort(list, ProductsInputStore.sortBy)
+    let list = this.filter(ProductsStore.list, searchField)
+    list = this.sort(list, sortBy)
     const idList = list.map(e=>{return e.id})
     this.idList=idList    
   }

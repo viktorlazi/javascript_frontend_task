@@ -5,16 +5,20 @@ import UserInput from '../../Components/UserInput'
 import DisplayList from '../../Components/DisplayList'
 import ListElement from './Components/ListElement'
 
-import {BrandsInputStore} from '../../Stores/UserInputStore'
+import UserInputStore from '../../Stores/UserInputStore'
 import BrandsService from './Stores/BrandsService'
 import BrandsStore from '../../Stores/BrandsStore'
 
 import './styles/brands.css'
 import AddElement from './Components/AddElement'
 
+
+const BrandsInputStore = new UserInputStore()
+BrandsInputStore.sortBy='name'
+
 function Products() {
   useEffect(() => { 
-    BrandsService.processList()
+    BrandsService.processList(BrandsInputStore.searchField, BrandsInputStore.sortBy)
     BrandsService.setNumberOfProducts()
      //eslint-disable-next-line
   }, [BrandsInputStore.searchField, BrandsInputStore.sortBy, BrandsStore.list.length])

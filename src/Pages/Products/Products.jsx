@@ -6,15 +6,18 @@ import AddElement from './Components/AddElement'
 import DisplayList from '../../Components/DisplayList'
 import ListElement from './Components/ListElement'
 
-import {ProductsInputStore} from '../../Stores/UserInputStore'
+import UserInputStore from '../../Stores/UserInputStore'
 import ProductsService from './Stores/ProductsService'
 import ProductsStore from '../../Stores/ProductsStore'
 
 import './styles/products.css'
 
+const ProductsInputStore = new UserInputStore()
+ProductsInputStore.sortBy='brands'
+
 function Products() {
   useEffect(() => { 
-    ProductsService.processList()
+    ProductsService.processList(ProductsInputStore.searchField, ProductsInputStore.sortBy)
     //eslint-disable-next-line
   }, [ProductsInputStore.searchField, ProductsInputStore.sortBy, ProductsStore.list.length])
   return (

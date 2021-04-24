@@ -45,9 +45,9 @@ class BrandsService{
   setNumberOfProducts(){
     return BrandsStore.setNumberOfProducts()
   }
-  processList(){
-    let list = this.filter(BrandsStore.list, BrandsInputStore.searchField)
-    list = this.sort(list, BrandsInputStore.sortBy)
+  processList(searchField, sortBy){
+    let list = this.filter(BrandsStore.list, searchField)
+    list = this.sort(list, sortBy)
     const idList = list.map(e=>{return e.id})
     this.idList=idList        
   }
