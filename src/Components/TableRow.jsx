@@ -1,4 +1,5 @@
 import React from 'react'
+import BrandsStore from '../Stores/BrandsStore'
 
 function TableRow({props}) {
   return (
@@ -6,8 +7,17 @@ function TableRow({props}) {
       {
         props?
         Object.keys(props).map((e)=>{
-          return <th>{props[e]}</th>
-        })
+          switch(e){
+            case 'id':
+              return null
+            case 'brand':
+              const brands = BrandsStore.list
+              return <p>{(brands.find((e)=>{return e.id===props['brand']})||{}).name || 'unbranded'}</p>
+            default:
+              return <p>{props[e]}</p>
+          }
+        }
+        )
         :
         null
       }

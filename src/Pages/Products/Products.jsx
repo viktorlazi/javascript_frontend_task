@@ -15,6 +15,14 @@ import './styles/products.css'
 const ProductsInputStore = new UserInputStore()
 ProductsInputStore.sortBy='brands'
 
+const columnNames =(keys)=>{
+  return (
+    keys.map((e)=>{
+      return <th>{e}</th>
+    })
+  )
+}
+
 function Products() {
   useEffect(() => { 
     ProductsService.processList(ProductsInputStore.searchField, ProductsInputStore.sortBy)
@@ -24,6 +32,9 @@ function Products() {
     <div id="products">
       <SearchField UserInputStore={ProductsInputStore}/>
       <DisplayList> 
+        {
+          columnNames(ProductsService.getSortingTypes())
+        }
         {
           ProductsService.idList.map((e)=>{
             return <ListElement 
