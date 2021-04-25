@@ -1,5 +1,7 @@
-import React from 'react'
-import BrandsStore from '../Stores/BrandsStore'
+import React from 'react';
+import BrandsStore from '../Stores/BrandsStore';
+import './styles/table.css';
+
 
 function TableRow({props}) {
   return (
@@ -15,8 +17,8 @@ function TableRow({props}) {
               return <p>{(brands.find((e)=>{return e.id===props['brand']})||{}).name || 'unbranded'}</p>
             default:
               return <p>{props[e]}</p>
+            }
           }
-        }
         )
         :
         null
@@ -25,4 +27,4 @@ function TableRow({props}) {
   )
 }
 
-export default TableRow
+export default TableRow;

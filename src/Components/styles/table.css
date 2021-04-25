@@ -1,0 +1,22 @@
+table {
+  margin: 20px 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  padding: 5px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+table tr th{
+  font-weight: 300;
+}
+table tr th.column-name{
+  font-weight:800;
+  text-transform: uppercase;
+}
+table tr th.tools{
+  cursor:pointer;
+}

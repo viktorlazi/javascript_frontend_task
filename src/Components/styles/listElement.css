@@ -14,29 +14,3 @@ li{
   margin-bottom: 3px;
   border-left:1px black solid;
 }
-li p{
-  margin:0;
-  width: 90px;
-  overflow-x: auto;
-}
-li span{
-  width: 40px;
-}
-li .remove__span{
-  color:red;
-}
-li .edit__span{
-  color: green;
-}
-li span{
-  cursor:pointer;
-}
-li input{
-  width:15%;
-}
-li .change__span{
-  color: blue;
-}
-li .cancel__span{
-  color: purple;
-}

@@ -7,6 +7,13 @@ import EditElement from './EditElement'
 import TableRow from '../../../Components/TableRow'
 import BrandsStore from '../../../Stores/BrandsStore'
 
+import CancelIcon from '@material-ui/icons/Cancel';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import CheckIcon from '@material-ui/icons/Check';
+
+import MultioptionEditButton from '../../../Components/MultioptionEditButton'
+
 
 class Helper{
   isInEditMode = false
@@ -48,14 +55,14 @@ class ListElement extends React.Component{
   }
   noEditButtons(){
     return [
-        <th onClick={()=>{this.helper.toggleEditMode()}} className="edit__span">edit</th>,
-        <th onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="remove__span">remove</th>
+        <th onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></th>,
+        <th onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></th>
       ]
   }
   editButtons(){
     return [
-        <th onClick={action(()=>{this.edit()})} className="change__span">confirm</th>,
-        <th onClick={()=>{this.helper.toggleEditMode()}} className="cancel__span">cancel</th>
+        <th onClick={action(()=>{this.edit()})} className="tools"><CheckIcon/></th>,
+        <th onClick={()=>{this.helper.toggleEditMode()}} className="tools"><CancelIcon/></th>
     ];
   }
   
@@ -82,10 +89,26 @@ class ListElement extends React.Component{
     )
     }else{
       return (
-        <li>
-          <EditElement props={this.props.props} setElementField={(value, field)=>{this.helper.setElementField(value, field)}} />
-          {this.editButtons()}
-        </li>
+        <tr>
+          {
+            Object.keys(this.props.props).map((e)=>{
+              switch(e){
+                case 'brand':
+                return <th><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.props.setElementField(e, 'brand')}} /></th>
+                case 'id':
+                return null
+                default:
+                  return <th><input 
+                  onChange={action((i)=>{this.props.setElementField(i.target.value, e)})}
+                  defaultValue={this.props.props[e]} 
+                  type="text"/></th>
+                }
+              })
+            }
+            {
+              this.editButtons()
+            }
+        </tr>
       )
     }
   }
