@@ -7,11 +7,11 @@ function DisplayList(props) {
     <div>
       {
         props.children.length ? 
-        <ul>
+        <table>
           {
             props.children
           }
-        </ul>
+        </table>
         : <h4>No results</h4>
       }
     </div>

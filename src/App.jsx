@@ -11,6 +11,7 @@ function App() {
     <Router>
       <div className="App">
         <Header />
+        
         <div id="display">
           <Route exact path="/">
             <Products />

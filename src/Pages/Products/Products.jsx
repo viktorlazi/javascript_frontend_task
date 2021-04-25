@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
 
-import UserInput from '../../Components/UserInput'
+import SearchField from '../../Components/SearchField'
 import AddElement from './Components/AddElement'
 import DisplayList from '../../Components/DisplayList'
 import ListElement from './Components/ListElement'
@@ -22,7 +22,7 @@ function Products() {
   }, [ProductsInputStore.searchField, ProductsInputStore.sortBy, ProductsStore.list.length])
   return (
     <div id="products">
-      <UserInput UserInputStore={ProductsInputStore} getSortingTypes={()=>{return ProductsService.getSortingTypes()}}/>
+      <SearchField UserInputStore={ProductsInputStore}/>
       <DisplayList> 
         {
           ProductsService.idList.map((e)=>{

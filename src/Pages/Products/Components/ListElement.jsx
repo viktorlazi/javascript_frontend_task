@@ -4,6 +4,7 @@ import {action} from 'mobx'
 import { makeAutoObservable } from 'mobx'
 import DisplayElement from './DisplayElement'
 import EditElement from './EditElement'
+import TableRow from '../../../Components/TableRow'
 
 
 class Helper{
@@ -64,7 +65,7 @@ class ListElement extends React.Component{
     if(!this.helper.isInEditMode){
       return (
         <li>
-          <DisplayElement props={this.props.props} />
+          <TableRow props={this.props.props} />
           {this.noEditButtons()}
         </li>
     )

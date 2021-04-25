@@ -11,3 +11,6 @@
 .userInput{
   display:flex;
 }
+#brands{
+  width: 100%;
+}
