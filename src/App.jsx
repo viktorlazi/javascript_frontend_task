@@ -1,15 +1,16 @@
 import {observer} from 'mobx-react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 
-import ToggleMode from './Components/ToggleMode'
 import Brands from './Pages/Brands/Brands'
 import Products from './Pages/Products/Products'
+import Header from './Pages/Header/Header'
 import './App.css'
 
 function App() {
   return ( 
     <Router>
       <div className="App">
+        <Header />
         <div id="display">
           <Route exact path="/">
             <Products />
@@ -18,9 +19,6 @@ function App() {
             <Brands />
           </Route>
         </div>
-        <Route path="/">
-          <ToggleMode/>
-        </Route>
       </div>
     </Router>
   );

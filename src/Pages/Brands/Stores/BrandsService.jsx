@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
-import {BrandsInputStore} from '../../../Stores/UserInputStore'
 
 class BrandsService{
   idList = []

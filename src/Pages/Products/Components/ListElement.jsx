@@ -44,21 +44,35 @@ class ListElement extends React.Component{
     }
     this.helper.equalToProps(this.props.props)
   }
+  noEditButtons(){
+    return (
+      <div className="buttons">
+        <span onClick={()=>{this.helper.toggleEditMode()}} className="edit__span">edit</span>
+        <span onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="remove__span">remove</span>
+      </div>
+    )
+  }
+  editButtons(){
+    return (
+      <div className="buttons">
+        <span onClick={action(()=>{this.edit()})} className="change__span">confirm</span>
+        <span onClick={()=>{this.helper.toggleEditMode()}} className="cancel__span">cancel</span>
+      </div>
+    )
+  }
   render(){
     if(!this.helper.isInEditMode){
       return (
         <li>
           <DisplayElement props={this.props.props} />
-          <span onClick={()=>{this.helper.toggleEditMode()}} className="edit__span">edit</span>
-          <span onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="remove__span">remove</span>
+          {this.noEditButtons()}
         </li>
     )
     }else{
       return (
         <li>
           <EditElement props={this.props.props} setElementField={(value, field)=>{this.helper.setElementField(value, field)}} />
-          <span onClick={action(()=>{this.edit()})} className="change__span">confirm</span>
-          <span onClick={()=>{this.helper.toggleEditMode()}} className="cancel__span">cancel</span>
+          {this.editButtons()}
         </li>
       )
     }

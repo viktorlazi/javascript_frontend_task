@@ -1,11 +1,11 @@
 .App{
+  font-family: Poppins, sans-serif;
   display:flex;
   flex-direction: column;
   justify-content: space-between;
-  width:700px;
-  height:800px;
-  margin:0 auto;
-  padding:50px;
+  width: 920px;
+  margin: 0 auto;
+  height:100vh;
 }
 *{
   user-select: none;
@@ -15,4 +15,13 @@
   height: 100%;
   background-color: rgb(240, 240, 240);
   padding:30px;
+}
+.buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.buttons span{
+  width: 30%;
+  display:flex;
+  gap: 10px;
 }

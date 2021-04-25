@@ -1,0 +1,45 @@
+header{
+  display:flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  color: white;
+  align-content: center;
+  background-color: var(--main-color);
+}
+header .logo h1{
+  padding: 15px;
+}
+header nav ul{
+  overflow:hidden;
+  display:flex;
+  gap: 20px;
+  flex-direction: row;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+}
+header nav ul li{
+  margin: 0;
+  border: none;
+}
+header nav ul li a{
+  padding-bottom: 5px;
+  text-decoration: none;
+  position:relative;
+}
+header nav ul li a::before{
+  content: '';
+  position: absolute;
+  left:0;
+  bottom:0;
+  right:0;
+  height:1px;
+  background-color: #fff;
+  transition: all 0.5s ease;
+  transform: scale(0);
+}
+header nav ul li a:hover::before,
+header nav ul li a.active::before{
+  transform: scale(1);
+}
