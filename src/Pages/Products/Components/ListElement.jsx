@@ -94,12 +94,12 @@ class ListElement extends React.Component{
             Object.keys(this.props.props).map((e)=>{
               switch(e){
                 case 'brand':
-                return <th><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.props.setElementField(e, 'brand')}} /></th>
+                return <th><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></th>
                 case 'id':
                 return null
                 default:
                   return <th><input 
-                  onChange={action((i)=>{this.props.setElementField(i.target.value, e)})}
+                  onChange={action((i)=>{this.helper.setElementField(i.target.value, e)})}
                   defaultValue={this.props.props[e]} 
                   type="text"/></th>
                 }
