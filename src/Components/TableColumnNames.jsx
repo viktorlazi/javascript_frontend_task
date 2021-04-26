@@ -1,12 +1,12 @@
 import React from 'react';
 import './styles/table.css';
 
-function TableColumnNames({keys}) {
+function TableColumnNames({keys, sortBy}) {
   return (
     <tr>
       {
         keys.map(e=>{
-          return <th className="column-name">{e}</th>
+          return <th onClick={()=>{sortBy(e)}} className="column-name">{e}</th>
         })
       }
     </tr>

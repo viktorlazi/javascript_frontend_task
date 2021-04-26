@@ -20,3 +20,6 @@ table tr th.column-name{
 table tr th.tools{
   cursor:pointer;
 }
+table input{
+  width: 80px;
+}

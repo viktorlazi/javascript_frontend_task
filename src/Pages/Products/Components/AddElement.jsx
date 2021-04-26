@@ -35,20 +35,20 @@ class AddElement extends React.Component {
       {
         this.props.ListStore.getSortingTypes().map((e)=>{
           switch(e){
-            case 'brand':
-              const brands = BrandsStore.list
-              return <MultioptionEditButton 
-                props={brands} 
-                getValue={(e)=>{this.helper.newElement['brand']=e}}  />
             case 'id':
               return null
+            case 'brand':
+              const brands = BrandsStore.list
+              return [<p>brand:</p>, <MultioptionEditButton 
+                props={brands} 
+                getValue={(e)=>{this.helper.newElement['brand']=e}}/>]
             default:
-              return <input onChange={ 
+              return [<p>{e}:</p>, <input onChange={ 
                 action((i)=>{
                   this.helper.newElement[e]=i.target.value
                 })
               } placeholder={e} value={this.helper.newElement[e]} type="text">
-              </input>
+              </input>]
             }
           })
         }

@@ -25,7 +25,7 @@ function Products() {
     <div id="products">
       <SearchField UserInputStore={ProductsInputStore}/>
       <DisplayList>
-        <TableColumnNames keys={ProductsService.getSortingTypes()} />
+        <TableColumnNames keys={ProductsService.getSortingTypes()} sortBy={(sortBy)=>{ProductsInputStore.sortBy=sortBy}} />
         {
           ProductsService.idList.map((e)=>{
             return <ListElement 
@@ -35,6 +35,7 @@ function Products() {
           })
         }        
       </DisplayList>
+      <p id="error-message">{}</p>
       <AddElement ListStore={ProductsService} />
     </div>
   )

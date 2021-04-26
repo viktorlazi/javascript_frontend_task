@@ -61,8 +61,8 @@ class ListElement extends React.Component{
   }
   editButtons(){
     return [
-        <th onClick={action(()=>{this.edit()})} className="tools"><CheckIcon/></th>,
-        <th onClick={()=>{this.helper.toggleEditMode()}} className="tools"><CancelIcon/></th>
+        <th onClick={action(()=>{this.edit()})} className="tools"><CheckIcon style={{color:'var(--main-color)'}} /></th>,
+        <th onClick={()=>{this.helper.toggleEditMode()}} className="tools"><CancelIcon style={{color:'var(--color-1)'}}/></th>
     ];
   }
   
