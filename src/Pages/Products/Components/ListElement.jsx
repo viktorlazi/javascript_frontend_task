@@ -117,7 +117,7 @@ class ListElement extends React.Component{
                 default:
                   return <div className="cell"><input 
                   onChange={action((i)=>{this.helper.setElementField(i.target.value, e)})}
-                  defaultValue={this.props.props[e]} 
+                  value={this.helper.element[e]} 
                   type="text"/></div>
                 }
               })
