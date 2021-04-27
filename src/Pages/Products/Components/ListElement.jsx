@@ -51,23 +51,23 @@ class Helper{
 class ListElement extends React.Component{
   helper
   constructor(props){
-    super(props)
-    this.helper=new Helper()
-    this.helper.equalToProps(this.props.props)
+    super(props);
+    this.helper=new Helper();
+    this.helper.equalToProps(this.props.props);
   }
   edit(){
     this.props.setAlert('', 'black')
     if(this.helper.didChange(this.props.props)){
       const result = this.props.editElement(this.helper.element, this.props.props.id)
       if(result[0]){
-        this.helper.toggleEditMode()
-        this.props.setAlert(result[1], 'green')
-        return
+        this.helper.toggleEditMode();
+        this.props.setAlert(result[1], 'green');
+        return;
       }
-      this.props.setAlert(result[1], 'red')
-      this.helper.equalToProps(this.props.props)
+      this.props.setAlert(result[1], 'red');
+      this.helper.equalToProps(this.props.props);
     }else{
-      this.helper.toggleEditMode()
+      this.helper.toggleEditMode();
     }
   }
     noEditButtons(){

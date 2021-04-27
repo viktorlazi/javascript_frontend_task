@@ -18,8 +18,11 @@ class Helper{
     }
     makeAutoObservable(this)
   }
-  addNewElementToList(){
-    return ProductsService.addNewElement(this.newElement)
+  addNewElementToList(setAlert){
+    const result = ProductsService.addNewElement(this.newElement)
+    result[0]?
+    setAlert(result[1], 'green'):
+    setAlert(result[1], 'red')
   }
 }
 
@@ -53,7 +56,7 @@ class AddElement extends React.Component {
           })
         }
       <button onClick={()=>{
-        this.helper.addNewElementToList()
+        this.helper.addNewElementToList(this.props.setAlert)
         const lastSelected = this.helper.newElement.brand
         action(()=>{this.helper.newElement = {
           brand:lastSelected,

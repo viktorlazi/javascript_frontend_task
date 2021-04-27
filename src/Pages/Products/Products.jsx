@@ -58,7 +58,7 @@ function Products() {
         }     
       </DisplayList>
       <MessageSpace msg={helper.msg} colour={helper.colour} />
-      <AddElement ListStore={ProductsService} />
+      <AddElement setAlert={(msg, colour)=>helper.setAlert(msg, colour)} ListStore={ProductsService} />
     </div>
   )
 }

@@ -46,29 +46,34 @@ class ProductsStore{
   
 
   addNewElement(newElement){
-    if(this.isNewElementValid(newElement)){
-      if(!isNaN(newElement.cost) && isNaN(newElement.type) && isNaN(newElement.colour)){
-        let id
-        if(this.availableIDs.length){
-          id = this.availableIDs[0]
-          this.availableIDs.shift()
-        }else{
-          id = this.list.length
-        }
-        this.list.push({})
-        this.list[this.list.length-1]['id'] = id
-        Object.keys(newElement).map((e)=>{
-          this.list[this.list.length-1][e] = newElement[e]
-          return true
-        })
-        return true
-      }
-      alert('-type and colour cant be numbers\n-cost can only be a number')
-      return false
+    if(!this.isNewElementValid(newElement)){
+      return [false, 'Invalid input - empty fields'];
     }
-    alert('invalid inputs')
-    return false
+    if(isNaN(newElement.cost)){
+      return [false, 'Invalid input - cost must be a number'];
+    }
+    if(!isNaN(newElement.type)){
+      return [false, 'Invalid input - type must be a string'];
+    }
+    if(!isNaN(newElement.colour)){
+      return [false, 'Invalid input - colour must be a string'];
+    }
+    let id
+    if(this.availableIDs.length){
+      id = this.availableIDs[0]
+      this.availableIDs.shift()
+    }else{
+      id = this.list.length
+    }
+    this.list.push({})
+    this.list[this.list.length-1]['id'] = id
+    Object.keys(newElement).map((e)=>{
+      this.list[this.list.length-1][e] = newElement[e]
+      //return true
+    })
+    return [true, 'Element added'];
   }
+    
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)
     if(keys.length>0){
