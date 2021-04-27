@@ -1,7 +1,10 @@
 table {
-  margin: 20px 0;
+  display:block;
+  margin: 20px auto;
   border-collapse: collapse;
-  width: 100%;
+  width:max-content;
+  height:300px;
+  overflow: auto;
 }
 td, th {
   border: 1px solid #dddddd;
@@ -16,6 +19,7 @@ table tr th{
 table tr th.column-name{
   font-weight:800;
   text-transform: uppercase;
+  position: sticky;
 }
 table tr th.tools{
   cursor:pointer;
