@@ -1,4 +1,3 @@
-import React from 'react'
 import {observer} from 'mobx-react'
 
 function MultioptionEditButton({props, getValue, selected}) {
@@ -12,5 +11,4 @@ function MultioptionEditButton({props, getValue, selected}) {
     </select>
   )
 }
-
 export default observer(MultioptionEditButton)

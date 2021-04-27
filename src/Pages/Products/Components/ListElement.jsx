@@ -1,7 +1,6 @@
 import React from 'react'
 import {observer} from 'mobx-react'
-import {action} from 'mobx'
-import { makeAutoObservable, toJS } from 'mobx'
+import { makeAutoObservable, action } from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
 
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -70,11 +69,11 @@ class ListElement extends React.Component{
       this.helper.toggleEditMode();
     }
   }
-    noEditButtons(){
-    return [
-        <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></div>,
-        <div onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
-      ]
+  noEditButtons(){
+  return [
+      <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></div>,
+      <div onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
+    ];
   }
   editButtons(){
     return [
@@ -94,14 +93,16 @@ class ListElement extends React.Component{
                   return null
                 case 'brand':
                   const brands = BrandsStore.list
-                  return <div className="cell">{(brands.find((e)=>{return e.id===this.props.props['brand']})||{}).name || 'unbranded'}</div>
+                  return <div>{(brands.find((e)=>{return e.id===this.props.props['brand']})||{}).name || 'unbranded'}</div>
                 default:
-                  return <div className="cell">{this.props.props[e]}</div>
+                  return <div>{this.props.props[e]}</div>
                 }
               }
             )
           }
-          {this.noEditButtons()}
+          {
+            this.noEditButtons()
+          }
         </div>
     )
     }else{
@@ -111,11 +112,11 @@ class ListElement extends React.Component{
             Object.keys(this.props.props).map((e)=>{
               switch(e){
                 case 'brand':
-                return <div className="cell"><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></div>
+                return <div><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></div>
                 case 'id':
                 return null
                 default:
-                  return <div className="cell"><input 
+                  return <div><input 
                   onChange={action((i)=>{this.helper.setElementField(i.target.value, e)})}
                   value={this.helper.element[e]} 
                   type="text"/></div>

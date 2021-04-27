@@ -1,4 +1,3 @@
-import React from 'react'
 import {observer} from 'mobx-react'
 
 function SearchField({UserInputStore}) {
@@ -10,5 +9,4 @@ function SearchField({UserInputStore}) {
     </div>
   )
 }
-
 export default observer(SearchField)

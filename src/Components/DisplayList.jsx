@@ -1,4 +1,3 @@
-import React from 'react'
 import './styles/listElement.css'
 import {observer} from 'mobx-react'
 
@@ -17,5 +16,4 @@ function DisplayList(props) {
     </div>
   )
 }
-
 export default observer(DisplayList)

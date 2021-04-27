@@ -1,4 +1,3 @@
-import React from 'react'
 import BrandsStore from '../../../Stores/BrandsStore'
 import {observer} from 'mobx-react'
 
