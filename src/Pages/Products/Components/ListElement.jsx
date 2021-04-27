@@ -1,10 +1,7 @@
 import React from 'react'
 import {observer} from 'mobx-react'
 import {action} from 'mobx'
-import { makeAutoObservable } from 'mobx'
-import DisplayElement from './DisplayElement'
-import EditElement from './EditElement'
-import TableRow from '../../../Components/TableRow'
+import { makeAutoObservable, toJS } from 'mobx'
 import BrandsStore from '../../../Stores/BrandsStore'
 
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -13,7 +10,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 
 import MultioptionEditButton from '../../../Components/MultioptionEditButton'
-import { Divider } from '@material-ui/core'
 
 
 class Helper{
@@ -35,6 +31,18 @@ class Helper{
       return true
     })
   }
+  didChange(props){
+    let didChange = false;
+    Object.keys(this.element).map((e)=>{
+      return this.element[e]!==props[e];
+    }).forEach((e)=>{
+      if(e===true){
+        didChange = true;
+        return true
+      }
+    })
+    return didChange;
+  }
   constructor(){
     makeAutoObservable(this)
   }  
@@ -48,16 +56,21 @@ class ListElement extends React.Component{
     this.helper.equalToProps(this.props.props)
   }
   edit(){
-    const result = this.props.editElement(this.helper.element, this.props.props.id)
-    if(result[0]){
+    this.props.setAlert('', 'black')
+    if(this.helper.didChange(this.props.props)){
+      const result = this.props.editElement(this.helper.element, this.props.props.id)
+      if(result[0]){
+        this.helper.toggleEditMode()
+        this.props.setAlert(result[1], 'green')
+        return
+      }
+      this.props.setAlert(result[1], 'red')
+      this.helper.equalToProps(this.props.props)
+    }else{
       this.helper.toggleEditMode()
-      this.props.setAlert(result[1], 'green')
-      return
     }
-    this.props.setAlert(result[1], 'red')
-    this.helper.equalToProps(this.props.props)
   }
-  noEditButtons(){
+    noEditButtons(){
     return [
         <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></div>,
         <div onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
