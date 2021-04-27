@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/table.css';
 
 function TableColumnNames({keys, setSortBy, sortBy}) {
@@ -6,11 +5,10 @@ function TableColumnNames({keys, setSortBy, sortBy}) {
     <div className="column-names">
       {
         keys.map(e=>{
-          return <div onClick={()=>{setSortBy(e)}} className={`column-name cell row `+`${sortBy===e ? "sortBy":""}`}>{e}</div>
+          return <div onClick={()=>{setSortBy(e)}} className={`column-name row `+`${sortBy===e ? "sortBy":""}`}>{e}</div>
         })
       }
     </div>
   );
 }
-
 export default TableColumnNames;

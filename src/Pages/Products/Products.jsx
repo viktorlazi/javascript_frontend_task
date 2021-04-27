@@ -10,6 +10,7 @@ import TableColumnNames from '../../Components/TableColumnNames'
 import UserInputStore from '../../Stores/UserInputStore'
 import ProductsService from './Stores/ProductsService'
 import ProductsStore from '../../Stores/ProductsStore'
+import ErrorMessageSpace from '../../Components/ErrorMessageSpace'
 
 import './styles/products.css'
 
@@ -33,8 +34,9 @@ function Products() {
               editElement={(edited, id)=>{return ProductsService.editElement(edited, id)}} 
               removeElement={(x)=>ProductsService.removeElement(x)} />
           })
-        }        
+        }     
       </DisplayList>
+      <ErrorMessageSpace err={'sample error'} />   
       <p id="error-message">{}</p>
       <AddElement ListStore={ProductsService} />
     </div>

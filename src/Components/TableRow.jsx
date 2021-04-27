@@ -11,12 +11,12 @@ function TableRow({props}) {
         Object.keys(props).map((e)=>{
           switch(e){
             case 'id':
-              return null
+              return null;
             case 'brand':
               const brands = BrandsStore.list
-              return <p>{(brands.find((e)=>{return e.id===props['brand']})||{}).name || 'unbranded'}</p>
+              return <p>{(brands.find((e)=>{return e.id===props['brand']})||{}).name || 'unbranded'}</p>;
             default:
-              return <p>{props[e]}</p>
+              return <p>{props[e]}</p>;
             }
           }
         )
@@ -24,7 +24,7 @@ function TableRow({props}) {
         null
       }
     </tr>
-  )
+  );
 }
 
 export default TableRow;

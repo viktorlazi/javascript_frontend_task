@@ -1,5 +1,6 @@
 .table{
   box-shadow: var(--shadow-black-300);
+  text-align: center;
   margin: 10px auto;
   display:grid;
   grid-template-columns: 1fr;
@@ -12,6 +13,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .column-names{
+  padding: 5px 25px;
   height: 40px;
   align-items: center;
   font-weight:800;
@@ -31,4 +33,16 @@
 }
 .table .tools{
   cursor:pointer;
+}
+.error-message{
+  background-color: white;
+  padding: 5px;
+  text-align: center;
+  height:min-content;
+  box-shadow: var(--shadow-black-300);
+}
+.error-message p{
+  display:block;
+  color: var(--color-1);
+  text-transform: capitalize;
 }
