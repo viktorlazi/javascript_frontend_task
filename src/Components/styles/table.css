@@ -1,17 +1,25 @@
 table {
+  table-layout: fixed;
+  position: relative;
+  white-space: nowrap;
   display:block;
   margin: 20px auto;
   border-collapse: collapse;
   width:max-content;
   height:300px;
   overflow: auto;
+  box-shadow: var(--shadow-black-300);
 }
 td, th {
   border: 1px solid #dddddd;
-  padding: 5px;
+  padding: 8px;
 }
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+table tr.column-names{
+  z-index: 1;
+  top:0;
 }
 table tr th{
   font-weight: 300;
@@ -20,10 +28,14 @@ table tr th.column-name{
   font-weight:800;
   text-transform: uppercase;
   position: sticky;
+  cursor:pointer;
 }
 table tr th.tools{
   cursor:pointer;
 }
 table input{
   width: 80px;
+}
+.sortBy{
+  color:var(--main-color);
 }

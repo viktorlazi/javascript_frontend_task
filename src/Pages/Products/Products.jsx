@@ -14,7 +14,7 @@ import ProductsStore from '../../Stores/ProductsStore'
 import './styles/products.css'
 
 const ProductsInputStore = new UserInputStore()
-ProductsInputStore.sortBy='brands'
+ProductsInputStore.setSort='brands'
 
 function Products() {
   useEffect(() => { 
@@ -25,7 +25,7 @@ function Products() {
     <div id="products">
       <SearchField UserInputStore={ProductsInputStore}/>
       <DisplayList>
-        <TableColumnNames keys={ProductsService.getSortingTypes()} sortBy={(sortBy)=>{ProductsInputStore.sortBy=sortBy}} />
+        <TableColumnNames sortBy={ProductsInputStore.sortBy} keys={ProductsService.getSortingTypes()} setSortBy={(sortBy)=>{ProductsInputStore.sortBy=sortBy}} />
         {
           ProductsService.idList.map((e)=>{
             return <ListElement 
