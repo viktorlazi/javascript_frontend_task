@@ -10,7 +10,7 @@ class UserInputStore{
     this.searchField = x;
   }
   setSort(x){
-    this.sort = x;
+    this.sortBy = x;
   }
 }
 export default UserInputStore;

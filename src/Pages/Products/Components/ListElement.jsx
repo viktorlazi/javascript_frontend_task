@@ -13,6 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 
 import MultioptionEditButton from '../../../Components/MultioptionEditButton'
+import { Divider } from '@material-ui/core'
 
 
 class Helper{
@@ -55,21 +56,21 @@ class ListElement extends React.Component{
   }
   noEditButtons(){
     return [
-        <th onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></th>,
-        <th onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></th>
+        <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></div>,
+        <div onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
       ]
   }
   editButtons(){
     return [
-        <th onClick={action(()=>{this.edit()})} className="tools"><CheckIcon style={{color:'var(--main-color)'}} /></th>,
-        <th onClick={()=>{this.helper.toggleEditMode()}} className="tools"><CancelIcon style={{color:'var(--color-1)'}}/></th>
+        <div onClick={action(()=>{this.edit()})} className="tools"><CheckIcon style={{color:'var(--main-color)'}} /></div>,
+        <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><CancelIcon style={{color:'var(--color-1)'}}/></div>
     ];
   }
   
   render(){
     if(!this.helper.isInEditMode){
       return (
-        <tr>
+        <div className="row">
           {
             Object.keys(this.props.props).map((e)=>{
               switch(e){
@@ -77,38 +78,38 @@ class ListElement extends React.Component{
                   return null
                 case 'brand':
                   const brands = BrandsStore.list
-                  return <th>{(brands.find((e)=>{return e.id===this.props.props['brand']})||{}).name || 'unbranded'}</th>
+                  return <div className="cell">{(brands.find((e)=>{return e.id===this.props.props['brand']})||{}).name || 'unbranded'}</div>
                 default:
-                  return <th>{this.props.props[e]}</th>
+                  return <div className="cell">{this.props.props[e]}</div>
                 }
               }
             )
           }
           {this.noEditButtons()}
-        </tr>
+        </div>
     )
     }else{
       return (
-        <tr>
+        <div className="row">
           {
             Object.keys(this.props.props).map((e)=>{
               switch(e){
                 case 'brand':
-                return <th><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></th>
+                return <div className="cell"><MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></div>
                 case 'id':
                 return null
                 default:
-                  return <th><input 
+                  return <div className="cell"><input 
                   onChange={action((i)=>{this.helper.setElementField(i.target.value, e)})}
                   defaultValue={this.props.props[e]} 
-                  type="text"/></th>
+                  type="text"/></div>
                 }
               })
             }
             {
               this.editButtons()
             }
-        </tr>
+        </div>
       )
     }
   }

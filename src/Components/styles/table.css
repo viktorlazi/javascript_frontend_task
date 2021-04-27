@@ -1,3 +1,4 @@
+/*
 table {
   table-layout: fixed;
   position: relative;
@@ -8,7 +9,6 @@ table {
   width:max-content;
   height:300px;
   overflow: auto;
-  box-shadow: var(--shadow-black-300);
 }
 td, th {
   border: 1px solid #dddddd;
@@ -25,17 +25,41 @@ table tr th{
   font-weight: 300;
 }
 table tr th.column-name{
-  font-weight:800;
   text-transform: uppercase;
   position: sticky;
-  cursor:pointer;
 }
-table tr th.tools{
-  cursor:pointer;
+*/
+.table{
+  box-shadow: var(--shadow-black-300);
+  margin: 10px auto;
+  display:grid;
+  grid-template-columns: 1fr;
+  height: 300px;
+  overflow: auto;
 }
-table input{
-  width: 80px;
+.row{
+  padding: 5px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+.column-names{
+  height: 40px;
+  align-items: center;
+  font-weight:800;
+  cursor:pointer;
+  text-transform: uppercase;
+  background-color: white;
+  position: sticky;
+  top:0;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .sortBy{
   color:var(--main-color);
+}
+.table input{
+  max-width: 80px;
+}
+.table .tools{
+  cursor:pointer;
 }

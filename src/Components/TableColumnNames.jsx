@@ -3,13 +3,13 @@ import './styles/table.css';
 
 function TableColumnNames({keys, setSortBy, sortBy}) {
   return (
-    <tr className="column-names">
+    <div className="column-names">
       {
         keys.map(e=>{
-          return <th onClick={()=>{setSortBy(e)}} className={`column-name `+`${sortBy==e ? "sortBy":""}`}>{e}</th>
+          return <div onClick={()=>{setSortBy(e)}} className={`column-name cell row `+`${sortBy===e ? "sortBy":""}`}>{e}</div>
         })
       }
-    </tr>
+    </div>
   );
 }
 
