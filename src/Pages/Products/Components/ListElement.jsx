@@ -48,10 +48,13 @@ class ListElement extends React.Component{
     this.helper.equalToProps(this.props.props)
   }
   edit(){
-    if(this.props.editElement(this.helper.element, this.props.props.id)){
+    const result = this.props.editElement(this.helper.element, this.props.props.id)
+    if(result[0]){
       this.helper.toggleEditMode()
+      this.props.setAlert(result[1], 'green')
       return
     }
+    this.props.setAlert(result[1], 'red')
     this.helper.equalToProps(this.props.props)
   }
   noEditButtons(){

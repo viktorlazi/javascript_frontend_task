@@ -27,18 +27,24 @@ class ProductsStore{
     })
   }
   editElement(edited, id){
-    if(this.isNewElementValid(edited)){
-      if(!isNaN(edited.cost) && isNaN(edited.type) && isNaN(edited.colour)){
-        const index = this.list.findIndex(obj => obj.id === id)
-        this.listElementEqualTo(edited, index)
-        return true
-      }
-      alert('-type and colour cant be numbers\n-cost can only be a number')
-      return false
+    if(!this.isNewElementValid(edited)){
+      return [false, 'Invalid input - empty fields']
     }
-    alert('invalid inputs')
-    return false
+    if(isNaN(edited.cost)){
+      return [false, 'Invalid input - cost must be a number']
+    }
+    if(!isNaN(edited.type)){
+      return [false, 'Invalid input - type must be a string']
+    }
+    if(!isNaN(edited.colour)){
+      return [false, 'Invalid input - colour must be a string']
+    }
+    const index = this.list.findIndex(obj => obj.id === id);
+    this.listElementEqualTo(edited, index);
+    return [true, 'Element edited']
   }
+  
+
   addNewElement(newElement){
     if(this.isNewElementValid(newElement)){
       if(!isNaN(newElement.cost) && isNaN(newElement.type) && isNaN(newElement.colour)){

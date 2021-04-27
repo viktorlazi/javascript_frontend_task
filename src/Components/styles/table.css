@@ -34,14 +34,15 @@
 .table .tools{
   cursor:pointer;
 }
-.error-message{
+.message{
   background-color: white;
   padding: 5px;
   text-align: center;
   height:min-content;
   box-shadow: var(--shadow-black-300);
 }
-.error-message p{
+.message p{
+  min-height: 25px;
   display:block;
   color: var(--color-1);
   text-transform: capitalize;
