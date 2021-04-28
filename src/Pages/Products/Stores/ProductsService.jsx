@@ -3,8 +3,6 @@ import ProductsStore from '../../../Stores/ProductsStore'
 import BrandsStore from '../../../Stores/BrandsStore'
 
 class ProductsService{
-  idList = []
-
   constructor(){
     makeAutoObservable(this)
   }
@@ -18,7 +16,6 @@ class ProductsService{
     return ProductsStore.addNewElement(newElement)
   }
   removeElement(id){
-    this.idList.splice(this.idList.indexOf(id))
     return ProductsStore.removeElement(id)
   }
   editElement(edited, id){
@@ -45,12 +42,12 @@ class ProductsService{
     })]
     return filtered
   }
-  processList(searchField, sortBy){
+  getProcessedList(searchField, sortBy){
     ProductsStore.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
     let list = this.filter(ProductsStore.list, searchField)
     list = this.sort(list, sortBy)
     const idList = list.map(e=>{return e.id})
-    this.idList=idList    
+    return idList
   }
 }
 

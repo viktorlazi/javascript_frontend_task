@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react'
 import {observer} from 'mobx-react'
 
 import SearchField from '../../Components/SearchField'
@@ -9,7 +8,6 @@ import TableColumnNames from '../../Components/TableColumnNames'
 
 import UserInputStore from '../../Stores/UserInputStore'
 import ProductsService from './Stores/ProductsService'
-import ProductsStore from '../../Stores/ProductsStore'
 import MessageSpace from '../../Components/MessageSpace'
 import {makeAutoObservable} from 'mobx'
 
@@ -36,24 +34,18 @@ ProductsInputStore.setSort('brand');
 const helper = new Helper;
 
 function Products() {
-
-  useEffect(() => {
-    ProductsService.processList(ProductsInputStore.searchField, ProductsInputStore.sortBy)
-    //eslint-disable-next-line
-  }, [ProductsInputStore.searchField, ProductsInputStore.sortBy, ProductsStore.list.length])
-
   return (
     <div id="products">
       <SearchField UserInputStore={ProductsInputStore}/>
       <DisplayList>
         <TableColumnNames sortBy={ProductsInputStore.sortBy} keys={ProductsService.getSortingTypes()} setSortBy={(sortBy)=>{ProductsInputStore.setSort(sortBy)}} />
         {
-          ProductsService.idList.map((e)=>{
+          ProductsService.getProcessedList(ProductsInputStore.searchField, ProductsInputStore.sortBy).map((e)=>{
             return <ListElement
               setAlert={(msg, colour)=>helper.setAlert(msg, colour)}
               props={ProductsService.getElementById(e)} 
-              editElement={(edited, id)=>{return ProductsService.editElement(edited, id)}} 
-              removeElement={(x)=>ProductsService.removeElement(x)} />
+              editElement={ProductsService.editElement} 
+              removeElement={ProductsService.removeElement} />
           })
         }     
       </DisplayList>

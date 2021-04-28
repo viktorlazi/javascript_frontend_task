@@ -70,15 +70,15 @@ class ListElement extends React.Component{
     }
   }
   noEditButtons(){
-  return [
+    return [
       <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></div>,
-      <div onClick={action(()=>{this.props.removeElement(this.props.props.id)})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
+      <div onClick={action(()=>{this.props.removeElement(this.props.props.id); this.props.setAlert('Element deleted', 'orange');})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
     ];
   }
   editButtons(){
     return [
-        <div onClick={action(()=>{this.edit()})} className="tools"><CheckIcon style={{color:'var(--main-color)'}} /></div>,
-        <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><CancelIcon style={{color:'var(--color-1)'}}/></div>
+      <div onClick={action(()=>{this.edit()})} className="tools"><CheckIcon style={{color:'var(--main-color)'}} /></div>,
+      <div onClick={()=>{this.helper.toggleEditMode();this.props.setAlert('Action canceled', 'gray');}} className="tools"><CancelIcon style={{color:'var(--color-1)'}}/></div>
     ];
   }
   

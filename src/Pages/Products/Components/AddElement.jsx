@@ -21,7 +21,7 @@ class Helper{
   addNewElementToList(setAlert){
     const result = ProductsService.addNewElement(this.newElement)
     result[0]?
-    setAlert(result[1], 'green'):
+    setAlert(result[1], 'var(--main-color)'):
     setAlert(result[1], 'red')
   }
 }
