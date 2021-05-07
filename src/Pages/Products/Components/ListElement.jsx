@@ -1,14 +1,12 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import { makeAutoObservable, action } from 'mobx';
+import { makeAutoObservable, action, toJS } from 'mobx';
 import BrandsStore from '../../../Stores/BrandsStore';
 
-import CancelIcon from '@material-ui/icons/Cancel';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import CheckIcon from '@material-ui/icons/Check';
-
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
+import EditButtons from './EditButtons';
+import NoEditButtons from './NoEditButtons';
+
 
 class Helper{
   isInEditMode = false;
@@ -50,7 +48,7 @@ class ListElement extends React.Component{
   helper
   constructor(props){
     super(props);
-    this.helper=new Helper();
+    this.helper = new Helper();
     this.helper.equalToProps(this.props.props);
   }
   edit(){
@@ -67,18 +65,6 @@ class ListElement extends React.Component{
     }else{
       this.helper.toggleEditMode();
     }
-  }
-  noEditButtons(){
-    return [
-      <div onClick={()=>{this.helper.toggleEditMode()}} className="tools"><EditIcon style={{color:'var(--main-color)'}}/></div>,
-      <div onClick={action(()=>{this.props.removeElement(this.props.props.id); this.props.setAlert('Element deleted', 'orange');})} className="tools"><DeleteIcon style={{color:'var(--color-1)'}}/></div>
-    ];
-  }
-  editButtons(){
-    return [
-      <div onClick={action(()=>{this.edit()})} className="tools"><CheckIcon style={{color:'var(--main-color)'}} /></div>,
-      <div onClick={()=>{this.helper.toggleEditMode();this.props.setAlert('Action canceled', 'gray');}} className="tools"><CancelIcon style={{color:'var(--color-1)'}}/></div>
-    ];
   }
   
   render(){
@@ -99,9 +85,10 @@ class ListElement extends React.Component{
               }
             )
           }
-          {
-            this.noEditButtons()
-          }
+          <NoEditButtons 
+            removeElement={action(()=>{this.props.removeElement(this.props.props.id)})} 
+            toggleEditMode={()=>{this.helper.toggleEditMode()}} 
+            setAlert={()=>{this.props.setAlert()}} />
         </div>
     )
     }else{
@@ -122,9 +109,10 @@ class ListElement extends React.Component{
                 }
               })
             }
-            {
-              this.editButtons()
-            }
+            <EditButtons 
+              edit={action(()=>{this.edit()})} 
+              toggleEditMode={()=>{this.helper.toggleEditMode()}} 
+              setAlert={()=>{this.props.setAlert()}} />
         </div>
       )
     }

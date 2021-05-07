@@ -8,7 +8,6 @@ import './styles/addElement.css';
 
 class Helper{
   newElement;
-
   constructor(){
     this.newElement = {
       brand:1,
@@ -43,7 +42,7 @@ class AddElement extends React.Component {
             case 'brand':
               const brands = BrandsStore.list
               return [<p>brand:</p>, <MultioptionEditButton 
-                props={brands} 
+                props={brands}
                 getValue={(e)=>{this.helper.newElement['brand']=e}}/>]
             default:
               return [<p>{e}:</p>, <input onChange={ 
