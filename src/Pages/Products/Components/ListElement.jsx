@@ -1,33 +1,32 @@
-import React from 'react'
-import {observer} from 'mobx-react'
-import { makeAutoObservable, action } from 'mobx'
-import BrandsStore from '../../../Stores/BrandsStore'
+import React from 'react';
+import {observer} from 'mobx-react';
+import { makeAutoObservable, action } from 'mobx';
+import BrandsStore from '../../../Stores/BrandsStore';
 
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 
-import MultioptionEditButton from '../../../Components/MultioptionEditButton'
-
+import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 
 class Helper{
-  isInEditMode = false
-  element = {}
+  isInEditMode = false;
+  element = {};
   
   toggleEditMode(){
-    this.isInEditMode = !this.isInEditMode
+    this.isInEditMode = !this.isInEditMode;
   }
   setElementField(value, field){
-    this.element[field] = value
+    this.element[field] = value;
   }
   equalToProps(x){
-    this.element={}
+    this.element={};
     Object.keys(x).map((e)=>{
       if(e!=='id'){
-        this.element[e]=x[e]
+        this.element[e]=x[e];
       }
-      return true
+      return true;
     })
   }
   didChange(props){
@@ -37,13 +36,13 @@ class Helper{
     }).forEach((e)=>{
       if(e===true){
         didChange = true;
-        return true
+        return true;
       }
     })
     return didChange;
   }
   constructor(){
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }  
 }
 
@@ -131,4 +130,4 @@ class ListElement extends React.Component{
     }
   }
 }
-export default observer(ListElement)
+export default observer(ListElement);

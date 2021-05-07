@@ -1,5 +1,5 @@
-import './styles/listElement.css'
-import {observer} from 'mobx-react'
+import './styles/listElement.css';
+import {observer} from 'mobx-react';
 
 function DisplayList(props) {
   return (
@@ -14,6 +14,6 @@ function DisplayList(props) {
         : <h4>No results</h4>
       }
     </div>
-  )
+  );
 }
-export default observer(DisplayList)
+export default observer(DisplayList);

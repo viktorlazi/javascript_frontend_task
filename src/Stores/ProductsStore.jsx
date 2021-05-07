@@ -1,47 +1,47 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx';
 
 class ProductsStore{
-  list = []
-  sortingTypes = []
-  availableIDs = []
+  list = [];
+  sortingTypes = [];
+  availableIDs = [];
   
   constructor(){
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
   getElementById(id){
-    const index = this.list.findIndex(obj => obj.id === id)
-    return this.list[index]
+    const index = this.list.findIndex(obj => obj.id === id);
+    return this.list[index];
   }
   removeElement(id){
     this.list=this.list.filter(e=>{
-      return e.id !== id
+      return e.id !== id;
     })
-    this.availableIDs.push(id)
+    this.availableIDs.push(id);
   }
   listElementEqualTo(obj, index){
     Object.keys(this.list[index]).map((e)=>{
       if(e!=='id'){
-        this.list[index][e] = obj[e]
+        this.list[index][e] = obj[e];
       }
-      return true
+      return true;
     })
   }
   editElement(edited, id){
     if(!this.isNewElementValid(edited)){
-      return [false, 'Invalid input - empty fields']
+      return [false, 'Invalid input - empty fields'];
     }
     if(isNaN(edited.cost)){
-      return [false, 'Invalid input - cost must be a number']
+      return [false, 'Invalid input - cost must be a number'];
     }
     if(!isNaN(edited.type)){
-      return [false, 'Invalid input - type must be a string']
+      return [false, 'Invalid input - type must be a string'];
     }
     if(!isNaN(edited.colour)){
-      return [false, 'Invalid input - colour must be a string']
+      return [false, 'Invalid input - colour must be a string'];
     }
     const index = this.list.findIndex(obj => obj.id === id);
     this.listElementEqualTo(edited, index);
-    return [true, 'Element edited']
+    return [true, 'Element edited'];
   }
   
 
@@ -60,15 +60,15 @@ class ProductsStore{
     }
     let id
     if(this.availableIDs.length){
-      id = this.availableIDs[0]
-      this.availableIDs.shift()
+      id = this.availableIDs[0];
+      this.availableIDs.shift();
     }else{
       id = this.list.length
     }
-    this.list.push({})
-    this.list[this.list.length-1]['id'] = id
+    this.list.push({});
+    this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{
-      this.list[this.list.length-1][e] = newElement[e]
+      this.list[this.list.length-1][e] = newElement[e];
       //return true
     })
     return [true, 'Element added'];
@@ -78,24 +78,24 @@ class ProductsStore{
     const keys = Object.keys(newElement)
     if(keys.length>0){
       return keys.every((e)=>{
-        return newElement[e]
-      })
+        return newElement[e];
+      });
     }
-    return false
+    return false;
   }
   getListProperties(key){
-    return this.list.map(e=>e[key])
+    return this.list.map(e=>e[key]);
   }
   unbrandIfBrandNotExistent(validBrands){
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
-        e.brand=1
+        e.brand=1;
       }
-    })
+    });
   }
 }
 
-const productsStore = new ProductsStore()
+const productsStore = new ProductsStore();
 
 /**
  * preset products
@@ -130,6 +130,6 @@ productsStore.list.push({
   cost:3300     
 }    
 )    
-productsStore.sortingTypes = ['brand', 'type', 'colour', 'cost']
+productsStore.sortingTypes = ['brand', 'type', 'colour', 'cost'];
  
-export default productsStore
+export default productsStore;

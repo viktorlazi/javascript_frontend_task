@@ -23,6 +23,7 @@
   transition: all 0.5s ease;
   box-shadow: var(--shadow-black-300);
   font-weight: 500;
+  outline: none;
 }
 .add__new button:focus{
   box-shadow: var(--shadow-black-300);

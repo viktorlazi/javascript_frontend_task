@@ -1,4 +1,4 @@
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react';
 
 function SearchField({UserInputStore}) {
   return (
@@ -7,6 +7,6 @@ function SearchField({UserInputStore}) {
         onChange={(e)=>{UserInputStore.setSearchField(e.target.value)}}
         />
     </div>
-  )
+  );
 }
-export default observer(SearchField)
+export default observer(SearchField);

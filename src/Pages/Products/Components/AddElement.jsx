@@ -1,13 +1,13 @@
-import React from 'react'
-import {observer} from 'mobx-react'
-import {action, makeAutoObservable} from 'mobx'
-import BrandsStore from '../../../Stores/BrandsStore'
-import ProductsService from '../Stores/ProductsService'
-import MultioptionEditButton from '../../../Components/MultioptionEditButton'
-import './styles/addElement.css'
+import React from 'react';
+import {observer} from 'mobx-react';
+import {action, makeAutoObservable} from 'mobx';
+import BrandsStore from '../../../Stores/BrandsStore';
+import ProductsService from '../Stores/ProductsService';
+import MultioptionEditButton from '../../../Components/MultioptionEditButton';
+import './styles/addElement.css';
 
 class Helper{
-  newElement
+  newElement;
 
   constructor(){
     this.newElement = {
@@ -15,22 +15,22 @@ class Helper{
       type:'',
       colour:'',
       cost:''
-    }
-    makeAutoObservable(this)
+    };
+    makeAutoObservable(this);
   }
   addNewElementToList(setAlert){
-    const result = ProductsService.addNewElement(this.newElement)
+    const result = ProductsService.addNewElement(this.newElement);
     result[0]?
     setAlert(result[1], 'var(--main-color)'):
-    setAlert(result[1], 'red')
+    setAlert(result[1], 'red');
   }
 }
 
 class AddElement extends React.Component {
-  helper
+  helper;
   constructor(props){
-    super(props)
-    this.helper=new Helper()
+    super(props);
+    this.helper=new Helper();
   }
   render(){
     return(
@@ -56,18 +56,17 @@ class AddElement extends React.Component {
           })
         }
       <button onClick={()=>{
-        this.helper.addNewElementToList(this.props.setAlert)
-        const lastSelected = this.helper.newElement.brand
+        this.helper.addNewElementToList(this.props.setAlert);
+        const lastSelected = this.helper.newElement.brand;
         action(()=>{this.helper.newElement = {
           brand:lastSelected,
           type:'',
           colour:'',
           cost:''
-        }})
+        }});
       }}>Add New</button>
     </div>
-    )
+    );
   }
 }
-
-export default observer(AddElement)
+export default observer(AddElement);

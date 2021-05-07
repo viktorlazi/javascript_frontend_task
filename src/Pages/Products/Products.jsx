@@ -1,27 +1,26 @@
-import {observer} from 'mobx-react'
+import {observer} from 'mobx-react';
 
-import SearchField from '../../Components/SearchField'
-import AddElement from './Components/AddElement'
-import DisplayList from '../../Components/DisplayList'
-import ListElement from './Components/ListElement'
-import TableColumnNames from '../../Components/TableColumnNames'
+import SearchField from '../../Components/SearchField';
+import AddElement from './Components/AddElement';
+import DisplayList from '../../Components/DisplayList';
+import ListElement from './Components/ListElement';
+import TableColumnNames from '../../Components/TableColumnNames';
 
-import UserInputStore from '../../Stores/UserInputStore'
-import ProductsService from './Stores/ProductsService'
-import MessageSpace from '../../Components/MessageSpace'
-import {makeAutoObservable} from 'mobx'
+import UserInputStore from '../../Stores/UserInputStore';
+import ProductsService from './Stores/ProductsService';
+import MessageSpace from '../../Components/MessageSpace';
+import {makeAutoObservable} from 'mobx';
 
-import './styles/products.css'
-
+import './styles/products.css';
 
 class Helper{
-  msg
-  colour
+  msg;
+  colour;
   
   constructor(){
-    this.colour = 'black'
-    this.msg = ''
-    makeAutoObservable(this)
+    this.colour = 'black';
+    this.msg = '';
+    makeAutoObservable(this);
   }
   setAlert(msg, colour){
     this.msg = msg;
@@ -54,5 +53,4 @@ function Products() {
     </div>
   )
 }
-
-export default observer(Products)
+export default observer(Products);
