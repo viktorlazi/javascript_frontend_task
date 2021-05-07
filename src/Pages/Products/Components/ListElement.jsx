@@ -1,12 +1,11 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import { makeAutoObservable, action, toJS } from 'mobx';
+import { makeAutoObservable, action } from 'mobx';
 import BrandsStore from '../../../Stores/BrandsStore';
 
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
-import EditButtons from './EditButtons';
-import NoEditButtons from './NoEditButtons';
-
+import EditButtons from '../../../Components/EditButtons';
+import NoEditButtons from '../../../Components/NoEditButtons';
 
 class Helper{
   isInEditMode = false;
@@ -18,7 +17,7 @@ class Helper{
   setElementField(value, field){
     this.element[field] = value;
   }
-  equalToProps(x){
+  setEqualToProps(x){
     this.element={};
     Object.keys(x).map((e)=>{
       if(e!=='id'){
@@ -49,7 +48,7 @@ class ListElement extends React.Component{
   constructor(props){
     super(props);
     this.helper = new Helper();
-    this.helper.equalToProps(this.props.props);
+    this.helper.setEqualToProps(this.props.props);
   }
   edit(){
     this.props.setAlert('', 'black')
@@ -61,7 +60,7 @@ class ListElement extends React.Component{
         return;
       }
       this.props.setAlert(result[1], 'red');
-      this.helper.equalToProps(this.props.props);
+      this.helper.setEqualToProps(this.props.props);
     }else{
       this.helper.toggleEditMode();
     }
