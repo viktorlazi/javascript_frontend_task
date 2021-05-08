@@ -69,7 +69,7 @@ class ProductsStore{
     this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{
       this.list[this.list.length-1][e] = newElement[e];
-      //return true
+      return null
     })
     return [true, 'Element added'];
   }

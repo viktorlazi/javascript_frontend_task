@@ -25,7 +25,7 @@ function Products() {
   
   return (
     <div id="products">
-      <SearchField UserInputStore={BrandsInputStore} />
+      <SearchField setSearchField={(x)=>{BrandsInputStore.setSearchField(x)}} />
       <DisplayList> 
         {
           BrandsService.idList.map((e)=>{

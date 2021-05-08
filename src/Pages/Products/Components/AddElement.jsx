@@ -42,7 +42,7 @@ class AddElement extends React.Component {
             case 'brand':
               const brands = BrandsStore.list
               return [<p>brand:</p>, <MultioptionEditButton 
-                props={brands}
+                options={brands}
                 getValue={(e)=>{this.helper.newElement['brand']=e}}/>]
             default:
               return [<p>{e}:</p>, <input onChange={ 

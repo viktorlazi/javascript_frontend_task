@@ -5,7 +5,7 @@ function TableColumnNames({keys, setSortBy, sortBy}) {
     <div className="column-names">
       {
         keys.map(e=>{
-          return <div onClick={()=>{setSortBy(e)}} className={`column-name row `+`${sortBy===e ? "sortBy":""}`}>{e}</div>
+          return <div onClick={()=>{setSortBy(e)}} className={`column-name row ${sortBy===e ? "sortBy":""}`}>{e}</div>
         })
       }
     </div>

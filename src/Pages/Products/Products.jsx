@@ -29,13 +29,13 @@ class Helper{
 }
 
 const ProductsInputStore = new UserInputStore();
+const helper = new Helper();
 ProductsInputStore.setSort('brand');
-const helper = new Helper;
 
 function Products() {
   return (
     <div id="products">
-      <SearchField UserInputStore={ProductsInputStore}/>
+      <SearchField setSearchField={(x)=>{ProductsInputStore.setSearchField(x)}}/>
       <DisplayList>
         <TableColumnNames sortBy={ProductsInputStore.sortBy} keys={ProductsService.getSortingTypes()} setSortBy={(sortBy)=>{ProductsInputStore.setSort(sortBy)}} />
         {
@@ -44,7 +44,7 @@ function Products() {
               setAlert={(msg, colour)=>helper.setAlert(msg, colour)}
               props={ProductsService.getElementById(e)} 
               editElement={ProductsService.editElement} 
-              removeElement={ProductsService.removeElement} />
+              removeElement={ProductsService.removeElement} />;
           })
         }     
       </DisplayList>

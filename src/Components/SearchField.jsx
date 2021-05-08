@@ -1,10 +1,10 @@
 import {observer} from 'mobx-react';
 
-function SearchField({UserInputStore}) {
+function SearchField({setSearchField}) {
   return (
     <div className="userInput">
       <input type="text" id="search" placeholder="search..."
-        onChange={(e)=>{UserInputStore.setSearchField(e.target.value)}}
+        onChange={(e)=>{setSearchField(e.target.value)}}
         />
     </div>
   );

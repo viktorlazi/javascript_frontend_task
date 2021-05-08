@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 
-class UserInputStore{
+export default class UserInputStore{
   searchField = '';
   sortBy = '';
   constructor(){
@@ -12,5 +12,4 @@ class UserInputStore{
   setSort(x){
     this.sortBy = x;
   }
-}
-export default UserInputStore;
+};
