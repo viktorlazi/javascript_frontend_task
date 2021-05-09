@@ -48,19 +48,19 @@ class ListElement extends React.Component{
   constructor(props){
     super(props);
     this.helper = new Helper();
-    this.helper.setEqualToProps(this.props.props);
+    this.helper.setEqualToProps(this.props.element);
   }
   edit(){
     this.props.setAlert('', 'black')
-    if(this.helper.didChange(this.props.props)){
-      const result = this.props.editElement(this.helper.element, this.props.props.id)
+    if(this.helper.didChange(this.props.element)){
+      const result = this.props.editElement(this.helper.element, this.props.element.id)
       if(result[0]){
         this.helper.toggleEditMode();
         this.props.setAlert(result[1], 'green');
         return;
       }
       this.props.setAlert(result[1], 'red');
-      this.helper.setEqualToProps(this.props.props);
+      this.helper.setEqualToProps(this.props.element);
     }else{
       this.helper.toggleEditMode();
     }
@@ -71,21 +71,21 @@ class ListElement extends React.Component{
       return (
         <div className="row">
           {
-            Object.keys(this.props.props).map((e)=>{
+            Object.keys(this.props.element).map((e)=>{
               switch(e){
                 case 'id':
                   return null
                 case 'brand':
                   const brands = BrandsStore.list
-                  return <div>{(brands.find((e)=>{return e.id===this.props.props['brand']})||{}).name || 'unbranded'}</div>
+                  return <div>{(brands.find((e)=>{return e.id===this.props.element['brand']})||{}).name || 'unbranded'}</div>
                 default:
-                  return <div>{this.props.props[e]}</div>
+                  return <div>{this.props.element[e]}</div>
                 }
               }
             )
           }
           <NoEditButtons 
-            removeElement={action(()=>{this.props.removeElement(this.props.props.id)})} 
+            removeElement={action(()=>{this.props.removeElement(this.props.element.id)})} 
             toggleEditMode={()=>{this.helper.toggleEditMode()}} 
             setAlert={()=>{this.props.setAlert()}} />
         </div>
@@ -94,10 +94,10 @@ class ListElement extends React.Component{
       return (
         <div className="row">
           {
-            Object.keys(this.props.props).map((e)=>{
+            Object.keys(this.props.element).map((e)=>{
               switch(e){
                 case 'brand':
-                return <div><MultioptionEditButton selected={this.props.props.brand} options={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></div>
+                return <div><MultioptionEditButton selected={this.props.element.brand} options={BrandsStore.list} getValue={(e)=>{this.helper.setElementField(e, 'brand')}} /></div>
                 case 'id':
                 return null
                 default:

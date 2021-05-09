@@ -13,6 +13,7 @@ import {makeAutoObservable} from 'mobx';
 
 import './styles/products.css';
 
+
 class Helper{
   msg;
   colour;
@@ -30,7 +31,6 @@ class Helper{
 
 const ProductsInputStore = new UserInputStore();
 const helper = new Helper();
-ProductsInputStore.setSort('brand');
 
 function Products() {
   return (
@@ -42,7 +42,7 @@ function Products() {
           ProductsService.getProcessedList(ProductsInputStore.searchField, ProductsInputStore.sortBy).map((e)=>{
             return <ListElement
               setAlert={(msg, colour)=>helper.setAlert(msg, colour)}
-              props={ProductsService.getElementById(e)} 
+              element={ProductsService.getElementById(e)} 
               editElement={ProductsService.editElement} 
               removeElement={ProductsService.removeElement} />;
           })
