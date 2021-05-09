@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import BrandsStore from '../../../Stores/BrandsStore'
 
 class ProductsStore{
   list = [];
@@ -43,8 +44,37 @@ class ProductsStore{
     this.listElementEqualTo(edited, index);
     return [true, 'Element edited'];
   }
-  
-
+  getSortingTypes(){
+    return this.sortingTypes
+  }
+  sort(list, sortBy){
+    list.sort(
+      (a,b)=>{
+        const nameA = a[sortBy]
+        const nameB = b[sortBy]
+        if (nameA < nameB) {
+          return -1;
+        }else if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      }
+    )
+    return list
+  }
+  filter(list, searchField){
+    let filtered = [...list.filter((e)=>{
+      return (BrandsStore.getElementById(e.brand).name + e.type + e.colour + e.cost).includes(searchField)
+    })]
+    return filtered
+  }
+  getProcessedList(searchField, sortBy){
+    this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
+    let list = this.filter(this.list, searchField)
+    list = this.sort(list, sortBy)
+    const idList = list.map(e=>{return e.id})
+    return idList
+  }
   addNewElement(newElement){
     if(!this.isNewElementValid(newElement)){
       return [false, 'Invalid input - empty fields'];
@@ -72,8 +102,7 @@ class ProductsStore{
       return null
     })
     return [true, 'Element added'];
-  }
-    
+  }    
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)
     if(keys.length>0){

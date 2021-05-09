@@ -2,7 +2,7 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import {action, makeAutoObservable} from 'mobx';
 import BrandsStore from '../../../Stores/BrandsStore';
-import ProductsService from '../Stores/ProductsService';
+import ProductsStore from '../Stores/ProductsStore';
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 import './styles/addElement.css';
 
@@ -18,7 +18,7 @@ class Helper{
     makeAutoObservable(this);
   }
   addNewElementToList(setAlert){
-    const result = ProductsService.addNewElement(this.newElement);
+    const result = ProductsStore.addNewElement(this.newElement);
     result[0]?
     setAlert(result[1], 'var(--main-color)'):
     setAlert(result[1], 'red');

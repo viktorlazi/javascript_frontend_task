@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import ProductsStore from './ProductsStore';
+import ProductsStore from '../Pages/Products/Stores/ProductsStore';
 
 class BrandsStore{
   list = [];
