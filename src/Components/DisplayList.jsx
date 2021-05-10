@@ -6,7 +6,7 @@ function DisplayList(props) {
     <div>
       {
         props.children.length ? 
-        <div class="table">
+        <div className="table">
           {
             props.children
           }

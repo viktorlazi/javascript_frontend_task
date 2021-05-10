@@ -13,11 +13,10 @@ class ProductsStore{
     this.list = this.service.fetchList()
   }
   getElementById(id){
-    const index = this.list.findIndex(obj => obj.id === id);
-    return this.list[index];
+    return this.list.find(e=>e.id===id);
   }
   getSortingTypes(){
-    return this.sortingTypes
+    return this.sortingTypes;
   }
   getListProperties(key){
     return this.list.map(e=>e[key]);
@@ -30,7 +29,6 @@ class ProductsStore{
     this.service.removeListItem(id);
   }
   getProcessedList(searchField, sortBy){
-    console.log(this.service.list)
     this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
     let list = this.filter(this.list, searchField)
     list = this.sort(list, sortBy)
