@@ -1,23 +1,41 @@
 import { makeAutoObservable } from 'mobx';
 import BrandsStore from '../../../Stores/BrandsStore'
+import ProductsService from './ProductsService'
 
 class ProductsStore{
   list = [];
-  sortingTypes = [];
+  sortingTypes = ['brand', 'type', 'colour', 'cost'];
   availableIDs = [];
-  
+  service = new ProductsService();
+
   constructor(){
     makeAutoObservable(this);
+    this.list = this.service.fetchList()
   }
   getElementById(id){
     const index = this.list.findIndex(obj => obj.id === id);
     return this.list[index];
+  }
+  getSortingTypes(){
+    return this.sortingTypes
+  }
+  getListProperties(key){
+    return this.list.map(e=>e[key]);
   }
   removeElement(id){
     this.list=this.list.filter(e=>{
       return e.id !== id;
     })
     this.availableIDs.push(id);
+    this.service.removeListItem(id);
+  }
+  getProcessedList(searchField, sortBy){
+    console.log(this.service.list)
+    this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
+    let list = this.filter(this.list, searchField)
+    list = this.sort(list, sortBy)
+    const idList = list.map(e=>{return e.id})
+    return idList
   }
   listElementEqualTo(obj, index){
     Object.keys(this.list[index]).map((e)=>{
@@ -44,9 +62,6 @@ class ProductsStore{
     this.listElementEqualTo(edited, index);
     return [true, 'Element edited'];
   }
-  getSortingTypes(){
-    return this.sortingTypes
-  }
   sort(list, sortBy){
     list.sort(
       (a,b)=>{
@@ -67,13 +82,6 @@ class ProductsStore{
       return (BrandsStore.getElementById(e.brand).name + e.type + e.colour + e.cost).includes(searchField)
     })]
     return filtered
-  }
-  getProcessedList(searchField, sortBy){
-    this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
-    let list = this.filter(this.list, searchField)
-    list = this.sort(list, sortBy)
-    const idList = list.map(e=>{return e.id})
-    return idList
   }
   addNewElement(newElement){
     if(!this.isNewElementValid(newElement)){
@@ -101,6 +109,7 @@ class ProductsStore{
       this.list[this.list.length-1][e] = newElement[e];
       return null
     })
+    this.service.appendList([this.list[this.list.length-1]])
     return [true, 'Element added'];
   }    
   isNewElementValid(newElement){
@@ -112,53 +121,16 @@ class ProductsStore{
     }
     return false;
   }
-  getListProperties(key){
-    return this.list.map(e=>e[key]);
-  }
   unbrandIfBrandNotExistent(validBrands){
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
         e.brand=1;
       }
+      this.service.editListElement(e.id, e)
     });
   }
 }
 
 const productsStore = new ProductsStore();
-
-/**
- * preset products
- */
- 
-productsStore.list.push({
-  id:0,
-  brand:4,
-  type:'stratocaster',
-  colour:'blue',
-  cost:4200      
-},
-{
-  id:1,
-  brand:4,
-  type:'telecaster',
-  colour:'black',
-  cost:4300      
-},
-{
-  id:2,
-  brand:3,
-  type:'singlecut',
-  colour:'sunburn',
-  cost:3301 
-},
-{ 
-  id:3,
-  brand:2,
-  type:'singlecut',
-  colour:'yellow',
-  cost:3300     
-}    
-)    
-productsStore.sortingTypes = ['brand', 'type', 'colour', 'cost'];
  
 export default productsStore;
