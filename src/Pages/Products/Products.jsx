@@ -43,8 +43,8 @@ function Products() {
             return <ListElement
               setAlert={(msg, colour)=>helper.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
-              editElement={ProductsStore.editElement} 
-              removeElement={ProductsStore.removeElement} />;
+              editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
+              removeElement={(id)=>{ProductsStore.removeElement(id)}} />;
           })
         }     
       </DisplayList>
