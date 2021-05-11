@@ -1,16 +1,17 @@
 import {observer} from 'mobx-react';
+import {makeAutoObservable} from 'mobx';
 
 import SearchField from '../../Components/SearchField';
 import AddElement from './Components/AddElement';
 import DisplayList from '../../Components/DisplayList';
 import ListElement from './Components/ListElement';
 import TableColumnNames from '../../Components/TableColumnNames';
+import MessageSpace from '../../Components/MessageSpace';
 
 import UserInputStore from '../../Stores/UserInputStore';
 import ProductsStore from './Stores/ProductsStore';
 import ListElementStore from './Components/Stores/ListElementStore';
-import MessageSpace from '../../Components/MessageSpace';
-import {makeAutoObservable} from 'mobx';
+import AddElementStore from './Components/Stores/AddElementStore';
 
 import './styles/products.css';
 
@@ -32,6 +33,7 @@ class Helper{
 
 const helper = new Helper();
 const ProductsInputStore = new UserInputStore();
+const addElementStore = new AddElementStore();
 
 function Products() {
   return (
@@ -41,19 +43,23 @@ function Products() {
         <TableColumnNames sortBy={ProductsInputStore.sortBy} keys={ProductsStore.getSortingTypes()} setSortBy={(sortBy)=>{ProductsInputStore.setSort(sortBy)}} />
         {
           ProductsStore.getProcessedList(ProductsInputStore.searchField, ProductsInputStore.sortBy).map((e)=>{
-            const listElementStore = new ListElementStore(ProductsStore.getElementById(e));
             return <ListElement
               setAlert={(msg, colour)=>helper.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
               editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
               removeElement={(id)=>{ProductsStore.removeElement(id)}} 
-              store={listElementStore}
+              store={new ListElementStore(ProductsStore.getElementById(e))}
             />;
           })
         }     
       </DisplayList>
       <MessageSpace msg={helper.msg} colour={helper.colour} />
-      <AddElement setAlert={(msg, colour)=>helper.setAlert(msg, colour)} ListStore={ProductsStore} />
+      <AddElement 
+        setAlert={(msg, colour)=>helper.setAlert(msg, colour)} 
+        getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
+        store={addElementStore}
+        addNewElement={(newElement)=>{ return ProductsStore.addNewElement(newElement)}}
+      />
     </div>
   )
 }

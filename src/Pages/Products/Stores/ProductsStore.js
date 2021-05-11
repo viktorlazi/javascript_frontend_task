@@ -94,20 +94,20 @@ class ProductsStore{
     if(!isNaN(newElement.colour)){
       return [false, 'Invalid input - colour must be a string'];
     }
-    let id
+    let id;
     if(this.availableIDs.length){
       id = this.availableIDs[0];
       this.availableIDs.shift();
     }else{
-      id = this.list.length
+      id = this.list.length;
     }
     this.list.push({});
     this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{
       this.list[this.list.length-1][e] = newElement[e];
-      return null
+      return null;
     })
-    this.service.appendList([this.list[this.list.length-1]])
+    this.service.appendList([this.list[this.list.length-1]]);
     return [true, 'Element added'];
   }    
   isNewElementValid(newElement){
