@@ -16,11 +16,12 @@ import AlertStore from './Stores/AlertStore';
 
 import './styles/products.css';
 
-const alertStore = new AlertStore();
-const ProductsInputStore = new UserInputStore();
-const addElementStore = new AddElementStore();
 
 function Products() {
+  const alertStore = new AlertStore();
+  const ProductsInputStore = new UserInputStore();
+  const addElementStore = new AddElementStore();
+  
   return (
     <div id="products">
       <SearchField setSearchField={(x)=>{ProductsInputStore.setSearchField(x)}}/>
