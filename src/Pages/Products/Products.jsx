@@ -12,26 +12,11 @@ import UserInputStore from '../../Stores/UserInputStore';
 import ProductsStore from './Stores/ProductsStore';
 import ListElementStore from './Components/Stores/ListElementStore';
 import AddElementStore from './Components/Stores/AddElementStore';
+import AlertStore from './Stores/AlertStore';
 
 import './styles/products.css';
 
-
-class Helper{
-  msg;
-  colour;
-  
-  constructor(){
-    this.colour = 'black';
-    this.msg = '';
-    makeAutoObservable(this);
-  }
-  setAlert(msg, colour){
-    this.msg = msg;
-    this.colour = colour;
-  }
-}
-
-const helper = new Helper();
+const alertStore = new AlertStore();
 const ProductsInputStore = new UserInputStore();
 const addElementStore = new AddElementStore();
 
@@ -44,7 +29,7 @@ function Products() {
         {
           ProductsStore.getProcessedList(ProductsInputStore.searchField, ProductsInputStore.sortBy).map((e)=>{
             return <ListElement
-              setAlert={(msg, colour)=>helper.setAlert(msg, colour)}
+              setAlert={(msg, colour)=>alertStore.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
               editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
               removeElement={(id)=>{ProductsStore.removeElement(id)}} 
@@ -53,9 +38,9 @@ function Products() {
           })
         }     
       </DisplayList>
-      <MessageSpace msg={helper.msg} colour={helper.colour} />
+      <MessageSpace msg={alertStore.msg} colour={alertStore.colour} />
       <AddElement 
-        setAlert={(msg, colour)=>helper.setAlert(msg, colour)} 
+        setAlert={(msg, colour)=>alertStore.setAlert(msg, colour)} 
         getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
         store={addElementStore}
         addNewElement={(newElement)=>{ return ProductsStore.addNewElement(newElement)}}
