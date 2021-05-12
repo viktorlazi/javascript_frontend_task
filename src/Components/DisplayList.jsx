@@ -11,7 +11,7 @@ function DisplayList(props) {
             props.children
           }
         </div>
-        : <h4>No results</h4>
+        : null
       }
     </div>
   );

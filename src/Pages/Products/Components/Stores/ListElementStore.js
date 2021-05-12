@@ -7,8 +7,8 @@ class ListElementStore{
   edit(setAlert, element, editElement){
     if(this.didChange(element)){
       const result = editElement(this.element, element.id);
-      setAlert(result)
-      this.setEqualToProps(element);
+      setAlert(result);
+      this.setEqualToProps();
     }else{
       this.toggleEditMode();
     }
