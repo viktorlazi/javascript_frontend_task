@@ -27,7 +27,7 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
         }
         <NoEditButtons 
           removeElement={action(()=>{setAlert(removeElement(element.id))})} 
-          toggleEditMode={()=>{store.toggleEditMode()}} />
+          toggleEditMode={()=>{store.toggleEditMode()}}/>
       </div>
     );
   }else{
