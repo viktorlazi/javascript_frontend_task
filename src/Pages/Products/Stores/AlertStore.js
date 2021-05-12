@@ -6,10 +6,12 @@ class AlertStore{
   msgCodes = [
     [200, 'edited'],
     [201, 'added'],
+    [202, 'removed'],
     [400, 'empty fields'],
     [401, 'invalid cost'],
     [402, 'invalid type'],
     [403, 'invalid colour'],
+    [500, 'internal error, missing id']
   ];
   
   constructor(){

@@ -22,11 +22,16 @@ class ProductsStore{
     return this.list.map(e=>e[key]);
   }
   removeElement(id){
-    this.list=this.list.filter(e=>{
+    let newList=this.list.filter(e=>{
       return e.id !== id;
     })
+    if(newList === this.list){
+      return [false, [500]];
+    }
+    this.list = newList;
     this.availableIDs.push(id);
     this.service.removeListItem(id);
+    return [true, [202]];
   }
   getProcessedList(searchField, sortBy){
     this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))

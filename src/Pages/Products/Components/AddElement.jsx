@@ -29,7 +29,7 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store}){
         })
       }
     <button onClick={()=>{
-      store.addNewElementToList(setAlert, addNewElement);
+      setAlert(addNewElement(store.newElement));
       const lastSelected = store.newElement.brand;
       action(()=>{store.newElement = {
         brand:lastSelected,

@@ -11,9 +11,5 @@ class AddElementStore{
     };
     makeAutoObservable(this);
   }
-  addNewElementToList(setAlert, addNewElement){
-    const result = addNewElement(this.newElement);
-    setAlert(result);
-  }
 }
 export default AddElementStore;

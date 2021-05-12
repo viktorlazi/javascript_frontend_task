@@ -31,7 +31,7 @@ function Products() {
               setAlert={(msg, colour)=>alertStore.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
               editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
-              removeElement={(id)=>{ProductsStore.removeElement(id)}} 
+              removeElement={(id)=>{return ProductsStore.removeElement(id)}} 
               store={new ListElementStore(ProductsStore.getElementById(e))}
             />;
           })
