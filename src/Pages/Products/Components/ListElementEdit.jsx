@@ -7,9 +7,9 @@ function ListElementEdit({element, brands, storeElementValue, setElementField}) 
     Object.keys(element).map((e)=>{
       switch(e){
         case 'brand':
-        return <div><MultioptionEditButton selected={element.brand} options={brands} getValue={(e)=>{setElementField(e, 'brand')}} /></div>
+          return <div><MultioptionEditButton selected={element.brand} options={brands} getValue={(e)=>{setElementField(e, 'brand')}} /></div>
         case 'id':
-        return null
+          return null
         default:
           return <div><input 
           onChange={action((i)=>{setElementField(i.target.value, e)})}

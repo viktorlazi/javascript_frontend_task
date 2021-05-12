@@ -11,7 +11,9 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
   if(!store.isInEditMode){
     return (
       <div className="row">
-        <ListElementDisplay element={element} brands={BrandsStore.list} />
+        <ListElementDisplay 
+          element={element} 
+          brands={BrandsStore.list} />
         <NoEditButtons 
           removeElement={action(()=>{setAlert(removeElement(element.id))})} 
           toggleEditMode={()=>{store.toggleEditMode()}}/>
@@ -20,7 +22,11 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
   }else{
     return (
       <div className="row">
-        <ListElementEdit element={element} brands={BrandsStore.list} store={store} storeElementValue={store.element} setElementField={(x,y)=>{return store.setElementField(x,y)}} />
+        <ListElementEdit 
+          element={element} 
+          brands={BrandsStore.list} 
+          storeElementValue={store.element} 
+          setElementField={(x,y)=>{return store.setElementField(x,y)}} />
         <EditButtons 
           edit={action(()=>{store.edit(setAlert, element, editElement)})} 
           toggleEditMode={()=>{store.toggleEditMode()}} 
