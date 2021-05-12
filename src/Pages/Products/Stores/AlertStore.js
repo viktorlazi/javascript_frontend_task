@@ -5,6 +5,7 @@ class AlertStore{
   colour;
   msgCodes = [
     [200, 'edited'],
+    [201, 'added'],
     [400, 'empty fields'],
     [401, 'invalid cost'],
     [402, 'invalid type'],

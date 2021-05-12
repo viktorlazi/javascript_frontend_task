@@ -86,17 +86,21 @@ class ProductsStore{
     return filtered
   }
   addNewElement(newElement){
+    let errorCodes = [];
     if(!this.isNewElementValid(newElement)){
-      return [false, 'Invalid input - empty fields'];
+      errorCodes.push(400);
     }
     if(isNaN(newElement.cost)){
-      return [false, 'Invalid input - cost must be a number'];
+      errorCodes.push(401);
     }
     if(!isNaN(newElement.type)){
-      return [false, 'Invalid input - type must be a string'];
+      errorCodes.push(402);
     }
     if(!isNaN(newElement.colour)){
-      return [false, 'Invalid input - colour must be a string'];
+      errorCodes.push(403);
+    }
+    if(errorCodes.length > 0){
+      return [false, errorCodes]
     }
     let id;
     if(this.availableIDs.length){
@@ -112,7 +116,7 @@ class ProductsStore{
       return null;
     })
     this.service.appendList([this.list[this.list.length-1]]);
-    return [true, 'Element added'];
+    return [true, [201]];
   }    
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)

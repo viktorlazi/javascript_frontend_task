@@ -39,7 +39,7 @@ function Products() {
       </DisplayList>
       <MessageSpace msg={alertStore.msg} colour={alertStore.colour} />
       <AddElement 
-        setAlert={(msg, colour)=>alertStore.setAlert(msg, colour)} 
+        setAlert={(status)=>{alertStore.setAlert(status)}} 
         getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
         store={addElementStore}
         addNewElement={(newElement)=>{return ProductsStore.addNewElement(newElement)}}

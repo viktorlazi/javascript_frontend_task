@@ -13,9 +13,7 @@ class AddElementStore{
   }
   addNewElementToList(setAlert, addNewElement){
     const result = addNewElement(this.newElement);
-    result[0]?
-    setAlert(result[1], 'var(--main-color)'):
-    setAlert(result[1], 'red');
+    setAlert(result);
   }
 }
 export default AddElementStore;
