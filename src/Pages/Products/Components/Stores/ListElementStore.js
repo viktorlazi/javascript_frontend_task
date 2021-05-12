@@ -20,7 +20,7 @@ class ListElementStore{
     this.element[field] = value;
   }
   setEqualToProps(x){
-    this.element={};
+    this.element = {};
     Object.keys(x).map((e)=>{
       if(e!=='id'){
         this.element[e]=x[e];
