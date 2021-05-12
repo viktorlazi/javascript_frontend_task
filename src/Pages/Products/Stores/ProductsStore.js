@@ -44,21 +44,25 @@ class ProductsStore{
     })
   }
   editElement(edited, id){
+    let errorCodes = [];
     if(!this.isNewElementValid(edited)){
-      return [false, 'Invalid input - empty fields'];
+      errorCodes.push(400);
     }
     if(isNaN(edited.cost)){
-      return [false, 'Invalid input - cost must be a number'];
+      errorCodes.push(401);
     }
     if(!isNaN(edited.type)){
-      return [false, 'Invalid input - type must be a string'];
+      errorCodes.push(402);
     }
     if(!isNaN(edited.colour)){
-      return [false, 'Invalid input - colour must be a string'];
+      errorCodes.push(403);
+    }
+    if(errorCodes.length > 0){
+      return [false, errorCodes]
     }
     const index = this.list.findIndex(obj => obj.id === id);
     this.listElementEqualTo(edited, index);
-    return [true, 'Element edited'];
+    return [true, [200]];
   }
   sort(list, sortBy){
     list.sort(

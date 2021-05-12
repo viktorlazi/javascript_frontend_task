@@ -1,5 +1,4 @@
 import {observer} from 'mobx-react';
-import {makeAutoObservable} from 'mobx';
 
 import SearchField from '../../Components/SearchField';
 import AddElement from './Components/AddElement';
@@ -16,12 +15,11 @@ import AlertStore from './Stores/AlertStore';
 
 import './styles/products.css';
 
+const alertStore = new AlertStore();
+const ProductsInputStore = new UserInputStore();
+const addElementStore = new AddElementStore();
 
-function Products() {
-  const alertStore = new AlertStore();
-  const ProductsInputStore = new UserInputStore();
-  const addElementStore = new AddElementStore();
-  
+function Products() {  
   return (
     <div id="products">
       <SearchField setSearchField={(x)=>{ProductsInputStore.setSearchField(x)}}/>
@@ -44,7 +42,7 @@ function Products() {
         setAlert={(msg, colour)=>alertStore.setAlert(msg, colour)} 
         getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
         store={addElementStore}
-        addNewElement={(newElement)=>{ return ProductsStore.addNewElement(newElement)}}
+        addNewElement={(newElement)=>{return ProductsStore.addNewElement(newElement)}}
       />
     </div>
   )

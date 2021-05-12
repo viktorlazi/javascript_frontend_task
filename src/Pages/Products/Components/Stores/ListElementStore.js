@@ -5,15 +5,9 @@ class ListElementStore{
   element = {};
   
   edit(setAlert, element, editElement){
-    setAlert('', 'black')
     if(this.didChange(element)){
       const result = editElement(this.element, element.id);
-      if(result[0]){
-        this.toggleEditMode();
-        setAlert(result[1], 'green');
-        return;
-      }
-      setAlert(result[1], 'red');
+      setAlert(result)
       this.setEqualToProps(element);
     }else{
       this.toggleEditMode();
