@@ -1,4 +1,4 @@
-function ListElementDisplay({element, brands}) {
+function ListElementDisplay({element, brands, invalidInputs}) {
   return (
     Object.keys(element).map((e)=>{
       switch(e){
@@ -7,7 +7,9 @@ function ListElementDisplay({element, brands}) {
         case 'brand':
           return <div>{(brands.find((e)=>{return e.id===element['brand']})||{}).name || 'unbranded'}</div>
         default:
-          return <div>{element[e]}</div>
+          return <div className={`${invalidInputs.includes(e) ? "invalidInput":""}`}>
+            {element[e]}
+          </div>
         }
       }
     )

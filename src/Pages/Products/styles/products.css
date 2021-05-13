@@ -11,3 +11,6 @@
 #products{
   width: 100%;
 }
+.invalidInput{
+  color: red;
+}

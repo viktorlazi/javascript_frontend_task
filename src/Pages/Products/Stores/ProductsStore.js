@@ -34,11 +34,11 @@ class ProductsStore{
     return [true, [202]];
   }
   getProcessedList(searchField, sortBy){
-    this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'))
-    let list = this.filter(this.list, searchField)
-    list = this.sort(list, sortBy)
-    const idList = list.map(e=>{return e.id})
-    return idList
+    this.unbrandIfBrandNotExistent(BrandsStore.getListProperties('id'));
+    let list = this.filter(this.list, searchField);
+    list = this.sort(list, sortBy);
+    const idList = list.map(e=>{return e.id});
+    return idList;
   }
   listElementEqualTo(obj, index){
     Object.keys(this.list[index]).map((e)=>{
@@ -68,6 +68,7 @@ class ProductsStore{
     const index = this.list.findIndex(obj => obj.id === id);
     this.listElementEqualTo(edited, index);
     return [true, [200]];
+  
   }
   sort(list, sortBy){
     list.sort(
@@ -81,14 +82,14 @@ class ProductsStore{
         }
         return 0;
       }
-    )
-    return list
+    );
+    return list;
   }
   filter(list, searchField){
     let filtered = [...list.filter((e)=>{
-      return (BrandsStore.getElementById(e.brand).name + e.type + e.colour + e.cost).includes(searchField)
-    })]
-    return filtered
+      return (BrandsStore.getElementById(e.brand).name + e.type + e.colour + e.cost).includes(searchField);
+    })];
+    return filtered;
   }
   addNewElement(newElement){
     let errorCodes = [];
@@ -105,7 +106,7 @@ class ProductsStore{
       errorCodes.push(403);
     }
     if(errorCodes.length > 0){
-      return [false, errorCodes]
+      return [false, errorCodes];
     }
     let id;
     if(this.availableIDs.length){
@@ -141,7 +142,5 @@ class ProductsStore{
     });
   }
 }
-
-const productsStore = new ProductsStore();
- 
+const productsStore = new ProductsStore(); 
 export default productsStore;

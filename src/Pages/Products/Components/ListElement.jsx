@@ -13,7 +13,9 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
       <div className="row">
         <ListElementDisplay 
           element={element} 
-          brands={BrandsStore.list} />
+          brands={BrandsStore.list} 
+          invalidInputs={store.invalidInputs}
+          />
         <NoEditButtons 
           removeElement={action(()=>{setAlert(removeElement(element.id))})} 
           toggleEditMode={()=>{store.toggleEditMode()}}/>
@@ -29,8 +31,7 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
           setElementField={(x,y)=>{return store.setElementField(x,y)}} />
         <EditButtons 
           edit={action(()=>{store.edit(setAlert, element, editElement)})} 
-          toggleEditMode={()=>{store.toggleEditMode()}} 
-          setAlert={()=>{setAlert()}} />
+          toggleEditMode={()=>{store.toggleEditMode()}} />
       </div>
     );
   }

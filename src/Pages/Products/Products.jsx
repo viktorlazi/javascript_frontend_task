@@ -18,6 +18,10 @@ import './styles/products.css';
 const alertStore = new AlertStore();
 const ProductsInputStore = new UserInputStore();
 const addElementStore = new AddElementStore();
+const listElementStores = [];
+ProductsStore.list.forEach(e => {
+  listElementStores.push({id:e.id, store: new ListElementStore(ProductsStore.getElementById(e.id))})
+});
 
 function Products() {  
   return (
@@ -32,10 +36,10 @@ function Products() {
               element={ProductsStore.getElementById(e)} 
               editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
               removeElement={(id)=>{return ProductsStore.removeElement(id)}} 
-              store={new ListElementStore(ProductsStore.getElementById(e))}
+              store={listElementStores.filter(i=>{return i.id===e})[0].store}
             />;
           })
-        }     
+        }
       </DisplayList>
       <MessageSpace msg={alertStore.msg} colour={alertStore.colour} />
       <AddElement 

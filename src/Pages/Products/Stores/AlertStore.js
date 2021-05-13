@@ -20,7 +20,6 @@ class AlertStore{
     makeAutoObservable(this);
   }
   setAlert(status){
-    console.log(status)
     let msg;
     let colour;
     if(status[0]){
