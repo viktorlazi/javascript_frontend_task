@@ -47,6 +47,7 @@ function Products() {
         getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
         store={addElementStore}
         addNewElement={(newElement)=>{return ProductsStore.addNewElement(newElement)}}
+        addListElementStore={(id)=>{listElementStores.push({id:id, store: new ListElementStore(ProductsStore.getElementById(id))})}}
       />
     </div>
   )

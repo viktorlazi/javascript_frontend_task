@@ -5,7 +5,7 @@ import BrandsStore from '../../../Stores/BrandsStore';
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 import './styles/addElement.css';
 
-function AddElement({getSortingTypes, addNewElement, setAlert, store}){
+function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore}){
   return(
   <div className="add__new">
     {
@@ -29,7 +29,9 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store}){
         })
       }
     <button onClick={()=>{
-      setAlert(addNewElement(store.newElement));
+      const result = addNewElement(store.newElement);
+      setAlert(result);
+      addListElementStore(result[2]);
       const lastSelected = store.newElement.brand;
       action(()=>{store.newElement = {
         brand:lastSelected,

@@ -106,7 +106,7 @@ class ProductsStore{
       errorCodes.push(403);
     }
     if(errorCodes.length > 0){
-      return [false, errorCodes];
+      return [false, errorCodes, -1];
     }
     let id;
     if(this.availableIDs.length){
@@ -122,7 +122,7 @@ class ProductsStore{
       return null;
     })
     this.service.appendList([this.list[this.list.length-1]]);
-    return [true, [201]];
+    return [true, [201], id];
   }    
   isNewElementValid(newElement){
     const keys = Object.keys(newElement)
