@@ -11,5 +11,17 @@ class AddElementStore{
     };
     makeAutoObservable(this);
   }
+  addNewElement(addNewElement, addListElementStore, setAlert){
+    const result = addNewElement(this.newElement);
+    setAlert(result);
+    addListElementStore(result[2]);
+    const lastSelected = this.newElement.brand;
+    this.newElement = {
+      brand:lastSelected,
+      type:'',
+      colour:'',
+      cost:''
+    };
+  }
 }
 export default AddElementStore;

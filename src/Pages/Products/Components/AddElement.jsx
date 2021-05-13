@@ -28,18 +28,9 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
           }
         })
       }
-    <button onClick={()=>{
-      const result = addNewElement(store.newElement);
-      setAlert(result);
-      addListElementStore(result[2]);
-      const lastSelected = store.newElement.brand;
-      action(()=>{store.newElement = {
-        brand:lastSelected,
-        type:'',
-        colour:'',
-        cost:''
-      }});
-    }}>Add New</button>
+    <button onClick={action(()=>{
+      store.addNewElement(addNewElement, addListElementStore, setAlert);
+    })}>Add New</button>
   </div>
   );
 }
