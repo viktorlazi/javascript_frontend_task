@@ -14,7 +14,9 @@ class AddElementStore{
   addNewElement(addNewElement, addListElementStore, setAlert){
     const result = addNewElement(this.newElement);
     setAlert(result);
-    addListElementStore(result[2]);
+    if(result[0]){
+      addListElementStore(result[2]);
+    }
     const lastSelected = this.newElement.brand;
     this.newElement = {
       brand:lastSelected,
