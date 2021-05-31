@@ -57,25 +57,19 @@ class BrandsStore{
   }
   editElement(edited, id){
     let errorCodes = [];
+    /*
     if(!this.isNewElementValid(edited)){
       errorCodes.push(400);
-    }
-    if(isNaN(edited.cost)){
-      errorCodes.push(401);
-    }
-    if(!isNaN(edited.type)){
-      errorCodes.push(402);
-    }
-    if(!isNaN(edited.colour)){
-      errorCodes.push(403);
-    }
+    }*/
+    console.log(errorCodes)
     if(errorCodes.length > 0){
       return [false, errorCodes]
     }
     const index = this.list.findIndex(obj => obj.id === id);
+    edited['id'] = id;
     this.listElementEqualTo(edited, index);
+    this.service.editListElement(id, edited);
     return [true, [200]];
-  
   }
   sort(list, sortBy){
     list.sort(

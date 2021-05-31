@@ -7,7 +7,7 @@ function EditElement() {
   return Object.keys(this.props.props).map((e)=>{
     switch(e){
       case 'brand':
-        return <MultioptionEditButton selected={this.props.props.brand} props={BrandsStore.list} getValue={(e)=>{this.props.setElementField(e, 'brand')}} />;
+        return <MultioptionEditButton selected={this.props.props.brand} props={BrandsService.fetchList()} getValue={(e)=>{this.props.setElementField(e, 'brand')}} />;
       case 'id':
         return null;
       default:

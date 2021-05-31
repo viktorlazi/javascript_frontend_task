@@ -66,6 +66,7 @@ class ProductsStore{
       return [false, errorCodes]
     }
     const index = this.list.findIndex(obj => obj.id === id);
+    edited['id'] = id;
     this.listElementEqualTo(edited, index);
     return [true, [200]];
   

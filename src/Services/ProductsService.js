@@ -55,8 +55,6 @@ class ProductsService{
     this.list = [];
   }
   editListElement(id, element){
-    console.log(toJS(id))
-    console.log(toJS(element))
     const index = this.list.findIndex(obj => obj.id === id);
     this.list[index] = element
   }
