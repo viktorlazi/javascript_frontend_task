@@ -34,8 +34,7 @@ class BrandsStore{
     return [true, [202]];
   }
   setNumberOfProducts(){
-    const productsService = new ProductsService();
-    const products = productsService.fetchList();
+    const products = ProductsService.fetchList();
     this.list.forEach((e)=>{
       this.list.find(i=>e===i).numberOfProducts = products.filter(i=>e.id===i.brand).length;
     });

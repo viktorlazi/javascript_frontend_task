@@ -1,4 +1,4 @@
-export default class ProductsService{
+class ProductsService{
   list = [];
   constructor(){    
     //preset elements
@@ -53,3 +53,5 @@ export default class ProductsService{
     this.list[this.list.find(e=>e===id)] = element
   }
 }
+const productsService = new ProductsService();
+export default productsService;

@@ -6,7 +6,7 @@ class ProductsStore{
   list = [];
   sortingTypes = ['brand', 'type', 'colour', 'cost'];
   availableIDs = [];
-  service = new ProductsService();
+  service = ProductsService;
 
   constructor(){
     makeAutoObservable(this);
