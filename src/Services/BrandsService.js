@@ -20,7 +20,7 @@ class BrandsService{
       {
         id:4,
         name:'fender',
-        numberOfProducts: 1
+        numberOfProducts: 0
       },
       {
         id:5,
@@ -50,7 +50,8 @@ class BrandsService{
     this.list = [];
   }
   editListElement(id, element){
-    this.list[this.list.find(e=>e===id)] = element;
+    const index = this.list.findIndex(obj => obj.id === id);
+    this.list[index] = element
   }
 }
 const brandsService = new BrandsService();

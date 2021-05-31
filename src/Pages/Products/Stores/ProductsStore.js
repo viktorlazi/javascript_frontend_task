@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 
@@ -34,7 +34,7 @@ class ProductsStore{
     return [true, [202]];
   }
   getProcessedList(searchField, sortBy){
-    //this.unbrandIfBrandNotExistent(BrandsService.getListProperties('id'));
+    this.unbrandIfBrandNotExistent();
     let list = this.filter(this.list, searchField);
     list = this.sort(list, sortBy);
     const idList = list.map(e=>{return e.id});
@@ -133,12 +133,13 @@ class ProductsStore{
     }
     return false;
   }
-  unbrandIfBrandNotExistent(validBrands){
+  unbrandIfBrandNotExistent(){
+    const validBrands = BrandsService.fetchList().map(e=>{return e['id']})
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
         e.brand=1;
+        this.service.editListElement(e.id, e);
       }
-      this.service.editListElement(e.id, e)
     });
   }
 }

@@ -1,3 +1,5 @@
+import {toJS} from 'mobx'
+
 class ProductsService{
   list = [];
   constructor(){    
@@ -53,7 +55,10 @@ class ProductsService{
     this.list = [];
   }
   editListElement(id, element){
-    this.list[this.list.find(e=>e===id)] = element
+    console.log(toJS(id))
+    console.log(toJS(element))
+    const index = this.list.findIndex(obj => obj.id === id);
+    this.list[index] = element
   }
 }
 const productsService = new ProductsService();
