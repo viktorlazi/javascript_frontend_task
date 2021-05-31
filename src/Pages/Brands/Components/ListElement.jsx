@@ -16,9 +16,13 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
           brands={BrandsService.fetchList()} 
           invalidInputs={store.invalidInputs}
           />
-        <NoEditButtons 
-          removeElement={action(()=>{setAlert(removeElement(element.id))})} 
-          toggleEditMode={()=>{store.toggleEditMode()}}/>
+        {
+          element.name !== 'unbranded'?
+          <NoEditButtons 
+            removeElement={action(()=>{setAlert(removeElement(element.id))})} 
+            toggleEditMode={()=>{store.toggleEditMode()}}/>
+          :null
+        }
       </div>
     );
   }else{
