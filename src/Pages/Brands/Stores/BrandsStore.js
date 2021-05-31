@@ -5,12 +5,12 @@ import ProductsService from '../../../Services/ProductsService';
 class BrandsStore{
   list = [];
   sortingTypes = ['name', 'nr. of products'];
-  availableIDs = [];
+  availableID = 10;
   service = BrandsService;
 
   constructor(){
     makeAutoObservable(this);
-    this.list = this.service.fetchList()
+    this.list = this.service.fetchList();
   }
   getElementById(id){
     return this.list.find(e=>e.id===id);
@@ -29,13 +29,12 @@ class BrandsStore{
       return [false, [500]];
     }
     this.list = newList;
-    this.availableIDs.push(id);
     this.service.removeListItem(id);
-    console.log(toJS(this.list))
     return [true, [202]];
   }
   setNumberOfProducts(){
     const products = ProductsService.fetchList();
+    console.log(toJS(products))
     this.list.forEach((e)=>{
       this.list.find((i)=>{return e===i}).numberOfProducts = products.filter(i=>e.id===i.brand).length;
     });
@@ -101,13 +100,7 @@ class BrandsStore{
     if(errorCodes.length > 0){
       return [false, errorCodes, -1];
     }
-    let id;
-    if(this.availableIDs.length){
-      id = this.availableIDs[0];
-      this.availableIDs.shift();
-    }else{
-      id = this.list.length;
-    }
+    const id = this.availableID;
     this.list.push({});
     this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{
@@ -115,6 +108,7 @@ class BrandsStore{
       return null;
     })
     this.service.appendList([this.list[this.list.length-1]]);
+    this.availableID++;
     return [true, [201], id];
   }    
   isNewElementValid(newElement){

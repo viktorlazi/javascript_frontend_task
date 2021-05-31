@@ -138,10 +138,16 @@ class ProductsStore{
     const validBrands = BrandsService.fetchList().map(e=>{return e['id']})
     this.list.forEach(e => {
       if(!validBrands.includes(e.brand)){
-        e.brand=1;
-        this.service.editListElement(e.id, e);
+        const element = e;
+        element.brand = 0;
+        this.editListElement(e.id, element);
+        this.service.editListElement(e.id, element);
       }
     });
+  }
+  editListElement(id, element){
+    const index = this.list.findIndex(obj => obj.id === id);
+    this.list[index] = element;
   }
 }
 const productsStore = new ProductsStore(); 
