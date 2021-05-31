@@ -44,7 +44,10 @@ class ProductsService{
     });
   }
   removeListItem(id){
-    this.list.splice(id, 1)
+    let newList=this.list.filter(e=>{
+      return e.id !== id;
+    })
+    this.list = newList;
   }
   resetList(){
     this.list = [];

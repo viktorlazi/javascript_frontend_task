@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 
@@ -31,6 +31,7 @@ class BrandsStore{
     this.list = newList;
     this.availableIDs.push(id);
     this.service.removeListItem(id);
+    console.log(toJS(this.list))
     return [true, [202]];
   }
   setNumberOfProducts(){
