@@ -2,11 +2,11 @@ import { makeAutoObservable } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 
-class ProductsStore{
+class BrandsStore{
   list = [];
-  sortingTypes = ['brand', 'type', 'colour', 'cost'];
+  sortingTypes = ['name', 'nr. of products'];
   availableIDs = [];
-  service = new ProductsService();
+  service = BrandsService;
 
   constructor(){
     makeAutoObservable(this);
@@ -15,11 +15,11 @@ class ProductsStore{
   getElementById(id){
     return this.list.find(e=>e.id===id);
   }
-  getSortingTypes(){
-    return this.sortingTypes;
-  }
   getListProperties(key){
     return this.list.map(e=>e[key]);
+  }
+  getSortingTypes(){
+    return this.sortingTypes;
   }
   removeElement(id){
     let newList=this.list.filter(e=>{
@@ -33,8 +33,15 @@ class ProductsStore{
     this.service.removeListItem(id);
     return [true, [202]];
   }
+  setNumberOfProducts(){
+    const productsService = new ProductsService();
+    const products = productsService.fetchList();
+    this.list.forEach((e)=>{
+      this.list.find(i=>e===i).numberOfProducts = products.filter(i=>e.id===i.brand).length;
+    });
+  }
   getProcessedList(searchField, sortBy){
-    //this.unbrandIfBrandNotExistent(BrandsService.getListProperties('id'));
+    this.setNumberOfProducts();
     let list = this.filter(this.list, searchField);
     list = this.sort(list, sortBy);
     const idList = list.map(e=>{return e.id});
@@ -87,7 +94,7 @@ class ProductsStore{
   }
   filter(list, searchField){
     let filtered = [...list.filter((e)=>{
-      return (BrandsService.fetchListItems(e.brand).name + e.type + e.colour + e.cost).includes(searchField);
+      return e.name.includes(searchField);
     })];
     return filtered;
   }
@@ -133,14 +140,6 @@ class ProductsStore{
     }
     return false;
   }
-  unbrandIfBrandNotExistent(validBrands){
-    this.list.forEach(e => {
-      if(!validBrands.includes(e.brand)){
-        e.brand=1;
-      }
-      this.service.editListElement(e.id, e)
-    });
-  }
 }
-const productsStore = new ProductsStore(); 
-export default productsStore;
+const brandsStore = new BrandsStore(); 
+export default brandsStore;

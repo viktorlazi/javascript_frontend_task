@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import {action} from 'mobx';
-import BrandsStore from '../../../Stores/BrandsStore';
+import BrandsService from '../../../Services/BrandsService';
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 import './styles/addElement.css';
 
@@ -14,7 +14,7 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
           case 'id':
             return null
           case 'brand':
-            const brands = BrandsStore.list
+            const brands = BrandsService.fetchList();
             return [<p>brand:</p>, <MultioptionEditButton 
               options={brands}
               getValue={(e)=>{store.newElement['brand']=e}}/>]

@@ -1,7 +1,7 @@
 import {observer} from 'mobx-react';
 import {action} from 'mobx';
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
-import BrandsStore from '../../../Stores/BrandsStore';
+import BrandsService from '../../../Services/BrandsService';
 
 function EditElement() {
   return Object.keys(this.props.props).map((e)=>{

@@ -1,49 +1,37 @@
-import React from 'react'
-import {observer} from 'mobx-react'
-import {makeAutoObservable, action} from 'mobx'
-import BrandsService from '../Stores/BrandsService'
-import './styles/addElement.css'
+import React from 'react';
+import {observer} from 'mobx-react';
+import {action} from 'mobx';
+import BrandsService from '../../../Services/BrandsService';
+import MultioptionEditButton from '../../../Components/MultioptionEditButton';
+import './styles/addElement.css';
 
-class Helper{
-  newElement
-
-  constructor(){
-    this.newElement = {
-      name:'',
-      numberOfProducts:0
-    }
-    makeAutoObservable(this)
-  }
-  addNewElementToList(){
-    return BrandsService.addNewElement(this.newElement)
-  }
-}
-
-class AddElement extends React.Component {
-  helper
-  constructor(props){
-    super(props)
-    this.helper=new Helper()
-  }
-  render(){
-    return(
-    <div className="add__new">
-      <input onChange={ 
-        action((i)=>{
-          this.helper.newElement['name']=i.target.value
+function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore}){
+  return(
+  <div className="add__new">
+    {
+      getSortingTypes().map((e)=>{
+        switch(e){
+          case 'id':
+            return null
+          case 'brand':
+            const brands = BrandsService.fetchList();
+            return [<p>brand:</p>, <MultioptionEditButton 
+              options={brands}
+              getValue={(e)=>{store.newElement['brand']=e}}/>]
+          default:
+            return [<p>{e}:</p>, <input onChange={ 
+              action((i)=>{
+                store.newElement[e]=i.target.value
+              })
+            } placeholder={e} value={store.newElement[e]} type="text">
+            </input>]
+          }
         })
-      } placeholder={'name'} value={this.helper.newElement['name']} type="text">
-      </input>
-      <button onClick={()=>{
-        this.helper.addNewElementToList()
-        action(()=>{this.helper.newElement = {
-          name:'',
-          numberOfProducts:0
-        }})
-      }}>Add New</button>
-    </div>
-    )
-  }
+      }
+    <button onClick={action(()=>{
+      store.addNewElement(addNewElement, addListElementStore, setAlert);
+    })}>Add New</button>
+  </div>
+  );
 }
-
-export default observer(AddElement)
+export default observer(AddElement);
