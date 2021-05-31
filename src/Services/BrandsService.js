@@ -3,27 +3,27 @@ class BrandsService{
   constructor(){    
     //preset elements
     this.list.push({
-        id:1,
+        id:0,
         name:'unbranded',
         numberOfProducts: 0
       },
       {
-        id:2,
+        id:1,
         name:'epiphone',
         numberOfProducts: 0
       },
       {
-        id:3,
+        id:2,
         name:'cort',
         numberOfProducts: 0
       },
       {
-        id:4,
+        id:3,
         name:'fender',
         numberOfProducts: 0
       },
       {
-        id:5,
+        id:4,
         name:'yamaha',
         numberOfProducts: 0
       } 

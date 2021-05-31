@@ -4,10 +4,8 @@ class AddElementStore{
   newElement;
   constructor(){
     this.newElement = {
-      brand:1,
-      type:'',
-      colour:'',
-      cost:''
+      name:'',
+      numberOfProducts:''
     };
     makeAutoObservable(this);
   }
@@ -17,12 +15,9 @@ class AddElementStore{
     if(result[0]){
       addListElementStore(result[2]);
     }
-    const lastSelected = this.newElement.brand;
     this.newElement = {
-      brand:lastSelected,
-      type:'',
-      colour:'',
-      cost:''
+      name:'',
+      numberOfProducts:''
     };
   }
 }

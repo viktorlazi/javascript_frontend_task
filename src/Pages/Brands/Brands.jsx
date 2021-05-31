@@ -41,6 +41,14 @@ function Brands() {
           })
         }
       </DisplayList>
+      <MessageSpace msg={alertStore.msg} colour={alertStore.colour} />
+      <AddElement 
+        setAlert={(status)=>{alertStore.setAlert(status)}} 
+        getSortingTypes={()=>{return BrandsStore.getSortingTypes()}} 
+        store={addElementStore}
+        addNewElement={(newElement)=>{return BrandsStore.addNewElement(newElement)}}
+        addListElementStore={(id)=>{listElementStores.push({id:id, store: new ListElementStore(BrandsStore.getElementById(id))})}}
+      />
     </div>
   )
 }

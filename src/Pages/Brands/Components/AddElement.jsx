@@ -1,8 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {action} from 'mobx';
-import BrandsService from '../../../Services/BrandsService';
-import MultioptionEditButton from '../../../Components/MultioptionEditButton';
+import {action, toJS} from 'mobx';
 import './styles/addElement.css';
 
 function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore}){
@@ -12,16 +10,13 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
       getSortingTypes().map((e)=>{
         switch(e){
           case 'id':
-            return null
-          case 'brand':
-            const brands = BrandsService.fetchList();
-            return [<p>brand:</p>, <MultioptionEditButton 
-              options={brands}
-              getValue={(e)=>{store.newElement['brand']=e}}/>]
+          case 'nr. of products':
+            return null;
           default:
             return [<p>{e}:</p>, <input onChange={ 
               action((i)=>{
                 store.newElement[e]=i.target.value
+                console.log(toJS(store.newElement));
               })
             } placeholder={e} value={store.newElement[e]} type="text">
             </input>]

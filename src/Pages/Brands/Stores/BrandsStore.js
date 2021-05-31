@@ -93,18 +93,10 @@ class BrandsStore{
     return filtered;
   }
   addNewElement(newElement){
+    console.log(toJS(this.list))
     let errorCodes = [];
     if(!this.isNewElementValid(newElement)){
-      errorCodes.push(400);
-    }
-    if(isNaN(newElement.cost)){
-      errorCodes.push(401);
-    }
-    if(!isNaN(newElement.type)){
-      errorCodes.push(402);
-    }
-    if(!isNaN(newElement.colour)){
-      errorCodes.push(403);
+      //errorCodes.push(400);
     }
     if(errorCodes.length > 0){
       return [false, errorCodes, -1];
