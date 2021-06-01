@@ -5,7 +5,7 @@ class AddElementStore{
   constructor(){
     this.newElement = {
       name:'',
-      numberOfProducts:''
+      number:''
     };
     makeAutoObservable(this);
   }
@@ -17,7 +17,7 @@ class AddElementStore{
     }
     this.newElement = {
       name:'',
-      numberOfProducts:''
+      number:''
     };
   }
 }

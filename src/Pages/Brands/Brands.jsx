@@ -16,6 +16,7 @@ import AlertStore from './Stores/AlertStore';
 import './styles/brands.css';
 
 const BrandsInputStore = new UserInputStore();
+BrandsInputStore.sortBy = 'number';
 const alertStore = new AlertStore();
 const addElementStore = new AddElementStore();
 const listElementStores = [];

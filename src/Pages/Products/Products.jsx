@@ -17,6 +17,7 @@ import './styles/products.css';
 
 const alertStore = new AlertStore();
 const ProductsInputStore = new UserInputStore();
+ProductsInputStore.sortBy = 'cost';
 const addElementStore = new AddElementStore();
 const listElementStores = [];
 ProductsStore.list.forEach(e => {

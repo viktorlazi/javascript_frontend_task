@@ -10,7 +10,7 @@ function ListElementEdit({element, brands, storeElementValue, setElementField}) 
           return <div><MultioptionEditButton selected={element.brand} options={brands} getValue={(e)=>{setElementField(e, 'brand')}} /></div>
         case 'id':
           return null;
-        case 'numberOfProducts':
+        case 'number':
           return <p>{element[e]}</p>;
         default:
           return <div><input 

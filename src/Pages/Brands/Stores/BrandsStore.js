@@ -4,7 +4,7 @@ import ProductsService from '../../../Services/ProductsService';
 
 class BrandsStore{
   list = [];
-  sortingTypes = ['name', 'nr. of products'];
+  sortingTypes = ['name', 'number'];
   availableID = 10;
   service = BrandsService;
 
@@ -36,7 +36,7 @@ class BrandsStore{
     const products = ProductsService.fetchList();
     console.log(toJS(products))
     this.list.forEach((e)=>{
-      this.list.find((i)=>{return e===i}).numberOfProducts = products.filter(i=>e.id===i.brand).length;
+      this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
     });
   }
   getProcessedList(searchField, sortBy){
