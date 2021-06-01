@@ -10,7 +10,7 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
       getSortingTypes().map((e)=>{
         switch(e){
           case 'id':
-          case 'nr. of products':
+          case 'number':
             return null;
           default:
             return [<p>{e}:</p>, <input onChange={ 
