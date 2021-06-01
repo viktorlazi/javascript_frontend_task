@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 
@@ -126,10 +126,10 @@ class ProductsStore{
     return [true, [201], id];
   }    
   isNewElementValid(newElement){
-    const keys = Object.keys(newElement)
+    const keys = Object.keys(newElement);
     if(keys.length>0){
       return keys.every((e)=>{
-        return newElement[e];
+        return newElement[e] || newElement[e] === 0;
       });
     }
     return false;
