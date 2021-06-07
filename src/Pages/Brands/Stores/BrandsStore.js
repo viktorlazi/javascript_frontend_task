@@ -1,16 +1,28 @@
 import { makeAutoObservable, toJS } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
+import UserInputStore from '../../../Stores/UserInputStore';
+import ListElementStore from '../Components/Stores/ListElementStore';
+import AddElementStore from '../Components/Stores/AddElementStore';
+import AlertStore from './AlertStore';
 
 class BrandsStore{
   list = [];
   sortingTypes = ['name', 'number'];
   availableID = 10;
   service = BrandsService;
+  alert = new AlertStore();
+  input = new UserInputStore();
+  addElement = new AddElementStore();
+  listElement = [];
 
   constructor(){
     makeAutoObservable(this);
     this.list = this.service.fetchList();
+    this.input.setSort('number');
+    this.list.forEach(e => {
+      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id))})
+    });
   }
   getElementById(id){
     return this.list.find(e=>e.id===id);

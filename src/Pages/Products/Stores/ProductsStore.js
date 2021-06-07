@@ -1,16 +1,29 @@
 import { makeAutoObservable } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
+import AlertStore from './AlertStore';
+import UserInputStore from '../../../Stores/UserInputStore';
+import AddElementStore from '../Components/Stores/AddElementStore';
+import ListElementStore from '../Components/Stores/ListElementStore';
 
 class ProductsStore{
   list = [];
   sortingTypes = ['brand', 'type', 'colour', 'cost'];
   availableIDs = [];
+
   service = ProductsService;
+  alert = new AlertStore();
+  input = new UserInputStore();
+  addElement = new AddElementStore();
+  listElement = [];
 
   constructor(){
     makeAutoObservable(this);
     this.list = this.service.fetchList()
+    this.input.setSort('cost');
+    this.list.forEach(e => {
+      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id))})
+    });
   }
   getElementById(id){
     return this.list.find(e=>e.id===id);
@@ -89,7 +102,7 @@ class ProductsStore{
   }
   filter(list, searchField){
     let filtered = [...list.filter((e)=>{
-      return (BrandsService.fetchListItems(e.brand).name + e.type + e.colour + e.cost).includes(searchField);
+      return (BrandsService.fetchListItems(e.brand)[0].name + e.type + e.colour + e.cost).includes(searchField);
     })];
     return filtered;
   }

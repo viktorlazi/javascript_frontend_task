@@ -1,8 +1,8 @@
 import {makeAutoObservable} from 'mobx';
 
 class AlertStore{
-  msg;
-  colour;
+  msg = '';
+  colour = 'black';
   msgCodes = [
     [200, 'edited'],
     [201, 'added'],
@@ -15,8 +15,6 @@ class AlertStore{
   ];
   
   constructor(){
-    this.colour = 'black';
-    this.msg = '';
     makeAutoObservable(this);
   }
   setAlert(status){
