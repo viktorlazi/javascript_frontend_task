@@ -1,21 +1,29 @@
-const brands = require('./db/brands.json');
-const products = require('./db/products.json');
+const products = require('./models/products.json');
+const brands = require('./models/brands.json');
 
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-//const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
- 
-server.use(middlewares);
-//server.use(router);
+const fs = require('fs');
+const express = require('express');
+const app = express();
 
-server.listen(3001, () => {
-  console.log('JSON Server is running');
-})
+const port = process.env.PORT || 3001;
 
-server.get('/products', (req, res) =>{
+app.get('/products', (req, res)=>{
   res.json(products);
 });
-server.get('/brands', (req, res) =>{
+app.get('/brands', (req, res)=>{
   res.json(brands);
 });
+
+app.get('/products/:id', (req, res)=>{
+  var removeID = req.params.id;
+  var data = fs.readFileSync('./models/products.json');
+  var json = JSON.parse(data);
+  var prdcts = json.products;
+  json.products = prdcts.filter((e) => { return e.id != removeID });
+  fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
+  res.json({});
+});
+
+
+app.listen(port);
+console.log('Running on port ' + port);
