@@ -9,7 +9,7 @@ const port = process.env.PORT || 3001;
 
 app.get('/products', (req, res)=>{
   res.json(products);
-});
+}); 
 app.get('/brands', (req, res)=>{
   res.json(brands);
 });
