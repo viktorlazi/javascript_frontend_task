@@ -1,40 +1,19 @@
 class ProductsService{
   list = [];
   constructor(){    
-    //preset elements
-    this.list.push({
-        id:0,
-        brand:3,
-        type:'stratocaster',
-        colour:'blue',
-        cost:4200      
-      },
-      {
-        id:1,
-        brand:3,
-        type:'telecaster',
-        colour:'black',
-        cost:4300      
-      },
-      {
-        id:2,
-        brand:2,
-        type:'singlecut',
-        colour:'sunburn',
-        cost:3301 
-      },
-      { 
-        id:3,
-        brand:1,
-        type:'singlecut',
-        colour:'yellow',
-        cost:3300     
-      }    
-    );
+
   }
-  fetchList(){
-    return this.list;
-  }
+  fetchList = new Promise((res, rej)=>{  
+    fetch("http://localhost:3001/products")
+    .then(res=>res.json())
+    .then(data=>{
+      res(data);
+    })
+    .catch(err=>{
+      rej(err);
+    });
+  });
+
   fetchListItems(ids){
     return this.list.filter(e=>{return ids.includes(e.id)})
   }

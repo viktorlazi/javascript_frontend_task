@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { action, autorun, makeAutoObservable, toJS, reaction } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 import AlertStore from './AlertStore';
@@ -19,10 +19,22 @@ class ProductsStore{
 
   constructor(){
     makeAutoObservable(this);
-    this.list = this.service.fetchList()
+    this.list = [];
+    this.pullList();
     this.input.setSort('cost');
     this.list.forEach(e => {
-      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id))})
+      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id)), key:e.id})
+    });    
+  }
+
+  pullList(){
+    this.list = [];
+    this.service.fetchList
+    .then(result=>{
+      result.forEach(e => {
+        this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
+      });
+      this.list = result;      
     });
   }
   getElementById(id){
@@ -102,7 +114,8 @@ class ProductsStore{
   }
   filter(list, searchField){
     let filtered = [...list.filter((e)=>{
-      return (BrandsService.fetchListItems(e.brand)[0].name + e.type + e.colour + e.cost).includes(searchField);
+      const brand = BrandsService.fetchListItems(e.brand)[0];
+      return (brand?brand['name']:null + e.type + e.colour + e.cost).includes(searchField);
     })];
     return filtered;
   }
@@ -164,5 +177,6 @@ class ProductsStore{
     this.list[index] = element;
   }
 }
-const productsStore = new ProductsStore(); 
+
+const productsStore = new ProductsStore();
 export default productsStore;

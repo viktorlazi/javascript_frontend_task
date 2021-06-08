@@ -16,7 +16,6 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
             return [<p>{e}:</p>, <input onChange={ 
               action((i)=>{
                 store.newElement[e]=i.target.value
-                console.log(toJS(store.newElement));
               })
             } placeholder={e} value={store.newElement[e]} type="text">
             </input>]

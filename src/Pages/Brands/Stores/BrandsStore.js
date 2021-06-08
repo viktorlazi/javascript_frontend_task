@@ -21,8 +21,11 @@ class BrandsStore{
     this.list = this.service.fetchList();
     this.input.setSort('number');
     this.list.forEach(e => {
-      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id))})
+      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id)), key:e.id})
     });
+  }
+  async pullList(){
+    this.list = await this.service.fetchList();
   }
   getElementById(id){
     return this.list.find(e=>e.id===id);
@@ -46,7 +49,6 @@ class BrandsStore{
   }
   setNumberOfProducts(){
     const products = ProductsService.fetchList();
-    console.log(toJS(products))
     this.list.forEach((e)=>{
       this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
     });
