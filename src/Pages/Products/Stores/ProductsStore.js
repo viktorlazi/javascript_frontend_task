@@ -26,11 +26,10 @@ class ProductsStore{
       this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id)), key:e.id})
     });    
   }
-
   pullList(){
-    this.list = [];
     this.service.fetchList
     .then(result=>{
+      this.listElement = [];
       result.forEach(e => {
         this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
       });
@@ -55,7 +54,7 @@ class ProductsStore{
     }
     this.list = newList;
     this.availableIDs.push(id);
-    this.service.removeListItem(id);
+    //this.service.removeListItem(id);
     return [true, [202]];
   }
   getProcessedList(searchField, sortBy){
@@ -93,7 +92,7 @@ class ProductsStore{
     const index = this.list.findIndex(obj => obj.id === id);
     edited['id'] = id;
     this.listElementEqualTo(edited, index);
-    this.service.editListElement(id, edited)
+    //this.service.editListElement(id, edited)
     return [true, [200]];
   
   }
@@ -149,7 +148,7 @@ class ProductsStore{
       this.list[this.list.length-1][e] = newElement[e];
       return null;
     })
-    this.service.appendList([this.list[this.list.length-1]]);
+    //this.service.appendList([this.list[this.list.length-1]]);
     return [true, [201], id];
   }    
   isNewElementValid(newElement){
@@ -168,7 +167,7 @@ class ProductsStore{
         const element = e;
         element.brand = 0;
         this.editListElement(e.id, element);
-        this.service.editListElement(e.id, element);
+        //this.service.editListElement(e.id, element);
       }
     });
   }
