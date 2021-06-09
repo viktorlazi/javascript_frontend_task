@@ -14,7 +14,10 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
           case 'id':
             return null
           case 'brand':
-            const brands = BrandsService.fetchList();
+            let brands = [];
+            BrandsService.fetchList.then(result=>{
+              brands = result.map(e=>{return e});
+            });
             return [<p>brand:</p>, <MultioptionEditButton 
               options={brands}
               getValue={(e)=>{store.newElement['brand']=e}}/>]

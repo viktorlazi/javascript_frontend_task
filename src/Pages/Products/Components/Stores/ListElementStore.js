@@ -1,9 +1,20 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, toJS} from 'mobx';
+import BrandsService from '../../../../Services/BrandsService';
 
 class ListElementStore{
   isInEditMode = false;
   element = {};
   invalidInputs = [];
+  brands = [];
+  constructor(element){
+    makeAutoObservable(this);
+    this.setEqualToProps(element);
+    BrandsService.fetchList.then(result=>{
+      this.brands = [];
+      this.brands.push(...result);
+      console.log(toJS(this.brands))
+    });
+  }
   
   edit(setAlert, element, editElement){
     this.invalidInputs = [];
@@ -58,9 +69,5 @@ class ListElementStore{
     })
     return didChange;
   }
-  constructor(element){
-    makeAutoObservable(this);
-    this.setEqualToProps(element);
-  }  
 }
 export default ListElementStore;

@@ -4,12 +4,16 @@ class BrandsService{
     fetch("http://localhost:3001/brands")
     .then(res=>res.json())
     .then(data=>{
+      this.list = data;
       res(data);
     })
     .catch(err=>{
       rej(err);
     });
   });
+  fetchLocalList(){
+    return this.list;
+  }
   fetchListItems(ids){
     return this.list.filter(e=>{return [ids].includes(e.id)});
   }

@@ -157,14 +157,17 @@ class ProductsStore{
     return false;
   }
   unbrandIfBrandNotExistent(){
-    const validBrands = BrandsService.fetchList().map(e=>{return e['id']})
-    this.list.forEach(e => {
-      if(!validBrands.includes(e.brand)){
-        const element = e;
-        element.brand = 0;
-        this.editListElement(e.id, element);
-        this.service.editListElement(e.id, element);
-      }
+    let validBrands = [];
+    BrandsService.fetchList.then(result=>{
+      validBrands = result.map(e=>{return e['id']});
+      this.list.forEach(e => {
+        if(!validBrands.includes(e.brand)){
+          const element = e;
+          element.brand = 1;
+          this.editListElement(e.id, element);
+          //this.service.editListElement(e.id, element);
+        }
+      });
     });
   }
   editListElement(id, element){

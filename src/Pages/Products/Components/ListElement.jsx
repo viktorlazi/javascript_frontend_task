@@ -1,6 +1,5 @@
 import {observer} from 'mobx-react';
 import {action} from 'mobx';
-import BrandsService from '../../../Services/BrandsService';
 
 import EditButtons from '../../../Components/EditButtons';
 import NoEditButtons from '../../../Components/NoEditButtons';
@@ -13,7 +12,7 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
       <div className="row">
         <ListElementDisplay 
           element={element} 
-          brands={BrandsService.fetchList()} 
+          brands={store.brands}
           invalidInputs={store.invalidInputs}
           />
         <NoEditButtons 
@@ -25,8 +24,8 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
     return (
       <div className="row">
         <ListElementEdit 
-          element={element} 
-          brands={BrandsService.fetchList()} 
+          element={element}
+          brands={store.brands}
           storeElementValue={store.element} 
           setElementField={(x,y)=>{return store.setElementField(x,y)}} />
         <EditButtons 
