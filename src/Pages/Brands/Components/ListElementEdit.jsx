@@ -1,13 +1,10 @@
-import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 import {action} from 'mobx';
 import {observer} from 'mobx-react';
 
-function ListElementEdit({element, brands, storeElementValue, setElementField}) {
+function ListElementEdit({element, storeElementValue, setElementField}) {
   return (
     Object.keys(element).map((e)=>{
       switch(e){
-        case 'brand':
-          return <div><MultioptionEditButton selected={element.brand} options={brands} getValue={(e)=>{setElementField(e, 'brand')}} /></div>
         case 'id':
           return null;
         case 'number':

@@ -13,7 +13,6 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
       <div className="row">
         <ListElementDisplay 
           element={element} 
-          brands={BrandsService.fetchList()} 
           invalidInputs={store.invalidInputs}
           />
         {
@@ -30,7 +29,6 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
       <div className="row">
         <ListElementEdit 
           element={element} 
-          brands={BrandsService.fetchList()} 
           storeElementValue={store.element} 
           setElementField={(x,y)=>{return store.setElementField(x,y)}} />
         <EditButtons 
