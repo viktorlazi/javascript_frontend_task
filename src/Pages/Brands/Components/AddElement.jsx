@@ -1,6 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import {action, toJS} from 'mobx';
+import {action} from 'mobx';
 import './styles/addElement.css';
 
 function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore}){

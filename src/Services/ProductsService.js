@@ -1,8 +1,4 @@
 class ProductsService{
-  list = [];
-  constructor(){    
-
-  }
   fetchList = new Promise((res, rej)=>{  
     fetch("http://localhost:3001/products")
     .then(res=>res.json())
@@ -13,6 +9,18 @@ class ProductsService{
       rej(err);
     });
   });
+  removeListItem = (id) =>{
+    return new Promise((res, rej)=>{
+      fetch("http://localhost:3001/products/remove/" + id)
+      .then(res=>res.json())
+      .then(data=>{
+        res(data);
+      })
+      .catch(err=>{
+        rej(err);
+      });
+    });
+  }
   appendList = new Promise((res, rej)=>{
 
   })

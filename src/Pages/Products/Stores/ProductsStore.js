@@ -1,4 +1,4 @@
-import { action, autorun, makeAutoObservable, toJS, reaction } from 'mobx';
+import {makeAutoObservable} from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 import AlertStore from './AlertStore';
@@ -33,7 +33,7 @@ class ProductsStore{
       result.forEach(e => {
         this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
       });
-      this.list = result;      
+      this.list = result;    
     });
   }
   getElementById(id){
@@ -54,7 +54,7 @@ class ProductsStore{
     }
     this.list = newList;
     this.availableIDs.push(id);
-    //this.service.removeListItem(id);
+    this.service.removeListItem(id);
     return [true, [202]];
   }
   getProcessedList(searchField, sortBy){

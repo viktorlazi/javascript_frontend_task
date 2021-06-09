@@ -14,12 +14,11 @@ app.get('/brands', (req, res)=>{
   res.json(brands);
 });
 
-app.get('/products/:id', (req, res)=>{
+app.get('/products/remove/:id', (req, res)=>{
   var removeID = req.params.id;
   var data = fs.readFileSync('./models/products.json');
   var json = JSON.parse(data);
-  var prdcts = json.products;
-  json.products = prdcts.filter((e) => { return e.id != removeID });
+  json = json.filter((e) => { return e.id != removeID });
   fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
   res.json({});
 });

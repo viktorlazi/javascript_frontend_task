@@ -30,7 +30,6 @@ class BrandsService{
     );
   }
   fetchList(){
-    let list = [];
     return this.list;
   }
   fetchListItems(ids){
