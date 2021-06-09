@@ -19,14 +19,10 @@ class ProductsStore{
 
   constructor(){
     makeAutoObservable(this);
-    this.list = [];
-    this.pullList();
-    this.input.setSort('cost');
-    this.list.forEach(e => {
-      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id)), key:e.id})
-    });    
+    this.fetchList();
+    this.input.setSort('cost'); 
   }
-  pullList(){
+  fetchList(){
     this.service.fetchList
     .then(result=>{
       this.listElement = [];
@@ -167,7 +163,7 @@ class ProductsStore{
         const element = e;
         element.brand = 0;
         this.editListElement(e.id, element);
-        //this.service.editListElement(e.id, element);
+        this.service.editListElement(e.id, element);
       }
     });
   }

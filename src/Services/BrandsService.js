@@ -1,37 +1,15 @@
 class BrandsService{
   list = [];
-  constructor(){    
-    //preset elements
-    this.list.push({
-        id:1,
-        name:'unbranded',
-        number: 0
-      },
-      {
-        id:2,
-        name:'epiphone',
-        number: 0
-      },
-      {
-        id:3,
-        name:'cort',
-        number: 0
-      },
-      {
-        id:4,
-        name:'fender',
-        number: 0
-      },
-      {
-        id:5,
-        name:'yamaha',
-        number: 0
-      } 
-    );
-  }
-  fetchList(){
-    return this.list;
-  }
+  fetchList = new Promise((res, rej)=>{  
+    fetch("http://localhost:3001/brands")
+    .then(res=>res.json())
+    .then(data=>{
+      res(data);
+    })
+    .catch(err=>{
+      rej(err);
+    });
+  });
   fetchListItems(ids){
     return this.list.filter(e=>{return [ids].includes(e.id)});
   }

@@ -18,14 +18,18 @@ class BrandsStore{
 
   constructor(){
     makeAutoObservable(this);
-    this.list = this.service.fetchList();
+    this.list = this.fetchList();
     this.input.setSort('number');
-    this.list.forEach(e => {
-      this.listElement.push({id:e.id, store: new ListElementStore(this.getElementById(e.id)), key:e.id})
-    });
   }
-  async pullList(){
-    this.list = await this.service.fetchList();
+  fetchList(){
+    this.service.fetchList
+    .then(result=>{
+      this.listElement = [];
+      result.forEach(e => {
+        this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
+      });
+      this.list = result;    
+    });
   }
   getElementById(id){
     return this.list.find(e=>e.id===id);
@@ -48,10 +52,17 @@ class BrandsStore{
     return [true, [202]];
   }
   setNumberOfProducts(){
-    const products = ProductsService.fetchList();
-    this.list.forEach((e)=>{
-      this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
-    });
+    if(!this.list){
+      return null;
+    }
+    let products;
+    ProductsService.fetchList
+    .then(result=>{
+      products = result;
+      this.list.forEach((e)=>{
+        this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
+      });
+    })
   }
   getProcessedList(searchField, sortBy){
     this.setNumberOfProducts();
@@ -100,6 +111,9 @@ class BrandsStore{
     return list;
   }
   filter(list, searchField){
+    if(!list){
+      return [];
+    }
     let filtered = [...list.filter((e)=>{
       return e.name.includes(searchField);
     })];

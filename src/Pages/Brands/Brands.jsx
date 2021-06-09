@@ -18,6 +18,7 @@ function Brands() {
       <DisplayList>
         <TableColumnNames sortBy={BrandsStore.input.sortBy} keys={BrandsStore.getSortingTypes()} setSortBy={(sortBy)=>{BrandsStore.input.setSort(sortBy)}} />
         {
+          BrandsStore.listElement.length ?
           BrandsStore.getProcessedList(BrandsStore.input.searchField, BrandsStore.input.sortBy).map((e)=>{
             return <ListElement
               setAlert={(msg, colour)=>BrandsStore.alert.setAlert(msg, colour)}
@@ -27,6 +28,7 @@ function Brands() {
               store={BrandsStore.listElement.filter(i=>{return i.id===e})[0].store}
             />;
           })
+          :null
         }
       </DisplayList>
       <MessageSpace msg={BrandsStore.alert.msg} colour={BrandsStore.alert.colour} />

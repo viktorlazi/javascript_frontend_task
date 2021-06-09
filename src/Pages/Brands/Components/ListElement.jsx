@@ -1,6 +1,5 @@
 import {observer} from 'mobx-react';
 import {action} from 'mobx';
-import BrandsService from '../../../Services/BrandsService';
 
 import EditButtons from '../../../Components/EditButtons';
 import NoEditButtons from '../../../Components/NoEditButtons';
