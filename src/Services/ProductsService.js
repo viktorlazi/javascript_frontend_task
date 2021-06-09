@@ -34,7 +34,7 @@ class ProductsService{
         headers: myHeaders,
         body: raw
       };
-      fetch("http://localhost:3001/products/append", requestOptions)
+      fetch("http://localhost:3001/products", requestOptions)
       .then(response => response.text())
       .then(result => res(result))
       .catch(error => rej(error));

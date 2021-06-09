@@ -27,16 +27,18 @@ app.get('/brands', (req, res)=>{
 });
 
 app.delete('/products/:id', (req, res)=>{
-  const data = fs.readFileSync('./models/products.json');
-  let json = JSON.parse(data);
+  const file = fs.readFileSync('./models/products.json');
+  let json = JSON.parse(file);
   json = json.filter((e) => { return e.id != req.params.id });
   fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
   res.json({});
 });
-app.post('/products/append', (req, res)=>{
-  console.log('alo');
-  console.log(req.body);
-  res.json({})
+app.post('/products', (req, res)=>{
+  const file = fs.readFileSync('./models/products.json');
+  let json = JSON.parse(file);
+  json.push(req.body);
+  fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
+  res.json({});
 });
 
 
