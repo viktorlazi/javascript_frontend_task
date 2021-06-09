@@ -148,7 +148,7 @@ class ProductsStore{
       this.list[this.list.length-1][e] = newElement[e];
       return null;
     })
-    //this.service.appendList([this.list[this.list.length-1]]);
+    this.service.appendList(this.list[this.list.length-1]);
     return [true, [201], id];
   }    
   isNewElementValid(newElement){
