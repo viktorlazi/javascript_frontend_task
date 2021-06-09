@@ -40,6 +40,14 @@ app.post('/products', (req, res)=>{
   fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
   res.json({});
 });
+app.put('/products', (req, res)=>{
+  const file = fs.readFileSync('./models/products.json');
+  let json = JSON.parse(file);
+  const index = json.findIndex(obj => obj.id === req.body.id);
+  json[index] = req.body.edited;
+  fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
+  res.json({});
+});
 
 
 app.listen(port);

@@ -1,17 +1,17 @@
 [
   {
-    "id": 0,
     "brand": 3,
     "type": "stratocaster",
     "colour": "blue",
-    "cost": 4200
+    "cost": "420000",
+    "id": 0
   },
   {
-    "id": 1,
     "brand": 3,
     "type": "telecaster",
     "colour": "black",
-    "cost": 4300
+    "cost": "43003",
+    "id": 1
   },
   {
     "id": 2,
@@ -21,10 +21,10 @@
     "cost": 3301
   },
   {
-    "id": 3,
     "brand": 1,
     "type": "singlecut",
     "colour": "yellow",
-    "cost": 3300
+    "cost": "33003",
+    "id": 3
   }
 ]

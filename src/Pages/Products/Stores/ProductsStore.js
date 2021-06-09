@@ -92,7 +92,7 @@ class ProductsStore{
     const index = this.list.findIndex(obj => obj.id === id);
     edited['id'] = id;
     this.listElementEqualTo(edited, index);
-    //this.service.editListElement(id, edited)
+    this.service.editListItem(id, edited);
     return [true, [200]];
   
   }

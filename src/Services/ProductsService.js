@@ -40,6 +40,22 @@ class ProductsService{
       .catch(error => rej(error));
     });
   }
+  editListItem = (id, edited) =>{
+    return new Promise((res, rej)=>{
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+      const raw = JSON.stringify({id, edited});
+      const requestOptions = {
+        method: 'PUT',
+        headers: myHeaders,
+        body: raw
+      };
+      fetch("http://localhost:3001/products", requestOptions)
+      .then(response => response.text())
+      .then(result => res(result))
+      .catch(error => rej(error));
+    });
+  }
   /*
 
 
