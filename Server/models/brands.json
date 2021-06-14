@@ -1,27 +1,27 @@
 [
   {
-    "id":0,
-    "name":"unbranded",
+    "id": 0,
+    "name": "unbranded",
     "number": 0
   },
   {
-    "id":1,
-    "name":"epiphone",
+    "name": "epiphone",
+    "number": 0,
+    "id": 1
+  },
+  {
+    "id": 2,
+    "name": "cort",
     "number": 0
   },
   {
-    "id":2,
-    "name":"cort",
+    "id": 3,
+    "name": "fender",
     "number": 0
   },
   {
-    "id":3,
-    "name":"fender",
-    "number": 0
-  },
-  {
-    "id":4,
-    "name":"yamaha",
+    "id": 4,
+    "name": "yamaha",
     "number": 0
   }
 ]
