@@ -1,4 +1,3 @@
-import {toJS} from 'mobx';
 function ListElementDisplay({element, brands, invalidInputs}) {
   return (
     Object.keys(element).map((e)=>{

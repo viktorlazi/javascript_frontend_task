@@ -26,5 +26,12 @@
     "colour": "yellow",
     "cost": "33003",
     "id": 3
+  },
+  {
+    "id": 4,
+    "brand": 1,
+    "type": "asd",
+    "colour": "lkj",
+    "cost": "123123"
   }
 ]

@@ -1,4 +1,4 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, runInAction} from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 import AlertStore from './AlertStore';
@@ -10,8 +10,9 @@ class ProductsStore{
   list = [];
   sortingTypes = ['brand', 'type', 'colour', 'cost'];
   availableIDs = [];
+  status = 'initial';
 
-  service = ProductsService;
+  service = new ProductsService();
   alert = new AlertStore();
   input = new UserInputStore();
   addElement = new AddElementStore();
@@ -19,9 +20,44 @@ class ProductsStore{
 
   constructor(){
     makeAutoObservable(this);
-    this.fetchList();
-    this.input.setSort('cost'); 
+    this.getProductsAsync();
+    this.input.setSort('cost');
   }
+  getProductsAsync = async () =>{
+    try{
+      const data = await this.service.get();
+      runInAction(() => {
+        this.list = data;
+        data.forEach(e => {
+          this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
+        });
+      });
+    }catch(error){
+      runInAction(() => {
+        this.status = "error";
+      });    
+    }
+  }
+  updateProductsAsync = async (product) =>{
+    try{
+      var params = {
+        pageNumber: this.countryData.pageNumber,
+        searchQuery: this.searchQuery,
+        isAscending: this.countryData.isAscending
+      };
+      const urlParams = new URLSearchParams(Object.entries(params));
+      const data = await this.countryService.get(urlParams)
+      runInAction(() => {
+        this.countryData = data;
+      });
+    }catch(error){
+      runInAction(() => {
+        this.status = "error";
+      });
+    }
+  }
+ 
+  /*
   fetchList(){
     this.service.fetchList
     .then(result=>{
@@ -31,7 +67,7 @@ class ProductsStore{
       });
       this.list = result;    
     });
-  }
+  }*/
   getElementById(id){
     return this.list.find(e=>e.id===id);
   }

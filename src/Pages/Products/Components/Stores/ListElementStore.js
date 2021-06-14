@@ -1,4 +1,4 @@
-import {makeAutoObservable, toJS} from 'mobx';
+import {makeAutoObservable} from 'mobx';
 import BrandsService from '../../../../Services/BrandsService';
 
 class ListElementStore{
@@ -12,7 +12,6 @@ class ListElementStore{
     BrandsService.fetchList.then(result=>{
       this.brands = [];
       this.brands.push(...result);
-      console.log(toJS(this.brands))
     });
   }
   
