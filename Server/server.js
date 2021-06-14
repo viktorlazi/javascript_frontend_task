@@ -27,26 +27,37 @@ app.get('/brands', (req, res)=>{
 });
 
 app.delete('/products/:id', (req, res)=>{
-  const file = fs.readFileSync('./models/products.json');
-  let json = JSON.parse(file);
-  json = json.filter((e) => { return e.id != req.params.id });
-  fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
-  res.json({});
+  try{
+    const file = fs.readFileSync('./models/products.json');
+    let json = JSON.parse(file);
+    json = json.filter((e) => { return e.id != req.params.id });
+    fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
+    res.status(204);
+  }catch(err){
+    res.status(500).send(err.json());
+  }
 });
 app.post('/products', (req, res)=>{
-  const file = fs.readFileSync('./models/products.json');
-  let json = JSON.parse(file);
-  json.push(req.body);
-  fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
-  res.json({});
+  try{
+    const file = fs.readFileSync('./models/products.json');
+    let json = JSON.parse(file);
+    json.push(req.body);
+    fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
+  }catch(err){
+    res.status(500).send(err.json());
+  }
 });
 app.put('/products', (req, res)=>{
-  const file = fs.readFileSync('./models/products.json');
-  let json = JSON.parse(file);
-  const index = json.findIndex(obj => obj.id === req.body.id);
-  json[index] = req.body.edited;
-  fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
-  res.json({});
+  try{
+    const file = fs.readFileSync('./models/products.json');
+    let json = JSON.parse(file);
+    const index = json.findIndex(obj => obj.id === req.body.id);
+    json[index] = req.body;
+    fs.writeFileSync('./models/products.json', JSON.stringify(json, null, 2));
+    res.status(200);
+  }catch(err){
+    res.status(500).send(err.json());
+  }
 });
 
 

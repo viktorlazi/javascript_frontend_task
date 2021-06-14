@@ -1,37 +1,16 @@
 [
   {
-    "brand": 3,
-    "type": "stratocaster",
-    "colour": "blue",
-    "cost": "420000",
-    "id": 0
-  },
-  {
-    "brand": 3,
-    "type": "telecaster",
-    "colour": "black",
-    "cost": "43003",
-    "id": 1
-  },
-  {
-    "id": 2,
     "brand": 2,
     "type": "singlecut",
     "colour": "sunburn",
-    "cost": 3301
+    "cost": "3301234",
+    "id": 2
   },
   {
     "brand": 1,
     "type": "singlecut",
     "colour": "yellow",
-    "cost": "33003",
+    "cost": "3300234",
     "id": 3
-  },
-  {
-    "id": 4,
-    "brand": 1,
-    "type": "asd",
-    "colour": "lkj",
-    "cost": "123123"
   }
 ]

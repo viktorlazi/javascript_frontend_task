@@ -26,43 +26,67 @@ class ProductsStore{
   getProductsAsync = async () =>{
     try{
       const data = await this.service.get();
-      runInAction(() => {
+      runInAction(() =>{
         this.list = data;
-        data.forEach(e => {
+        data.forEach(e =>{
           this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
         });
       });
     }catch(error){
-      runInAction(() => {
+      runInAction(() =>{
         this.status = "error";
       });    
     }
   }
-  updateProductsAsync = async (product) =>{
+  createProductAsync = async (product) =>{
     try{
-      var params = {
-        pageNumber: this.countryData.pageNumber,
-        searchQuery: this.searchQuery,
-        isAscending: this.countryData.isAscending
-      };
-      const urlParams = new URLSearchParams(Object.entries(params));
-      const data = await this.countryService.get(urlParams)
-      runInAction(() => {
-        this.countryData = data;
-      });
+      const response = await this.service.post(product);
+      if(response.status === 201){
+        runInAction(() =>{
+          this.status = "success";
+        })
+      } 
     }catch(error){
-      runInAction(() => {
+      runInAction(() =>{
         this.status = "error";
       });
     }
-  }
+  };
+  updateProductAsync = async (product) =>{
+    try{
+      const response = await this.service.put(product)
+      if(response.status === 200){
+        runInAction(() =>{
+          this.status = "success";
+        })
+      } 
+    }catch(error){
+      runInAction(() =>{
+        this.status = "error";
+      });
+    }
+  };
+  deleteProductAsync = async (id) =>{
+    try{
+      const response = await this.service.delete(id);
+      if(response.status === 204){
+        runInAction(() =>{
+          this.status = "success";
+        })
+      } 
+    }catch(error){
+      runInAction(() =>{
+        this.status = "error";
+      });
+    }
+}
  
   /*
   fetchList(){
     this.service.fetchList
     .then(result=>{
       this.listElement = [];
-      result.forEach(e => {
+      result.forEach(e =>{
         this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
       });
       this.list = result;    
@@ -86,7 +110,7 @@ class ProductsStore{
     }
     this.list = newList;
     this.availableIDs.push(id);
-    this.service.removeListItem(id);
+    this.deleteProductAsync(id);
     return [true, [202]];
   }
   getProcessedList(searchField, sortBy){
@@ -124,7 +148,7 @@ class ProductsStore{
     const index = this.list.findIndex(obj => obj.id === id);
     edited['id'] = id;
     this.listElementEqualTo(edited, index);
-    this.service.editListItem(id, edited);
+    this.updateProductAsync(edited);
     return [true, [200]];
   
   }
@@ -180,7 +204,7 @@ class ProductsStore{
       this.list[this.list.length-1][e] = newElement[e];
       return null;
     })
-    this.service.appendList(this.list[this.list.length-1]);
+    this.createProductAsync(this.list[this.list.length-1]);
     return [true, [201], id];
   }    
   isNewElementValid(newElement){
@@ -196,12 +220,12 @@ class ProductsStore{
     let validBrands = [];
     BrandsService.fetchList.then(result=>{
       validBrands = result.map(e=>{return e['id']});
-      this.list.forEach(e => {
+      this.list.forEach(e =>{
         if(!validBrands.includes(e.brand)){
           const element = e;
           element.brand = 1;
           this.editListElement(e.id, element);
-          //this.service.editListElement(e.id, element);
+          this.updateProductAsync(element);
         }
       });
     });
