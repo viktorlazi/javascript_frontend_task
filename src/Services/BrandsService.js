@@ -1,40 +1,47 @@
-class BrandsService{
-  list = [];
-  fetchList = new Promise((res, rej)=>{  
-    fetch("http://localhost:3001/brands")
-    .then(res=>res.json())
-    .then(data=>{
-      this.list = data;
-      res(data);
-    })
-    .catch(err=>{
-      rej(err);
-    });
-  });
-  fetchLocalList(){
-    return this.list;
+const webApiUrl = 'http://localhost:3001/brands';
+
+export default class BrandsService{
+  get = async () => {
+    const options = {
+      method: "GET",
+    }
+    const request = new Request(webApiUrl, options);
+    const response = await fetch(request);
+    return response.json();
   }
-  fetchListItems(ids){
-    return this.list.filter(e=>{return [ids].includes(e.id)});
+  post = async (model) => {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    var options = {
+      method: "POST",
+      headers,
+      body: JSON.stringify(model)
+    }
+    const request = new Request(webApiUrl, options);
+    const response = await fetch(request);
+    return response;
   }
-  appendList(list){
-    list.forEach(e => {
-      this.list.push(e);
-    });
+  put = async (model) => {
+    const headers = new Headers()
+    headers.append("Content-Type", "application/json");
+    var options = {
+      method: "PUT",
+      headers,
+      body: JSON.stringify(model)
+    }
+    const request = new Request(webApiUrl, options);
+    const response = await fetch(request);
+    return response;
   }
-  removeListItem(id){
-    let newList=this.list.filter(e=>{
-      return e.id !== id;
-    })
-    this.list = newList;
-  }
-  resetList(){
-    this.list = [];
-  }
-  editListElement(id, element){
-    const index = this.list.findIndex(obj => obj.id === id);
-    this.list[index] = element
+  delete = async (id) => {
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+    const options = {
+      method: "DELETE",
+      headers
+    }
+    const request = new Request(webApiUrl + "/" + id, options);
+    const response = await fetch(request);
+    return response;
   }
 }
-const brandsService = new BrandsService();
-export default brandsService;

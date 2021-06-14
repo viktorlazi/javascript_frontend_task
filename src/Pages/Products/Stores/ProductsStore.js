@@ -79,7 +79,7 @@ class ProductsStore{
         this.status = "error";
       });
     }
-}
+  }
  
   /*
   fetchList(){
@@ -113,10 +113,10 @@ class ProductsStore{
     this.deleteProductAsync(id);
     return [true, [202]];
   }
-  getProcessedList(searchField, sortBy){
+  getProcessedList(){
     this.unbrandIfBrandNotExistent();
-    let list = this.filter(this.list, searchField);
-    list = this.sort(list, sortBy);
+    let list = this.filter(this.list, this.input.searchField);
+    list = this.sort(list, this.input.sortBy);
     const idList = list.map(e=>{return e.id});
     return idList;
   }

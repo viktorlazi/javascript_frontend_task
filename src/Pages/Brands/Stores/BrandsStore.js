@@ -1,4 +1,4 @@
-import { makeAutoObservable, toJS } from 'mobx';
+import { makeAutoObservable, toJS, runInAction } from 'mobx';
 import BrandsService from '../../../Services/BrandsService';
 import ProductsService from '../../../Services/ProductsService';
 import UserInputStore from '../../../Stores/UserInputStore';
@@ -10,7 +10,7 @@ class BrandsStore{
   list = [];
   sortingTypes = ['name', 'number'];
   availableID = 10;
-  service = BrandsService;
+  brandsService = new BrandsService();
   alert = new AlertStore();
   input = new UserInputStore();
   addElement = new AddElementStore();
@@ -18,18 +18,65 @@ class BrandsStore{
 
   constructor(){
     makeAutoObservable(this);
-    this.list = this.fetchList();
+    this.getBrandsAsync();
     this.input.setSort('number');
   }
-  fetchList(){
-    this.service.fetchList
-    .then(result=>{
-      this.listElement = [];
-      result.forEach(e => {
-        this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
+  getBrandsAsync = async () =>{
+    try{
+      const data = await this.brandsService.get();
+      runInAction(() =>{
+        this.list = data;
+        data.forEach(e =>{
+          this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
+        });
       });
-      this.list = result;    
-    });
+    }catch(error){
+      runInAction(() =>{
+        this.status = "error";
+      });    
+    }
+  }
+  createBrandAsync = async (brand) =>{
+    try{
+      const response = await this.brandsService.post(brand);
+      if(response.status === 201){
+        runInAction(() =>{
+          this.status = "success";
+        })
+      } 
+    }catch(error){
+      runInAction(() =>{
+        this.status = "error";
+      });
+    }
+  };
+  updateBrandAsync = async (brand) =>{
+    try{
+      const response = await this.brandsService.put(brand)
+      if(response.status === 200){
+        runInAction(() =>{
+          this.status = "success";
+        })
+      } 
+    }catch(error){
+      runInAction(() =>{
+        this.status = "error";
+      });
+    }
+  };
+  deleteBrandAsync = async (id) =>{
+    try{
+      const response = await this.brandsService.delete(id);
+      if(response.status === 204){
+        runInAction(() =>{
+          this.status = "success";
+        })
+      } 
+    }catch(error){
+      runInAction(() =>{
+        this.status = "error";
+      });
+    }
   }
   getElementById(id){
     return this.list.find(e=>e.id===id);
@@ -48,7 +95,7 @@ class BrandsStore{
       return [false, [500]];
     }
     this.list = newList;
-    this.service.removeListItem(id);
+    this.deleteBrandAsync(id);
     return [true, [202]];
   }
   setNumberOfProducts(){
@@ -56,6 +103,7 @@ class BrandsStore{
       return null;
     }
     let products;
+    /*
     ProductsService.fetchList
     .then(result=>{
       products = result;
@@ -63,6 +111,7 @@ class BrandsStore{
         this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
       });
     })
+    */
   }
   getProcessedList(searchField, sortBy){
     this.setNumberOfProducts();
@@ -92,7 +141,7 @@ class BrandsStore{
     const index = this.list.findIndex(obj => obj.id === id);
     edited['id'] = id;
     this.listElementEqualTo(edited, index);
-    this.service.editListElement(id, edited);
+    this.updateBrandAsync(edited);
     return [true, [200]];
   }
   sort(list, sortBy){
@@ -135,7 +184,7 @@ class BrandsStore{
       this.list[this.list.length-1][e] = newElement[e];
       return null;
     })
-    this.service.appendList([this.list[this.list.length-1]]);
+    this.createBrandAsync([this.list[this.list.length-1]]);
     this.availableID++;
     return [true, [201], id];
   }    

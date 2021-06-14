@@ -1,8 +1,12 @@
 import {makeAutoObservable} from 'mobx';
+import BrandsService from '../../../../Services/BrandsService';
 
 class AddElementStore{
   newElement;
+  brands = [];
+  brandsService = new BrandsService();
   constructor(){
+    this.getAvailableBrandsAsync();
     this.newElement = {
       brand:1,
       type:'',
@@ -10,6 +14,9 @@ class AddElementStore{
       cost:''
     };
     makeAutoObservable(this);
+  }
+  getAvailableBrandsAsync = async () =>{
+    this.brands = await this.brandsService.get();
   }
   addNewElement(addNewElement, addListElementStore, setAlert){
     const result = addNewElement(this.newElement);

@@ -15,12 +15,12 @@ import './styles/products.css';
 function Products() {  
   return (
     <div id="products">
-      <SearchField setSearchField={(x)=>{ProductsStore.input.setSearchField(x)}}/>
+      {/*<SearchField setSearchField={(x)=>{ProductsStore.input.setSearchField(x)}}/>*/}
       <DisplayList>
         <TableColumnNames sortBy={ProductsStore.input.sortBy} keys={ProductsStore.getSortingTypes()} setSortBy={(sortBy)=>{ProductsStore.input.setSort(sortBy)}} />
         {
           ProductsStore.listElement.length ?
-          ProductsStore.getProcessedList(ProductsStore.input.searchField, ProductsStore.input.sortBy).map((e)=>{
+          ProductsStore.getProcessedList().map((e)=>{
             return <ListElement
               setAlert={(msg, colour)=>ProductsStore.alert.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
