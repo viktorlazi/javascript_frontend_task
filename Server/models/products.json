@@ -1,16 +1,23 @@
 [
   {
-    "brand": 2,
+    "brand": 4,
     "type": "singlecut",
     "colour": "sunburn",
     "cost": "3301234",
     "id": 2
   },
   {
-    "brand": 1,
+    "brand": 4,
     "type": "singlecut",
     "colour": "yellow",
     "cost": "3300234",
     "id": 3
+  },
+  {
+    "id": 2,
+    "brand": 3,
+    "type": "kj",
+    "colour": "lkj",
+    "cost": "123213"
   }
 ]

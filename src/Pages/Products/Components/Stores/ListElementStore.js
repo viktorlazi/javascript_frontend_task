@@ -6,15 +6,15 @@ class ListElementStore{
   element = {};
   invalidInputs = [];
   brands = [];
+  brandsService = new BrandsService();
   constructor(element){
     makeAutoObservable(this);
     this.setEqualToProps(element);
-    BrandsService.fetchList.then(result=>{
-      this.brands = [];
-      this.brands.push(...result);
-    });
+    this.getAvailableBrandsAsync();
   }
-  
+  getAvailableBrandsAsync = async () =>{
+    this.brands = await this.brandsService.get();
+  }
   edit(setAlert, element, editElement){
     this.invalidInputs = [];
     if(this.didChange(element)){

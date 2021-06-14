@@ -11,8 +11,10 @@ class ProductsStore{
   sortingTypes = ['brand', 'type', 'colour', 'cost'];
   availableIDs = [];
   status = 'initial';
+  brands = [];
 
-  service = new ProductsService();
+  productsService = new ProductsService();
+  brandsService = new BrandsService();
   alert = new AlertStore();
   input = new UserInputStore();
   addElement = new AddElementStore();
@@ -21,16 +23,26 @@ class ProductsStore{
   constructor(){
     makeAutoObservable(this);
     this.getProductsAsync();
+        
     this.input.setSort('cost');
+  }
+  getBrandsAsync = async () =>{
+    this.brands = await this.brandsService.get();
   }
   getProductsAsync = async () =>{
     try{
-      const data = await this.service.get();
+      const data = await this.productsService.get();
       runInAction(() =>{
         this.list = data;
-        data.forEach(e =>{
-          this.listElement.push({id:e.id, store: new ListElementStore(e), key:e.id})
-        });
+        try{
+          this.listElement = [];
+          this.list.forEach(e =>{
+            const store = new ListElementStore(e);
+            this.listElement.push({id:e.id, store, key:e.id})
+          });
+        }catch(e){
+          console.log(e);
+        }
       });
     }catch(error){
       runInAction(() =>{
@@ -40,7 +52,7 @@ class ProductsStore{
   }
   createProductAsync = async (product) =>{
     try{
-      const response = await this.service.post(product);
+      const response = await this.productsService.post(product);
       if(response.status === 201){
         runInAction(() =>{
           this.status = "success";
@@ -54,7 +66,7 @@ class ProductsStore{
   };
   updateProductAsync = async (product) =>{
     try{
-      const response = await this.service.put(product)
+      const response = await this.productsService.put(product)
       if(response.status === 200){
         runInAction(() =>{
           this.status = "success";
@@ -68,7 +80,7 @@ class ProductsStore{
   };
   deleteProductAsync = async (id) =>{
     try{
-      const response = await this.service.delete(id);
+      const response = await this.productsService.delete(id);
       if(response.status === 204){
         runInAction(() =>{
           this.status = "success";
@@ -83,7 +95,7 @@ class ProductsStore{
  
   /*
   fetchList(){
-    this.service.fetchList
+    this.productsService.fetchList
     .then(result=>{
       this.listElement = [];
       result.forEach(e =>{
@@ -113,9 +125,10 @@ class ProductsStore{
     this.deleteProductAsync(id);
     return [true, [202]];
   }
-  getProcessedList(){
-    this.unbrandIfBrandNotExistent();
+  getProcessedList = () =>{
+    //this.unbrandIfBrandNotExistent();
     let list = this.filter(this.list, this.input.searchField);
+    console.log(list)
     list = this.sort(list, this.input.sortBy);
     const idList = list.map(e=>{return e.id});
     return idList;
@@ -167,10 +180,12 @@ class ProductsStore{
     );
     return list;
   }
-  filter(list, searchField){
+  filter = (list, searchField) =>{
     let filtered = [...list.filter((e)=>{
-      const brand = BrandsService.fetchListItems(e.brand)[0];
-      return (brand?brand['name']:null + e.type + e.colour + e.cost).includes(searchField);
+      const brand = this.brands.find(ele=>{
+        return ele.id === e.brand
+      })
+      return (brand?brand.name:null + e.type + e.colour + e.cost).includes(searchField);
     })];
     return filtered;
   }
@@ -218,6 +233,7 @@ class ProductsStore{
   }
   unbrandIfBrandNotExistent(){
     let validBrands = [];
+    /*
     BrandsService.fetchList.then(result=>{
       validBrands = result.map(e=>{return e['id']});
       this.list.forEach(e =>{
@@ -229,6 +245,7 @@ class ProductsStore{
         }
       });
     });
+    */
   }
   editListElement(id, element){
     const index = this.list.findIndex(obj => obj.id === id);
