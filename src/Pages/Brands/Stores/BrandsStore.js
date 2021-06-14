@@ -11,6 +11,7 @@ class BrandsStore{
   sortingTypes = ['name', 'number'];
   availableID = 10;
   brandsService = new BrandsService();
+  productsService = new ProductsService();
   alert = new AlertStore();
   input = new UserInputStore();
   addElement = new AddElementStore();
@@ -98,23 +99,17 @@ class BrandsStore{
     this.deleteBrandAsync(id);
     return [true, [202]];
   }
-  setNumberOfProducts(){
+  setNumberOfProductsAsync = async () =>{
     if(!this.list){
       return null;
     }
-    let products;
-    /*
-    ProductsService.fetchList
-    .then(result=>{
-      products = result;
-      this.list.forEach((e)=>{
-        this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
-      });
-    })
-    */
+    const products = await this.productsService.get();
+    this.list.forEach((e)=>{
+      this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
+    });
   }
   getProcessedList(searchField, sortBy){
-    this.setNumberOfProducts();
+    this.setNumberOfProductsAsync();
     let list = this.filter(this.list, searchField);
     list = this.sort(list, sortBy);
     const idList = list.map(e=>{return e.id});
