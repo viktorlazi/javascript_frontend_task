@@ -1,11 +1,10 @@
-import {makeAutoObservable, runInAction} from 'mobx';
-import BrandsService from '../../../../Services/BrandsService';
+import {makeAutoObservable} from 'mobx';
 
 class AddElementStore{
   newElement;
   constructor(){
     this.newElement = {
-      brand:1,
+      brand:0,
       type:'',
       colour:'',
       cost:''

@@ -105,7 +105,9 @@ class BrandsStore{
     }
     const products = await this.productsService.get();
     this.list.forEach((e)=>{
-      this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
+      runInAction(()=>{
+        this.list.find((i)=>{return e===i}).number = products.filter(i=>e.id===i.brand).length;
+      });
     });
   }
   getProcessedList(searchField, sortBy){
