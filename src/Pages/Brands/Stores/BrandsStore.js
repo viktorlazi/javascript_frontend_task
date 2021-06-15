@@ -127,10 +127,12 @@ class BrandsStore{
   }
   editElement(edited, id){
     let errorCodes = [];
-    /*
+    
     if(!this.isNewElementValid(edited)){
-      errorCodes.push(400);
-    }*/
+      errorCodes.push(401);
+    }else if(!isNaN(edited.name)){
+      errorCodes.push(402);
+    }
     console.log(errorCodes)
     if(errorCodes.length > 0){
       return [false, errorCodes]
