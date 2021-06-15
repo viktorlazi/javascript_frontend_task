@@ -1,4 +1,3 @@
-import React from 'react';
 import {observer} from 'mobx-react';
 import {action} from 'mobx';
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';

@@ -9,7 +9,6 @@ import AlertStore from './AlertStore';
 class BrandsStore{
   list = [];
   sortingTypes = ['name', 'number'];
-  availableID = 10;
   brandsService = new BrandsService();
   productsService = new ProductsService();
   alert = new AlertStore();
@@ -21,6 +20,9 @@ class BrandsStore{
     makeAutoObservable(this);
     this.getBrandsAsync();
     this.input.setSort('number');
+  }
+  getRandomID = () =>{
+    return Math.round(Math.random()*10000000);
   }
   getBrandsAsync = async () =>{
     try{
@@ -163,7 +165,7 @@ class BrandsStore{
       return [];
     }
     let filtered = [...list.filter((e)=>{
-      return e.name.includes(searchField);
+      return (e.name + e.number).includes(searchField);
     })];
     return filtered;
   }
@@ -177,7 +179,7 @@ class BrandsStore{
     if(errorCodes.length > 0){
       return [false, errorCodes, -1];
     }
-    const id = this.availableID;
+    const id = this.getRandomID();
     this.list.push({});
     this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{
@@ -185,7 +187,6 @@ class BrandsStore{
       return null;
     })
     this.createBrandAsync(this.list[this.list.length-1]);
-    this.availableID++;
     return [true, [201], id];
   }    
 

@@ -9,7 +9,6 @@ import ListElementStore from '../Components/Stores/ListElementStore';
 class ProductsStore{
   list = [];
   sortingTypes = ['brand', 'type', 'colour', 'cost'];
-  availableIDs = [];
   status = 'initial';
   brands = [];
 
@@ -25,6 +24,9 @@ class ProductsStore{
     this.getProductsAsync();
     this.getBrandsAsync();
     this.input.setSort('cost');
+  }
+  getRandomID = () =>{
+    return Math.round(Math.random()*10000000);
   }
   getBrandsAsync = async () =>{
     const result = await this.brandsService.get();
@@ -112,7 +114,6 @@ class ProductsStore{
       return [false, [500]];
     }
     this.list = newList;
-    this.availableIDs.push(id);
     this.deleteProductAsync(id);
     return [true, [202]];
   }
@@ -196,13 +197,7 @@ class ProductsStore{
     if(errorCodes.length > 0){
       return [false, errorCodes, -1];
     }
-    let id;
-    if(this.availableIDs.length){
-      id = this.availableIDs[0];
-      this.availableIDs.shift();
-    }else{
-      id = this.list.length;
-    }
+    const id = this.getRandomID();
     this.list.push({});
     this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{
