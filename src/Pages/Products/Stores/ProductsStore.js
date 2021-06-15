@@ -27,12 +27,13 @@ class ProductsStore{
     this.input.setSort('cost');
   }
   getRandomID = () =>{
-    return Math.round(Math.random()*10000000);
+    return Math.round(Math.random()*10000000 );
   }
   updateBrandsContinuously = () =>{
     return setInterval(()=>{
       this.getBrandsAsync();
-    }, 3000)
+      this.unbrandIfBrandNotExistent();
+    }, 2000)
   }
   getBrandsAsync = async () =>{
     const result = await this.brandsService.get();
@@ -124,7 +125,6 @@ class ProductsStore{
     return [true, [202]];
   }
   getProcessedList = () =>{
-    //this.unbrandIfBrandNotExistent();
     let list = this.filter(this.list, this.input.searchField);
     list = this.sort(list, this.input.sortBy);
     const idList = list.map(e=>{return e.id});
@@ -223,15 +223,15 @@ class ProductsStore{
     return false;
   }
   unbrandIfBrandNotExistent(){
-    /*let validBrands = result.map(e=>{return e['id']});
+    let validBrands = this.brands.map(e=>{return e['id']});
     this.list.forEach(e =>{
       if(!validBrands.includes(e.brand)){
         const element = e;
-        element.brand = 1;
+        element.brand = 0;
         this.editListElement(e.id, element);
         this.updateProductAsync(element);
       }
-    });*/
+    });
   }
   editListElement(id, element){
     const index = this.list.findIndex(obj => obj.id === id);

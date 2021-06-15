@@ -25,7 +25,7 @@ class BrandsStore{
   updateProductsNumberContinuously = () =>{
     return setInterval(()=>{
       this.setNumberOfProductsAsync();
-    }, 3000)
+    }, 2000)
   }
   getRandomID = () =>{
     return Math.round(Math.random()*10000000);
