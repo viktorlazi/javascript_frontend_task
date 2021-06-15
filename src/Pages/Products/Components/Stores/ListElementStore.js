@@ -1,19 +1,12 @@
 import {makeAutoObservable} from 'mobx';
-import BrandsService from '../../../../Services/BrandsService';
 
 class ListElementStore{
   isInEditMode = false;
   element = {};
   invalidInputs = [];
-  brands = [];
-  brandsService = new BrandsService();
   constructor(element){
     makeAutoObservable(this);
     this.setEqualToProps(element);
-    this.getAvailableBrandsAsync();
-  }
-  getAvailableBrandsAsync = async () =>{
-    this.brands = await this.brandsService.get();
   }
   edit(setAlert, element, editElement){
     this.invalidInputs = [];

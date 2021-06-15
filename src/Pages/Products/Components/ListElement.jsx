@@ -6,13 +6,13 @@ import NoEditButtons from '../../../Components/NoEditButtons';
 import ListElementDisplay from './ListElementDisplay';
 import ListElementEdit from './ListElementEdit';
 
-function ListElement({setAlert, element, editElement, removeElement, store}) {
+function ListElement({setAlert, element, editElement, removeElement, store, brands}) {
   if(!store.isInEditMode){
     return (
       <div className="row">
         <ListElementDisplay 
           element={element} 
-          brands={store.brands}
+          brands={brands}
           invalidInputs={store.invalidInputs}
           />
         <NoEditButtons 
@@ -25,7 +25,7 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
       <div className="row">
         <ListElementEdit 
           element={element}
-          brands={store.brands}
+          brands={brands}
           storeElementValue={store.element} 
           setElementField={(x,y)=>{return store.setElementField(x,y)}} />
         <EditButtons 

@@ -27,8 +27,10 @@ class ProductsStore{
     this.input.setSort('cost');
   }
   getBrandsAsync = async () =>{
-    this.brands = await this.brandsService.get();
-    console.log(toJS(this.brands));
+    const result = await this.brandsService.get();
+    runInAction(()=>{
+      this.brands =result;
+    });
   }
   getProductsAsync = async () =>{
     try{
@@ -220,20 +222,15 @@ class ProductsStore{
     return false;
   }
   unbrandIfBrandNotExistent(){
-    let validBrands = [];
-    /*
-    BrandsService.fetchList.then(result=>{
-      validBrands = result.map(e=>{return e['id']});
-      this.list.forEach(e =>{
-        if(!validBrands.includes(e.brand)){
-          const element = e;
-          element.brand = 1;
-          this.editListElement(e.id, element);
-          this.updateProductAsync(element);
-        }
-      });
-    });
-    */
+    /*let validBrands = result.map(e=>{return e['id']});
+    this.list.forEach(e =>{
+      if(!validBrands.includes(e.brand)){
+        const element = e;
+        element.brand = 1;
+        this.editListElement(e.id, element);
+        this.updateProductAsync(element);
+      }
+    });*/
   }
   editListElement(id, element){
     const index = this.list.findIndex(obj => obj.id === id);

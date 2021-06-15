@@ -27,6 +27,7 @@ function Products() {
               editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
               removeElement={(id)=>{return ProductsStore.removeElement(id)}} 
               store={ProductsStore.listElement.filter(i=>{return i.id===e})[0].store}
+              brands={ProductsStore.brands}
             />;
           }):null
         }
@@ -38,6 +39,7 @@ function Products() {
         store={ProductsStore.addElement}
         addNewElement={(newElement)=>{return ProductsStore.addNewElement(newElement)}}
         addListElementStore={(id)=>{ProductsStore.listElement.push({id:id, key:id, store: new ListElementStore(ProductsStore.getElementById(id))})}}
+        brands={ProductsStore.brands}
       />
     </div>
   )

@@ -1,11 +1,10 @@
 import React from 'react';
 import {observer} from 'mobx-react';
 import {action} from 'mobx';
-import BrandsService from '../../../Services/BrandsService';
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 import './styles/addElement.css';
 
-function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore}){
+function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore, brands}){
   return(
   <div className="add__new">
     {
@@ -15,7 +14,7 @@ function AddElement({getSortingTypes, addNewElement, setAlert, store, addListEle
             return null
           case 'brand':
             return [<p>brand:</p>, <MultioptionEditButton 
-              options={store.brands}
+              options={brands}
               getValue={(e)=>{store.newElement['brand']=e}}/>]
           default:
             return [<p>{e}:</p>, <input onChange={ 
