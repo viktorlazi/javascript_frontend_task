@@ -19,7 +19,13 @@ class BrandsStore{
   constructor(){
     makeAutoObservable(this);
     this.getBrandsAsync();
+    this.updateProductsNumberContinuously();
     this.input.setSort('number');
+  }
+  updateProductsNumberContinuously = () =>{
+    return setInterval(()=>{
+      this.setNumberOfProductsAsync();
+    }, 3000)
   }
   getRandomID = () =>{
     return Math.round(Math.random()*10000000);
@@ -113,7 +119,6 @@ class BrandsStore{
     });
   }
   getProcessedList(searchField, sortBy){
-    this.setNumberOfProductsAsync();
     let list = this.filter(this.list, searchField);
     list = this.sort(list, sortBy);
     const idList = list.map(e=>{return e.id});
