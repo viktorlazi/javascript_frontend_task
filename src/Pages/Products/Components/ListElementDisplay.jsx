@@ -8,8 +8,9 @@ function ListElementDisplay({element, brands, invalidInputs}) {
           return <div>{
             brands.length?
             brands.find((e)=>{return e.id===element['brand']})?
-            brands.find((e)=>{return e.id===element['brand']}).name:'unbranded'
-            :'unbranded'
+            brands.find((e)=>{return e.id===element['brand']}).name
+            :'brand not found'
+            :'brand not found'
           }</div>
         default:
           return <div className={`${invalidInputs.includes(e) ? "invalidInput":""}`}>
