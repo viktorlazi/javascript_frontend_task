@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "brand": 0,
+    "brand": 3,
     "type": "stratocaster",
     "colour": "blue",
     "cost": 4200
@@ -15,14 +15,14 @@
   },
   {
     "id": 2,
-    "brand": 0,
+    "brand": 2,
     "type": "singlecut",
     "colour": "sunburn",
     "cost": 3301
   },
   {
     "id": 3,
-    "brand": 0,
+    "brand": 1,
     "type": "singlecut",
     "colour": "yellow",
     "cost": 3300
