@@ -1,5 +1,19 @@
 [
   {
+    "id": 0,
+    "brand": 3,
+    "type": "stratocaster",
+    "colour": "blue",
+    "cost": 4200
+  },
+  {
+    "id": 1,
+    "brand": 3,
+    "type": "telecaster",
+    "colour": "black",
+    "cost": 4300
+  },
+  {
     "id": 2,
     "brand": 2,
     "type": "singlecut",
@@ -7,31 +21,10 @@
     "cost": 3301
   },
   {
-    "id": 8317008,
-    "brand": 0,
-    "type": "qewqeqw",
-    "colour": "qweqwe",
-    "cost": "13123"
-  },
-  {
-    "id": 1472041,
-    "brand": 0,
-    "type": "qew",
-    "colour": "qwe",
-    "cost": "13212"
-  },
-  {
-    "id": 8571412,
-    "brand": 2,
-    "type": "wqe",
-    "colour": "qwe",
-    "cost": "123123"
-  },
-  {
-    "id": 401427,
-    "brand": 2,
-    "type": "ada",
-    "colour": "sasd",
-    "cost": "123123"
+    "id": 3,
+    "brand": 1,
+    "type": "singlecut",
+    "colour": "yellow",
+    "cost": 3300
   }
 ]
