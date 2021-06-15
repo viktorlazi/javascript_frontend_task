@@ -21,11 +21,11 @@
     "cost": 3301
   },
   {
-    "id": 3,
-    "brand": 1,
+    "brand": 2,
     "type": "singlecut",
     "colour": "yellow",
-    "cost": 3300
+    "cost": 3300,
+    "id": 3
   },
   {
     "id": 4,

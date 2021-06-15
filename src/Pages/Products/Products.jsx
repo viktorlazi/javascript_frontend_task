@@ -15,7 +15,7 @@ import './styles/products.css';
 function Products() {  
   return (
     <div id="products">
-      {/*<SearchField setSearchField={(x)=>{ProductsStore.input.setSearchField(x)}}/>*/}
+      <SearchField setSearchField={(x)=>{ProductsStore.input.setSearchField(x)}}/>
       <DisplayList>
         <TableColumnNames sortBy={ProductsStore.input.sortBy} keys={ProductsStore.getSortingTypes()} setSortBy={(sortBy)=>{ProductsStore.input.setSort(sortBy)}} />
         {

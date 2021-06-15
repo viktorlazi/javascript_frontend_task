@@ -7,7 +7,8 @@ function ListElementDisplay({element, brands, invalidInputs}) {
         case 'brand':
           return <div>{
             brands.length?
-            brands.find((e)=>{return e.id===element['brand']}).name
+            brands.find((e)=>{return e.id===element['brand']}).name?
+            brands.find((e)=>{return e.id===element['brand']}).name:'unbranded'
             :'unbranded'
           }</div>
         default:
