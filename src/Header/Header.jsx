@@ -1,9 +1,8 @@
-import React from 'react'
-import {Link, useLocation} from 'react-router-dom'
-import './styles/header.css'
+import {Link, useLocation} from 'react-router-dom';
+import './styles/header.css';
 
 function Header() {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <header>
       <div className="logo">
@@ -26,5 +25,4 @@ function Header() {
     </header>
   )
 }
-
-export default Header
+export default Header;
