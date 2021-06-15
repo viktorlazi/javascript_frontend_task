@@ -23,10 +23,16 @@ class ProductsStore{
     makeAutoObservable(this);
     this.getProductsAsync();
     this.getBrandsAsync();
+    this.updateBrandsContinuously();
     this.input.setSort('cost');
   }
   getRandomID = () =>{
     return Math.round(Math.random()*10000000);
+  }
+  updateBrandsContinuously = () =>{
+    return setInterval(()=>{
+      this.getBrandsAsync();
+    }, 3000)
   }
   getBrandsAsync = async () =>{
     const result = await this.brandsService.get();
