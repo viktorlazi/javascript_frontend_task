@@ -8,9 +8,8 @@ class AlertStore{
     [201, 'added'],
     [202, 'removed'],
     [400, 'empty fields'],
-    [401, 'invalid cost'],
-    [402, 'invalid type'],
-    [403, 'invalid colour'],
+    [401, 'invalid input'],
+    [402, 'name cannot be a number'],
     [500, 'internal error, missing id']
   ];
   

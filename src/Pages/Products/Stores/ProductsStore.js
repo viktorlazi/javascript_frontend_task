@@ -28,6 +28,7 @@ class ProductsStore{
   }
   getBrandsAsync = async () =>{
     this.brands = await this.brandsService.get();
+    console.log(toJS(this.brands));
   }
   getProductsAsync = async () =>{
     try{

@@ -21,17 +21,10 @@
     "cost": 3301
   },
   {
-    "brand": 2,
+    "id": 3,
+    "brand": 1,
     "type": "singlecut",
     "colour": "yellow",
-    "cost": 3300,
-    "id": 3
-  },
-  {
-    "id": 4,
-    "brand": 1,
-    "type": "lkj",
-    "colour": "klj",
-    "cost": "12313"
+    "cost": 3300
   }
 ]

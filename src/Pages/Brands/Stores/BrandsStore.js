@@ -164,10 +164,11 @@ class BrandsStore{
     return filtered;
   }
   addNewElement(newElement){
-    console.log(toJS(this.list))
     let errorCodes = [];
     if(!this.isNewElementValid(newElement)){
-      //errorCodes.push(400);
+      errorCodes.push(401);
+    }else if(!isNaN(newElement.name)){
+      errorCodes.push(402);
     }
     if(errorCodes.length > 0){
       return [false, errorCodes, -1];
@@ -179,18 +180,19 @@ class BrandsStore{
       this.list[this.list.length-1][e] = newElement[e];
       return null;
     })
-    this.createBrandAsync([this.list[this.list.length-1]]);
+    this.createBrandAsync(this.list[this.list.length-1]);
     this.availableID++;
     return [true, [201], id];
   }    
+
   isNewElementValid(newElement){
-    const keys = Object.keys(newElement)
-    if(keys.length>0){
-      return keys.every((e)=>{
-        return newElement[e];
-      });
+    if(!newElement){
+      return false;
     }
-    return false;
+    if(!newElement.name){
+      return false;
+    }
+    return true;
   }
 }
 const brandsStore = new BrandsStore(); 
