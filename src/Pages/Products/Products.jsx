@@ -6,6 +6,7 @@ import DisplayList from '../../Components/DisplayList';
 import ListElement from './Components/ListElement';
 import TableColumnNames from '../../Components/TableColumnNames';
 import MessageSpace from '../../Components/MessageSpace';
+import EditScreen from './Components/EditScreen';
 
 import ProductsStore from './Stores/ProductsStore';
 import ListElementStore from './Components/Stores/ListElementStore';
@@ -33,14 +34,17 @@ function Products() {
         }
       </DisplayList>
       <MessageSpace msg={ProductsStore.alert.msg} colour={ProductsStore.alert.colour} />
-      <AddElement 
-        setAlert={(status)=>{ProductsStore.alert.setAlert(status)}} 
-        getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
-        store={ProductsStore.addElement}
-        addNewElement={(newElement)=>{return ProductsStore.addNewElement(newElement)}}
-        addListElementStore={(id)=>{ProductsStore.listElement.push({id:id, key:id, store: new ListElementStore(ProductsStore.getElementById(id))})}}
-        brands={ProductsStore.brands}
-      />
+      <div className="flex">
+        <AddElement 
+          setAlert={(status)=>{ProductsStore.alert.setAlert(status)}} 
+          getSortingTypes={()=>{return ProductsStore.getSortingTypes()}} 
+          store={ProductsStore.addElement}
+          addNewElement={(newElement)=>{return ProductsStore.addNewElement(newElement)}}
+          addListElementStore={(id)=>{ProductsStore.listElement.push({id:id, key:id, store: new ListElementStore(ProductsStore.getElementById(id))})}}
+          brands={ProductsStore.brands}
+        />
+        <EditScreen />
+      </div>
     </div>
   )
 }

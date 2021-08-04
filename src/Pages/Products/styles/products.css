@@ -14,3 +14,7 @@
 .invalidInput{
   color: red;
 }
+.flex{
+  display:flex;
+  gap: 20px;
+}

@@ -1,0 +1,9 @@
+.editScreen{
+  display:flex;
+  flex-direction: column;
+  padding: 0 30%;
+  box-shadow: var(--shadow-black-300);
+  padding: 20px;
+  width: 50%;
+  margin: 30px auto;
+}
