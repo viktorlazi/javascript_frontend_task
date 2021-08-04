@@ -2,8 +2,6 @@ function ListElementDisplay({element, brands, invalidInputs}) {
   return (
     Object.keys(element).map((e)=>{
       switch(e){
-        case 'id':
-          return null
         case 'brand':
           return <div>{
             brands.length?

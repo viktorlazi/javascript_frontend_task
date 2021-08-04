@@ -1,3 +1,9 @@
+/**
+ * NOT USED
+ * : editing inline
+ * 
+ */
+
 import MultioptionEditButton from '../../../Components/MultioptionEditButton';
 import {action} from 'mobx';
 import {observer} from 'mobx-react';
@@ -20,3 +26,4 @@ function ListElementEdit({element, brands, storeElementValue, setElementField}) 
   )
 }
 export default observer(ListElementEdit);
+

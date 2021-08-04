@@ -8,7 +8,7 @@ import ListElementStore from '../Components/Stores/ListElementStore';
 
 class ProductsStore{
   list = [];
-  sortingTypes = ['brand', 'type', 'colour', 'cost'];
+  sortingTypes = ['id', 'brand', 'type', 'colour', 'cost'];
   status = 'initial';
   brands = [];
 

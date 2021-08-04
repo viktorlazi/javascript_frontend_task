@@ -25,7 +25,6 @@ function Products() {
             return <ListElement
               setAlert={(msg, colour)=>ProductsStore.alert.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
-              editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
               removeElement={(id)=>{return ProductsStore.removeElement(id)}} 
               store={ProductsStore.listElement.filter(i=>{return i.id===e})[0].store}
               brands={ProductsStore.brands}
