@@ -7,3 +7,29 @@
   width: 50%;
   margin: 30px auto;
 }
+.editScreen input, .editScreen select{
+  padding: 5px;
+  margin: 5px;
+}
+.editScreen button{
+  margin-top: 20px;
+  background-color: #fff;
+  padding: 12px 30px;
+  border:none;
+  border-radius: 30px;
+  color: var(--main-color);
+  font-size: 16px;
+  text-transform: capitalize;
+  transition: all 0.5s ease;
+  box-shadow: var(--shadow-black-300);
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+.editScreen button:focus{
+  box-shadow: var(--shadow-black-300);
+}
+.editScreen button:hover{
+  color: #fff;
+  background-color: var(--main-color);
+}

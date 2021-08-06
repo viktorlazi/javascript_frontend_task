@@ -1,4 +1,4 @@
-import {makeAutoObservable} from 'mobx';
+import {makeAutoObservable, toJS} from 'mobx';
 
 class ListElementStore{
   isInEditMode = false;
@@ -11,6 +11,7 @@ class ListElementStore{
   edit(setAlert, element, editElement){
     this.invalidInputs = [];
     if(this.didChange(element)){
+      console.log(1)
       const result = editElement(this.element, element.id);
       setAlert(result);
       if(!result[0]){
@@ -50,6 +51,9 @@ class ListElementStore{
     })
   }
   didChange(props){
+    console.log(toJS(this.element))
+    console.log(toJS(props))
+
     let didChange = false;
     Object.keys(this.element).map((e)=>{
       return this.element[e]!==props[e];

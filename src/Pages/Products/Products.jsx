@@ -26,7 +26,7 @@ function Products() {
               setAlert={(msg, colour)=>ProductsStore.alert.setAlert(msg, colour)}
               element={ProductsStore.getElementById(e)} 
               removeElement={(id)=>{return ProductsStore.removeElement(id)}} 
-              store={ProductsStore.listElement.filter(i=>{return i.id===e})[0].store}
+              store={ProductsStore.getListElementStore(e)}
               brands={ProductsStore.brands}
             />;
           }):null
@@ -42,7 +42,17 @@ function Products() {
           addListElementStore={(id)=>{ProductsStore.listElement.push({id:id, key:id, store: new ListElementStore(ProductsStore.getElementById(id))})}}
           brands={ProductsStore.brands}
         />
-        <EditScreen />
+        {
+          ProductsStore.listElement.length?
+          <EditScreen 
+            editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
+            setAlert={(msg, colour)=>ProductsStore.alert.setAlert(msg, colour)}
+            element={ProductsStore.getElementById(22)} 
+            brands={ProductsStore.brands} 
+            store={ProductsStore.getListElementStore(2)}
+          />
+          :null
+        }
       </div>
     </div>
   )

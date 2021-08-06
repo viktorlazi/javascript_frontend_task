@@ -26,6 +26,13 @@ class ProductsStore{
     this.updateBrandsContinuously();
     this.input.setSort('cost');
   }
+  getListElementStore = (id) =>{
+    const filter = this.listElement.filter(i=>{return i.id===id})[0];
+    if(filter){
+      return filter.store
+    }
+    return null;
+  }
   getRandomID = () =>{
     return Math.round(Math.random()*10000000 );
   }
@@ -139,6 +146,8 @@ class ProductsStore{
     })
   }
   editElement(edited, id){
+    console.log(edited);
+    console.log(id);
     let errorCodes = [];
     if(!this.isNewElementValid(edited)){
       errorCodes.push(400);
@@ -203,7 +212,7 @@ class ProductsStore{
     if(errorCodes.length > 0){
       return [false, errorCodes, -1];
     }
-    const id = this.getRandomID();
+    const id = this.list.length;
     this.list.push({});
     this.list[this.list.length-1]['id'] = id;
     Object.keys(newElement).map((e)=>{

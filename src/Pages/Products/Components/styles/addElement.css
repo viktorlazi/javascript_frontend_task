@@ -24,6 +24,7 @@
   box-shadow: var(--shadow-black-300);
   font-weight: 500;
   outline: none;
+  cursor: pointer;
 }
 .add__new button:focus{
   box-shadow: var(--shadow-black-300);

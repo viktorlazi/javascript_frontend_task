@@ -6,6 +6,8 @@ import './styles/addElement.css';
 function AddElement({getSortingTypes, addNewElement, setAlert, store, addListElementStore, brands}){
   return(
   <div className="add__new">
+    <p>Add new Element</p>
+    <br/>
     {
       getSortingTypes().map((e)=>{
         switch(e){
