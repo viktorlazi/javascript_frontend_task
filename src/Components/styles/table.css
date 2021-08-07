@@ -34,6 +34,8 @@
 .table .tools{
   cursor:pointer;
 }
+.table .tools svg:hover{
+}
 .message{
   background-color: white;
   padding: 5px;

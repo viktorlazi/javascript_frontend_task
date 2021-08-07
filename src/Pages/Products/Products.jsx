@@ -47,7 +47,7 @@ function Products() {
           <EditScreen 
             editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
             setAlert={(msg, colour)=>ProductsStore.alert.setAlert(msg, colour)}
-            element={ProductsStore.getElementById(22)} 
+            element={ProductsStore.getElementById(2)} 
             brands={ProductsStore.brands} 
             store={ProductsStore.getListElementStore(2)}
           />

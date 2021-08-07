@@ -13,7 +13,8 @@ function ListElement({setAlert, element, removeElement, store, brands}) {
         invalidInputs={store.invalidInputs}
         />
       <NoEditButtons 
-        removeElement={action(()=>{setAlert(removeElement(element.id))})} 
+        confirmDelete={store.confirmDelete}
+        removeElement={store.confirmDelete?action(()=>{setAlert(removeElement(element.id))}):action(()=>{store.toggleConfirmDelete()})} 
         toggleEditMode={()=>{store.toggleEditMode()}}/>
     </div>
   );

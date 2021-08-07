@@ -6,7 +6,10 @@ import NoEditButtons from '../../../Components/NoEditButtons';
 import ListElementDisplay from './ListElementDisplay';
 import ListElementEdit from './ListElementEdit';
 
+import {useState} from 'react';
+
 function ListElement({setAlert, element, editElement, removeElement, store}) {
+  const confirmDelete = useState(false);
   if(!store.isInEditMode){
     return (
       <div className="row">
@@ -17,7 +20,8 @@ function ListElement({setAlert, element, editElement, removeElement, store}) {
         {
           element.name !== 'unbranded'?
           <NoEditButtons 
-            removeElement={action(()=>{setAlert(removeElement(element.id))})} 
+            confirmDelete={store.confirmDelete}
+            removeElement={store.confirmDelete?action(()=>{setAlert(removeElement(element.id))}):action(()=>{store.toggleConfirmDelete()})}
             toggleEditMode={()=>{store.toggleEditMode()}}/>
           :null
         }

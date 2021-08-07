@@ -4,14 +4,20 @@ class ListElementStore{
   isInEditMode = false;
   element = {};
   invalidInputs = [];
+  deleteConfirm = false;
   constructor(element){
     makeAutoObservable(this);
     this.setEqualToProps(element);
   }
+  toggleConfirmDelete = () =>{
+    this.confirmDelete = true;
+    setTimeout(()=>{
+      this.confirmDelete = false;
+    }, 2200);
+  }
   edit(setAlert, element, editElement){
     this.invalidInputs = [];
     if(this.didChange(element)){
-      console.log(1)
       const result = editElement(this.element, element.id);
       setAlert(result);
       if(!result[0]){

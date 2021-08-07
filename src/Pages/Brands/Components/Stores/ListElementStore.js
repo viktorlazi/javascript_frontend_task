@@ -4,7 +4,18 @@ class ListElementStore{
   isInEditMode = false;
   element = {};
   invalidInputs = [];
+  confirmDelete = false;
   
+  constructor(element){
+    makeAutoObservable(this);
+    this.setEqualToProps(element);
+  }  
+  toggleConfirmDelete = () =>{
+    this.confirmDelete = true;
+    setTimeout(()=>{
+      this.confirmDelete = false;
+    }, 2200);
+  }
   edit(setAlert, element, editElement){
     this.invalidInputs = [];
     if(this.didChange(element)){
@@ -58,9 +69,5 @@ class ListElementStore{
     })
     return didChange;
   }
-  constructor(element){
-    makeAutoObservable(this);
-    this.setEqualToProps(element);
-  }  
 }
 export default ListElementStore;

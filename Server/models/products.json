@@ -14,24 +14,17 @@
     "cost": 4300
   },
   {
+    "id": 2,
     "brand": 2,
     "type": "singlecut",
     "colour": "sunburn",
-    "cost": "23301",
-    "id": 2
+    "cost": 3301
   },
   {
     "id": 3,
-    "brand": 1,
+    "brand": 0,
     "type": "singlecut",
     "colour": "yellow",
     "cost": 3300
-  },
-  {
-    "id": 4,
-    "brand": 4,
-    "type": "alo",
-    "colour": "alo",
-    "cost": "123"
   }
 ]
