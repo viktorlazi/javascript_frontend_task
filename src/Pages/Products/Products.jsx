@@ -1,4 +1,5 @@
 import {observer} from 'mobx-react';
+import {Route} from 'react-router-dom';
 
 import SearchField from '../../Components/SearchField';
 import AddElement from './Components/AddElement';
@@ -13,7 +14,7 @@ import ListElementStore from './Components/Stores/ListElementStore';
 
 import './styles/products.css';
 
-function Products() {  
+function Products({routerStore}) {  
   return (
     <div id="products">
       <SearchField setSearchField={(x)=>{ProductsStore.input.setSearchField(x)}}/>
@@ -28,6 +29,8 @@ function Products() {
               removeElement={(id)=>{return ProductsStore.removeElement(id)}} 
               store={ProductsStore.getListElementStore(e)}
               brands={ProductsStore.brands}
+              isEdited={parseInt(routerStore.location.query.id) === e}
+              toggleEdit={()=>{routerStore.location.query = {id:e}}}
             />;
           }):null
         }
@@ -43,13 +46,14 @@ function Products() {
           brands={ProductsStore.brands}
         />
         {
-          ProductsStore.listElement.length?
+          ProductsStore.listElement.length
+          && routerStore.location.query.id?
           <EditScreen 
             editElement={(edited, id)=>ProductsStore.editElement(edited, id)} 
             setAlert={(msg, colour)=>ProductsStore.alert.setAlert(msg, colour)}
-            element={ProductsStore.getElementById(2)} 
+            element={ProductsStore.getElementById(parseInt(routerStore.location.query.id))} 
             brands={ProductsStore.brands} 
-            store={ProductsStore.getListElementStore(2)}
+            store={ProductsStore.getListElementStore(parseInt(routerStore.location.query.id))}
           />
           :null
         }

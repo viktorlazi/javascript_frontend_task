@@ -4,7 +4,7 @@ import {action} from 'mobx';
 import NoEditButtons from '../../../Components/NoEditButtons';
 import ListElementDisplay from './ListElementDisplay';
 
-function ListElement({setAlert, element, removeElement, store, brands}) {
+function ListElement({setAlert, element, removeElement, store, brands, isEdited, toggleEdit}) {
   return (
     <div className="row">
       <ListElementDisplay 
@@ -12,10 +12,11 @@ function ListElement({setAlert, element, removeElement, store, brands}) {
         brands={brands}
         invalidInputs={store.invalidInputs}
         />
-      <NoEditButtons 
+      <NoEditButtons
+        isInEditMode={isEdited}
         confirmDelete={store.confirmDelete}
         removeElement={store.confirmDelete?action(()=>{setAlert(removeElement(element.id))}):action(()=>{store.toggleConfirmDelete()})} 
-        toggleEditMode={()=>{store.toggleEditMode()}}/>
+        toggleEditMode={()=>{toggleEdit()}}/>
     </div>
   );
 }

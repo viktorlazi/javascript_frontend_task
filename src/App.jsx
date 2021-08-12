@@ -1,21 +1,24 @@
 import {observer} from 'mobx-react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {Router, RouterStore} from 'react-router-mobx';
+import {BrowserRouter, Route} from 'react-router-dom';
 
 import Brands from './Pages/Brands/Brands';
 import Products from './Pages/Products/Products';
 import Header from './Header/Header';
 import './App.css';
 
+const routerStore = new RouterStore();
+
 function App() {
-  return ( 
-    <Router>
+  return (
+    <Router component={BrowserRouter} routerStore={routerStore}>
       <div className="App">
         <Header />        
         <div id="display">
-          <Route exact path="/">
-            <Products />
+          <Route path="/products">
+            <Products routerStore={routerStore} />
           </Route>
-          <Route path="/brands">
+          <Route exact path="/brands">
             <Brands />
           </Route>
         </div>

@@ -7,11 +7,11 @@
     "cost": 4200
   },
   {
-    "id": 1,
-    "brand": 3,
+    "brand": 0,
     "type": "telecaster",
     "colour": "black",
-    "cost": 4300
+    "cost": 4300,
+    "id": 1
   },
   {
     "id": 2,
@@ -22,7 +22,7 @@
   },
   {
     "id": 3,
-    "brand": 0,
+    "brand": 1,
     "type": "singlecut",
     "colour": "yellow",
     "cost": 3300

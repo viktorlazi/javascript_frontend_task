@@ -11,12 +11,12 @@ function Header() {
       <nav>
         <ul>
           <li>
-            <Link to="/" className={`toggle__buttons__link ${location.pathname==='/'?"active":""}`}>
+            <Link to="/products" className={`toggle__buttons__link ${location.pathname.includes('products')?"active":""}`}>
               Products
             </Link>
           </li>
           <li>
-            <Link to="/brands" className={`toggle__buttons__link ${location.pathname==='/brands'?"active":""}`}>
+            <Link to="/brands" className={`toggle__buttons__link ${location.pathname.includes('brands')?"active":""}`}>
               Brands
             </Link>
           </li>
