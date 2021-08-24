@@ -7,7 +7,7 @@ export default class EditProductStore{
   editElement;
   setAlert;
   constructor(){
-    
+    makeAutoObservable(this);
   }
   setValues = (element, brands, editElementStore, editElement, setAlert) =>{
     this.element = element;
@@ -16,5 +16,4 @@ export default class EditProductStore{
     this.editElement = editElement;
     this.setAlert = setAlert;
   }
-
 }

@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/brands">
             <Brands />
           </Route>
-          <Route exact path="/edit">
+          <Route path="/edit">
             <EditProduct routerStore = {routerStore} />
           </Route>
         </div>

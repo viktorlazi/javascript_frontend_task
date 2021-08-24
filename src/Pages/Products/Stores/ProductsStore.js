@@ -5,6 +5,7 @@ import AlertStore from './AlertStore';
 import UserInputStore from '../../../Stores/UserInputStore';
 import AddElementStore from '../Components/Stores/AddElementStore';
 import ListElementStore from '../Components/Stores/ListElementStore';
+import EditProductStore from '../../Edit/Stores/EditProductStore';
 
 class ProductsStore{
   list = [];
@@ -17,6 +18,7 @@ class ProductsStore{
   alert = new AlertStore();
   input = new UserInputStore();
   addElement = new AddElementStore();
+  editStore;
   listElement = [];
 
   constructor(){
@@ -25,6 +27,9 @@ class ProductsStore{
     this.getBrandsAsync();
     this.updateBrandsContinuously();
     this.input.setSort('cost');
+  }
+  setEditStore = (id) =>{
+    this.editStore = new EditProductStore;
   }
   getListElementStore = (id) =>{
     const filter = this.listElement.filter(i=>{return i.id===id})[0];
