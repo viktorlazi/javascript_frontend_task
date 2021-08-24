@@ -1,5 +1,4 @@
 import {observer} from 'mobx-react';
-import {Route} from 'react-router-dom';
 
 import SearchField from '../../Components/SearchField';
 import AddElement from './Components/AddElement';
