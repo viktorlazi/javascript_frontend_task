@@ -18,7 +18,7 @@ class ProductsStore{
   alert = new AlertStore();
   input = new UserInputStore();
   addElement = new AddElementStore();
-  editStore;
+  editStore = new EditProductStore;
   listElement = [];
 
   constructor(){
@@ -27,6 +27,7 @@ class ProductsStore{
     this.getBrandsAsync();
     this.updateBrandsContinuously();
     this.input.setSort('cost');
+    this.setEditStore(1);
   }
   setEditStore = (id) =>{
     this.editStore = new EditProductStore;

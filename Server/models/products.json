@@ -7,11 +7,11 @@
     "cost": 4200
   },
   {
+    "id": 1,
     "brand": 0,
     "type": "telecaster",
     "colour": "black",
-    "cost": 4300,
-    "id": 1
+    "cost": 4300    
   },
   {
     "id": 2,

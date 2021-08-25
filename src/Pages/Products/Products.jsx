@@ -29,7 +29,7 @@ function Products({routerStore}) {
               store={ProductsStore.getListElementStore(e)}
               brands={ProductsStore.brands}
               isEdited={parseInt(routerStore.location.query.id) === e}
-              toggleEdit={()=>{routerStore.location.query = {id:e}}}
+              toggleEdit={()=>{routerStore.history.push('/edit?id=' + e)}}
             />;
           }):null
         }
